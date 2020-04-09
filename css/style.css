@@ -101,7 +101,7 @@ BODY
   left: 10%;
   width: 80%;
   height: 100%;
-  min-height: 58vh;
+  min-height: 48vh;
 }
 #body-title {
   color: black;
@@ -222,7 +222,7 @@ input#box-input-write-key[type=text]:focus {
   border: 2px solid #7e2857;
   outline-width: 0;
 }
-input.box-button-write-key {
+input#box-button-write-key {
   background-color: #7e2857;
   border: none;
   border-radius: 8px;
@@ -239,6 +239,13 @@ input.box-button-write-key {
   font-weight: bold;
   font-size: 0.9em;
   color: red;
+}
+#box-log-out {
+  display: none;
+  float: right;
+  font-size: 0.9em;
+  color: #7e2857;
+  text-decoration: underline;
 }
 
 
@@ -262,11 +269,12 @@ input.box-button-write-key {
     margin-bottom: 20px;
   }
 }
-#dashboard-card {
+.dashboard-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
   margin-bottom: 30px;
   background-color: #f1f1f1;
+  display: hidden;
 }
 
 #dashboard-title {

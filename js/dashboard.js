@@ -1,247 +1,86 @@
-const base_url = "https://www.microprediction.org/home/"
+const base_url = "https://www.microprediction.com/home/"
 
-const response = {
-  "code": "f1a76a7570a77514ac6e63405340c4b4",
-  "animal": "Flathat Stoat",
-  "balance::74ab5a2c6205469402cb94d2935d3443.json": -20.789482830058834,
-  "distance_to_bankruptcy": 655339.2105171699,
-  "/active/74ab5a2c6205469402cb94d2935d3443": [
-    "70::z1~covid_news_nyc~310.json",
-    "70::covid_news_nyc.json",
-    "310::hospital_bike_activity.json",
-    "70::z1~covid_news_nyc~910.json",
-    "70::z1~hospital_bike_activity~310.json",
-    "70::z1~hospital_bike_activity~910.json",
-    "70::z1~covid_news_nyc~70.json",
-    "910::z1~covid_news_nyc~310.json",
-    "910::covid_news_nyc.json",
-    "70::hospital_bike_activity.json"
-  ],
-  "performance::74ab5a2c6205469402cb94d2935d3443.json": {
-    "910::covid_news_nyc.json": 1.3981013333333334,
-    "70::covid_news_nyc.json": 1.3544106666666669,
-    "310::covid_news_nyc.json": 1.048576,
-    "910::z1~bart_delays~70.json": 0.9611946666666668,
-    "70::z1~bart_delays~70.json": 0.9175040000000002,
-    "310::z1~hospital_bike_activity~310.json": 0.8738133333333333,
-    "70::z1~hospital_bike_activity~70.json": 0.7084129523809523,
-    "310::z1~covid_news_nyc~310.json": 0.577220923076923,
-    "910::z1~bart_delays~310.json": 0.5679786666666667,
-    "70::z1~hospital_bike_activity~310.json": 0.48059733333333327,
-    "310::z1~bart_delays~910.json": 0.34952533333333324,
-    "310::hospital_bike_activity.json": 0.3058346666666665,
-    "910::hospital_bike_activity.json": 0.21845333333333328,
-    "70::z1~covid_news_nyc~310.json": 0.17476266666666687,
-    "910::z1~hospital_bike_activity~310.json": 0.17476266666666657,
-    "70::z1~covid_news_nyc~70.json": -0.04369066666666659,
-    "70::bart_delays.json": -0.13107200000000002,
-    "910::z1~covid_news_nyc~310.json": -0.5024426666666667,
-    "70::z1~hospital_bike_activity~910.json": -0.5679786666666667,
-    "70::hospital_bike_activity.json": -0.6054278095238097,
-    "70::z1~covid_news_nyc~910.json": -0.6335146666666667,
-    "310::z1~covid_news_nyc~910.json": -0.65536,
-    "910::z1~covid_news_nyc~70.json": -0.692809142857143,
-    "910::z1~hospital_bike_activity~70.json": -0.7427413333333334,
-    "70::z1~bart_delays~910.json": -0.7427413333333334,
-    "310::z1~hospital_bike_activity~910.json": -0.7864320000000001,
-    "910::z1~hospital_bike_activity~910.json": -0.8221789090909092,
-    "310::z1~covid_news_nyc~70.json": -0.9266698741258744,
-    "310::bart_delays.json": -0.9889978181818183,
-    "310::z1~bart_delays~70.json": -1.0048853333333334,
-    "910::z1~covid_news_nyc~910.json": -1.185889523809524,
-    "70::z1~bart_delays~310.json": -1.2233386666666668,
-    "310::z1~hospital_bike_activity~70.json": -1.4199466666666667,
-    "910::bart_delays.json": -1.5291733333333333,
-    "910::z1~bart_delays~910.json": -2.228224,
-    "310::z1~bart_delays~310.json": -2.3156053333333335
-  },
-  "confirms::74ab5a2c6205469402cb94d2935d3443.json": [
-    "{\"time\": \"2020-04-09 01:26:39.973770\", \"epoch_time\": 1586395599.9737792, \"operation\": \"set\", \"count\": 1, \"examples\": [{\"name\": \"hospital_bike_activity.json\", \"write_key\": \"74ab5a2c6205469402cb94d2935d3443\", \"value\": \"11.0\", \"percentiles\": {\"0\": 0.22550000000000003, \"1\": 0.22450000000000003, \"2\": 0.5}}]}",
-    "{\"time\": \"2020-04-09 01:26:39.972651\", \"epoch_time\": 1586395599.9726613, \"operation\": \"set\", \"count\": 3, \"examples\": [{\"name\": \"z1~hospital_bike_activity~70.json\", \"write_key\": \"74ab5a2c6205469402cb94d2935d3443\", \"value\": -0.7537489216716375, \"percentiles\": {\"0\": 0.5, \"1\": 0.5, \"2\": 0.5}}, {\"name\": \"z1~hospital_bike_activity~310.json\", \"write_key\": \"74ab5a2c6205469402cb94d2935d3443\", \"value\": -0.7570832306538241, \"percentiles\": {\"0\": 0.5, \"1\": 0.5, \"2\": 0.5}}]}",
-    "{\"time\": \"2020-04-09 01:26:39.966747\", \"epoch_time\": 1586395599.9667606, \"operation\": \"submit\", \"name\": \"z1~hospital_bike_activity~910.json\", \"success\": true, \"warn\": false, \"delays\": [310], \"some_values\": [-1.6828911137420235, -1.6800851219323705, -1.6799120812701793, -1.6784967772126584, -1.677388630252614]}",
-    "{\"time\": \"2020-04-09 01:26:39.944769\", \"epoch_time\": 1586395599.9447792, \"operation\": \"submit\", \"name\": \"z1~hospital_bike_activity~310.json\", \"success\": true, \"warn\": false, \"delays\": [910], \"some_values\": [-2.7506441653063742, -2.7487888394787, -2.7487433922058795, -2.7474628782935597, -2.74696573610623]}",
-    "{\"time\": \"2020-04-09 01:26:39.923192\", \"epoch_time\": 1586395599.9232028, \"operation\": \"submit\", \"name\": \"z1~hospital_bike_activity~310.json\", \"success\": true, \"warn\": false, \"delays\": [310], \"some_values\": [-2.745106671929359, -2.744242254315161, -2.7440643628031336, -2.7439007451792863, -2.743815332644591]}",
-    "{\"time\": \"2020-04-09 01:26:39.901385\", \"epoch_time\": 1586395599.9013956, \"operation\": \"submit\", \"name\": \"z1~hospital_bike_activity~310.json\", \"success\": true, \"warn\": false, \"delays\": [70], \"some_values\": [-2.7562691957903653, -2.7493959208133, -2.7487590137818283, -2.7486308991548922, -2.7465443585919385]}",
-    "{\"time\": \"2020-04-09 01:26:39.878388\", \"epoch_time\": 1586395599.878399, \"operation\": \"submit\", \"name\": \"z1~hospital_bike_activity~70.json\", \"success\": true, \"warn\": false, \"delays\": [910], \"some_values\": [-2.729967680452827, -2.7283287388365647, -2.728307467132374, -2.727110884161588, -2.72701742496075]}",
-    "{\"time\": \"2020-04-09 01:26:39.856272\", \"epoch_time\": 1586395599.8562837, \"operation\": \"submit\", \"name\": \"z1~hospital_bike_activity~70.json\", \"success\": true, \"warn\": false, \"delays\": [310], \"some_values\": [-2.7316560402494137, -2.727586922872038, -2.7264646206833745, -2.725970861605007, -2.7249863520791724]}",
-    "{\"time\": \"2020-04-09 01:26:39.832244\", \"epoch_time\": 1586395599.8322568, \"operation\": \"submit\", \"name\": \"z1~hospital_bike_activity~70.json\", \"success\": true, \"warn\": false, \"delays\": [70], \"some_values\": [-2.73326813701483, -2.72848789791279, -2.7274299315860295, -2.7273453726260515, -2.7268068075586553]}",
-    "{\"time\": \"2020-04-09 01:26:39.796262\", \"epoch_time\": 1586395599.7962756, \"operation\": \"submit\", \"name\": \"hospital_bike_activity.json\", \"success\": true, \"warn\": false, \"delays\": [910], \"some_values\": [-159.0006643091648, -158.99973954723575, -158.9978767246154, -158.9955985727298, -158.9950625768973]}"
-  ],
-  "errors::74ab5a2c6205469402cb94d2935d3443.json": [],
-  "warnings::74ab5a2c6205469402cb94d2935d3443.json": [],
-  "transactions::74ab5a2c6205469402cb94d2935d3443.json": [
-    [
-      "1586395582636-0",
-      {
-        "settlement_time": "2020-04-09 01:26:22.637793",
-        "stream": "z1~covid_news_nyc~70.json",
-        "delay": "70",
-        "stream_owner_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "recipient_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "amount": "0.39321600000000007"
+var write_key;
+var resp;
+
+function FetchAndLoadData(request) {
+  fetch(request)
+    .then(response => {
+      if (response.status !== 200) {
+        throw "Response status is not 200: " + response.status;
+      } else {
+        return response.json();
       }
-    ],
-    [
-      "1586393172299-0",
-      {
-        "settlement_time": "2020-04-09 00:46:12.299739",
-        "stream": "z1~covid_news_nyc~910.json",
-        "delay": "310",
-        "stream_owner_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "recipient_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "amount": "-0.2184533333333334"
+    })
+    .then(json => {
+      if (json["animal"] !== null) {
+        localStorage.setItem('write_key',write_key);
+        document.getElementById("box-log-out").style.display = "inline";
+        console.log("no");
+        for (var card of document.getElementsByClassName("dashboard-card")) {
+          card.style.display = "block";
+          console.log("here");
+        }
+        resp = json;
+        LoadOverview();
+        LoadActiveStreams();
+        LoadConfirms();
+        LoadErrors();
+        LoadWarnings();
+        LoadPerformance();
+        LoadTransactions();
+      } else {
+        document.getElementById("box-bad-key").innerHTML = "Invalid";
+        setTimeout(function(){
+          document.getElementById("box-bad-key").innerHTML = '';
+        }, 2000);
       }
-    ],
-    [
-      "1586379940567-0",
-      {
-        "settlement_time": "2020-04-08 21:05:40.560099",
-        "stream": "z1~hospital_bike_activity~910.json",
-        "delay": "310",
-        "stream_owner_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "recipient_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "amount": "-0.131072"
-      }
-    ],
-    [
-      "1586379915421-0",
-      {
-        "settlement_time": "2020-04-08 21:05:15.414288",
-        "stream": "z1~covid_news_nyc~310.json",
-        "delay": "310",
-        "stream_owner_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "recipient_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "amount": "-0.2184533333333334"
-      }
-    ],
-    [
-      "1586377508294-0",
-      {
-        "settlement_time": "2020-04-08 20:25:08.287853",
-        "stream": "z1~covid_news_nyc~70.json",
-        "delay": "310",
-        "stream_owner_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "recipient_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "amount": "-0.05957818181818177"
-      }
-    ],
-    [
-      "1586376320644-0",
-      {
-        "settlement_time": "2020-04-08 20:05:20.637851",
-        "stream": "hospital_bike_activity.json",
-        "delay": "310",
-        "stream_owner_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "recipient_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "amount": "0.2184533333333333"
-      }
-    ],
-    [
-      "1586355576680-0",
-      {
-        "settlement_time": "2020-04-08 14:19:36.679919",
-        "stream": "z1~bart_delays~910.json",
-        "delay": "70",
-        "stream_owner_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "recipient_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "amount": "-0.04369066666666666"
-      }
-    ],
-    [
-      "1586344226000-0",
-      {
-        "settlement_time": "2020-04-08 11:10:25.997681",
-        "stream": "z1~hospital_bike_activity~910.json",
-        "delay": "910",
-        "stream_owner_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "recipient_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "amount": "-0.29789090909090915"
-      }
-    ],
-    [
-      "1586340661109-0",
-      {
-        "settlement_time": "2020-04-08 10:11:01.105239",
-        "stream": "covid_news_nyc.json",
-        "delay": "910",
-        "stream_owner_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "recipient_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "amount": "0.39321600000000007"
-      }
-    ],
-    [
-      "1586339408564-0",
-      {
-        "settlement_time": "2020-04-08 09:50:08.559819",
-        "stream": "z1~hospital_bike_activity~310.json",
-        "delay": "910",
-        "stream_owner_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "recipient_code": "f1a76a7570a77514ac6e63405340c4b4",
-        "amount": "-0.3058346666666667"
-      }
-    ]
-  ]
+    })
+    .catch(error => {
+      console.log("Erorr Caught");
+      console.log(error);
+    })
 }
 
-var write_key = "";
-
 function OnLoadDashboard() {
+  var text_box = document.getElementById("box-input-write-key");
+  text_box.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById("box-button-write-key").click();
+    }
+  });
   write_key = localStorage.getItem('write_key');
+  var url = base_url+write_key+"/";
+  const request = new Request(url, {method: 'GET'});
   if (write_key) {
-    LoadOverview();
-    LoadActiveStreams();
-    LoadConfirms();
-    LoadErrors();
-    LoadWarnings();
-    LoadPerformance();
-    LoadTransactions();
+    FetchAndLoadData(request);
   }
 }
 
 function LoadDashboard() {
 	write_key = document.getElementById("box-input-write-key").value;
-	var url = base_url+write_key;
-
-	// const request = new Request(url, {method: 'GET'});
-
-	// fetch(request)
-	// 	.then(response => {
-	// 		console.log(response);
-	// 		if (response.status === 200) {
-	// 			;
-	// 		}
-	// 		else {
-	// 			console.log("ERROR");
-	// 			;
-	// 		}
-	// 	})
-	// 	.catch(error => {
-	// 		console.log(error);
-	// 	})
-
-  var valid = true;
-  if (valid) {
-    localStorage.removeItem('write_key');
-    localStorage.setItem('write_key',write_key);
-    LoadOverview();
-    LoadActiveStreams();
-    LoadConfirms();
-    LoadErrors();
-    LoadWarnings();
-    LoadPerformance();
-    LoadTransactions();
-  } else {
-    document.getElementById("box-bad-key").innerHTML = "Invalid";
-    setTimeout(function(){
-      document.getElementById("box-bad-key").innerHTML = '';
-    }, 2000);
+  if (write_key !== "") {
+    var url = base_url+write_key+"/";
+    const request = new Request(url, {method: 'GET'});
+    FetchAndLoadData(request);    
   }
 }
+
+function LogOut() {
+  document.getElementById("box-log-out").style.display = "none";
+  for (var card of document.getElementsByClassName("dashboard-card")) {
+    card.style.display = "none";
+  }
+  document.getElementById("box-input-write-key").value = "";
+  localStorage.removeItem("write_key");
+}
+
 
 // HELPER FUNCTION
 function CreateCardWithTitle(title) {
   var card = document.createElement("div");
-  card.id = "dashboard-card";
+  card.className = "dashboard-card";
 	var title_div = document.createElement("div");
 	title_div.id = "dashboard-title";
 	title_div.innerHTML = title;
@@ -288,23 +127,23 @@ function JoinDivs(divs) {
 
 function LoadOverview() {
   card = CreateCardWithTitle("Overview");
-  card.appendChild(TextDiv(response["code"], null, null, null, bold=true));
+  card.appendChild(TextDiv(resp["code"], null, null, null, bold=true));
   card.appendChild(
     JoinDivs([
       TextDiv("Memorable ID: ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
-      TextDiv(response["animal"])
+      TextDiv(resp["animal"])
     ])
   );
   card.appendChild(
     JoinDivs([
       TextDiv("Balance: ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
-      TextDiv(response["balance::"+write_key+".json"], pos_neg_color=true, round_digit=4)
+      TextDiv(resp["balance::"+write_key+".json"], pos_neg_color=true, round_digit=4)
     ])
   );
   card.appendChild(
     JoinDivs([
       TextDiv("Distance to Bankruptcy: ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
-      TextDiv(response["distance_to_bankruptcy"], pos_neg_color=false, round_digit=2)
+      TextDiv(resp["distance_to_bankruptcy"], pos_neg_color=false, round_digit=2)
     ])
   );
   $("#dashboard-overview").replaceWith(card);
@@ -312,7 +151,7 @@ function LoadOverview() {
 
 function LoadActiveStreams() {
   card = CreateCardWithTitle("Active Streams");
-  var streams = response["/active/"+write_key];
+  var streams = resp["/active/"+write_key];
   for (var item of streams) {
     card.appendChild(TextDiv(item));
   }
@@ -324,7 +163,7 @@ function LoadActiveStreams() {
 
 function LoadConfirms() {
   card = CreateCardWithTitle("Confirmations");
-  var confirms = response["confirms::"+write_key+".json"];
+  var confirms = resp["confirms::"+write_key+".json"];
   for (var item of confirms) {
     var item = JSON.parse(item);
     if (item["operation"] === "set") {
@@ -354,7 +193,7 @@ function LoadConfirms() {
 
 function LoadErrors() {
   card = CreateCardWithTitle("Errors");
-  var errors = response["errors::"+write_key+".json"];
+  var errors = resp["errors::"+write_key+".json"];
   for (var item of errors) {
     card.appendChild(TextDiv(item));
   }
@@ -366,7 +205,7 @@ function LoadErrors() {
 
 function LoadWarnings() {
   card = CreateCardWithTitle("Warnings");
-  var warnings = response["warnings::"+write_key+".json"];
+  var warnings = resp["warnings::"+write_key+".json"];
   for (var item of warnings) {
     card.appendChild(TextDiv(item));
   }
@@ -378,7 +217,7 @@ function LoadWarnings() {
 
 function LoadPerformance() {
   card = CreateCardWithTitle("Performance");
-  var performance = response["performance::"+write_key+".json"];
+  var performance = resp["performance::"+write_key+".json"];
   for (var key in performance) {
     card.appendChild(
       JoinDivs([
@@ -396,14 +235,14 @@ function LoadPerformance() {
 
 function LoadTransactions() {
   card = CreateCardWithTitle("Transactions");
-  var transactions = response["transactions::"+write_key+".json"];
+  var transactions = resp["transactions::"+write_key+".json"];
   for (var transaction of transactions) {
     var data = transaction[1];
     card.appendChild(
       JoinDivs([
         TextDiv(data["amount"], pos_neg_color=true, round_digit=4, null, bold=true),
         TextDiv(": ", null, null, null, bold=true),
-        TextDiv(data["stream"] + ": ")
+        TextDiv(data["stream"])
       ])
     );
   }

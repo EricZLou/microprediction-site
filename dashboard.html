@@ -31,10 +31,11 @@
 
       <div id="box-round-block">
         <div id="box-left">
+          <div id="box-log-out" onclick="LogOut()">Log Out</div>
           <div id="box-title">Dashboard</div>
           <div id="box-description">View all information associated with your write key, including your active streams, performance, and transactions.</div>
           <input type="text" name="write_key" id="box-input-write-key" placeholder="Your write key">
-          <input type="submit" class="box-button-write-key" value="Submit" onclick="LoadDashboard()">
+          <input type="submit" id="box-button-write-key" value="Submit" onclick="LoadDashboard()">
           <div id="box-bad-key"></div>
         </div>
         <div id="box-right">
@@ -59,9 +60,10 @@
         </div>
       </div>
     </div>
+    <div id="space"></div>
 
     <!-- FOOTER -->
-<!--     <div id="footer-container"><div id="footer">
+    <div id="footer-container"><div id="footer">
       <a name="footer"></a>
       <div id="footer-info">
         <div style="position:absolute; top:20%; height:50%; left:0%; width:100%;">
@@ -72,6 +74,6 @@
         </div>
       </div>
     </div></div>
- -->
+
   </body>
 </html>
