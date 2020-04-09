@@ -250,7 +250,7 @@ function CreateCardWithTitle(title) {
 }
 
 // HELPER FUNCTION
-function TextDiv(item, pos_neg_color=false, round_digit, exact_color) {
+function TextDiv(item, pos_neg_color=false, round_digit, exact_color, bold) {
   var div = document.createElement("div");
   div.id = "body-text";
   if (!round_digit) {
@@ -264,19 +264,49 @@ function TextDiv(item, pos_neg_color=false, round_digit, exact_color) {
       div.style.color = "red";
     } else {
       div.style.color = "green";
+      div.innerHTML = "+" + div.innerHTML;
     }
   } else if (exact_color) {
     div.style.color = exact_color;
   }
-  return div
+  if (bold) {
+    div.style.fontWeight = "bold";
+  }
+  return div;
+}
+
+// HELPER FUNCTION
+function JoinDivs(divs) {
+  var parent = document.createElement("div");
+  for (var child of divs) {
+    child.style.display = "inline";
+    parent.appendChild(child);
+  }
+  return parent;
 }
 
 
 function LoadOverview() {
   card = CreateCardWithTitle("Overview");
-  for (var item of ["code", "animal", "balance::"+write_key+".json", "distance_to_bankruptcy"]) {
-    card.appendChild(TextDiv(response[item]));
-  }
+  card.appendChild(TextDiv(response["code"], null, null, null, bold=true));
+  card.appendChild(
+    JoinDivs([
+      TextDiv("Memorable ID: ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
+      TextDiv(response["animal"])
+    ])
+  );
+  card.appendChild(
+    JoinDivs([
+      TextDiv("Balance: ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
+      TextDiv(response["balance::"+write_key+".json"], pos_neg_color=true, round_digit=4)
+    ])
+  );
+  card.appendChild(
+    JoinDivs([
+      TextDiv("Distance to Bankruptcy: ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
+      TextDiv(response["distance_to_bankruptcy"], pos_neg_color=false, round_digit=2)
+    ])
+  );
   $("#dashboard-overview").replaceWith(card);
 }
 
@@ -298,9 +328,19 @@ function LoadConfirms() {
   for (var item of confirms) {
     var item = JSON.parse(item);
     if (item["operation"] === "set") {
-      card.appendChild(TextDiv("set "+item["examples"][0]["name"], pos_neg_color=false, null, exact_color="#f9c809"));
+      card.appendChild(
+        JoinDivs([
+          TextDiv("SET ", pos_neg_color=false, null, exact_color="#f9c809", bold=true),
+          TextDiv(item["examples"][0]["name"])
+        ])
+      );
     } else if (item["operation"] === "submit") {
-      card.appendChild(TextDiv("submit "+item["name"], pos_neg_color=false, null, exact_color="#7e2857"));
+      card.appendChild(
+        JoinDivs([
+          TextDiv("SUBMIT ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
+          TextDiv(item["name"])
+        ])
+      );
     } else {
       card.appendChild(TextDiv("unknown action"));
     }
@@ -340,8 +380,13 @@ function LoadPerformance() {
   card = CreateCardWithTitle("Performance");
   var performance = response["performance::"+write_key+".json"];
   for (var key in performance) {
-    card.appendChild(TextDiv(key + ":"));
-    card.appendChild(TextDiv(performance[key], pos_neg_color=true, round_digit=4));
+    card.appendChild(
+      JoinDivs([
+        TextDiv(performance[key], pos_neg_color=true, round_digit=4, null, bold=true),
+        TextDiv(": ", null, null, null, bold=true),
+        TextDiv(key)
+      ])
+    );
   }
   if (performance.length === 0) {
     card.appendChild(TextDiv("Predict Data First"));
@@ -354,8 +399,13 @@ function LoadTransactions() {
   var transactions = response["transactions::"+write_key+".json"];
   for (var transaction of transactions) {
     var data = transaction[1];
-    card.appendChild(TextDiv(data["stream"] + ":"));
-    card.appendChild(TextDiv(data["amount"], pos_neg_color=true, round_digit=4));
+    card.appendChild(
+      JoinDivs([
+        TextDiv(data["amount"], pos_neg_color=true, round_digit=4, null, bold=true),
+        TextDiv(": ", null, null, null, bold=true),
+        TextDiv(data["stream"] + ": ")
+      ])
+    );
   }
   if (transactions.length === 0) {
     card.appendChild(TextDiv("No Transactions"));
