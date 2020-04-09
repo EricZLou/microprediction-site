@@ -10,7 +10,7 @@
     <script src="js/dashboard.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
-  <body>
+  <body onload="OnLoadDashboard()">
 
     <!-- HEADER -->
     <div id="header-container">
@@ -35,6 +35,7 @@
           <div id="box-description">View all information associated with your write key, including your active streams, performance, and transactions.</div>
           <input type="text" name="write_key" id="box-input-write-key" placeholder="Your write key">
           <input type="submit" class="box-button-write-key" value="Submit" onclick="LoadDashboard()">
+          <div id="box-bad-key"></div>
         </div>
         <div id="box-right">
           <!-- <img src="sources/forecast.jpg"> -->
@@ -42,23 +43,25 @@
       </div>
 
       <div id="space"></div>
-      <div class="dashboard-column">
-        <div id="dashboard-overview"></div>
-        <div id="dashboard-active-streams"></div>
-        <div id="dashboard-confirms"></div>
-        <div id="dashboard-errors"></div>
-        <div id="dashboard-warnings"></div>
-      </div>
-      <div class="dashboard-column">
-        <div id="dashboard-performance"></div>
-      </div>
-      <div class="dashboard-column">
-        <div id="dashboard-transactions"></div>
+      <div class="dashboard-row">
+        <div class="dashboard-column">
+          <div id="dashboard-overview"></div>
+          <div id="dashboard-active-streams"></div>
+          <div id="dashboard-confirms"></div>
+          <div id="dashboard-errors"></div>
+          <div id="dashboard-warnings"></div>
+        </div>
+        <div class="dashboard-column">
+          <div id="dashboard-performance"></div>
+        </div>
+        <div class="dashboard-column">
+          <div id="dashboard-transactions"></div>
+        </div>
       </div>
     </div>
 
     <!-- FOOTER -->
-    <div id="footer-container"><div id="footer">
+<!--     <div id="footer-container"><div id="footer">
       <a name="footer"></a>
       <div id="footer-info">
         <div style="position:absolute; top:20%; height:50%; left:0%; width:100%;">
@@ -69,6 +72,6 @@
         </div>
       </div>
     </div></div>
-
+ -->
   </body>
 </html>

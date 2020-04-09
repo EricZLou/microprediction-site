@@ -183,8 +183,23 @@ const response = {
   ]
 }
 
+var write_key = "";
+
+function OnLoadDashboard() {
+  write_key = localStorage.getItem('write_key');
+  if (write_key) {
+    LoadOverview();
+    LoadActiveStreams();
+    LoadConfirms();
+    LoadErrors();
+    LoadWarnings();
+    LoadPerformance();
+    LoadTransactions();
+  }
+}
+
 function LoadDashboard() {
-	var write_key = document.getElementById("box-input-write-key").value;
+	write_key = document.getElementById("box-input-write-key").value;
 	var url = base_url+write_key;
 
 	// const request = new Request(url, {method: 'GET'});
@@ -203,116 +218,147 @@ function LoadDashboard() {
 	// 	.catch(error => {
 	// 		console.log(error);
 	// 	})
-	
-	// LoadOverview();
-	LoadActiveStreams();
-  LoadConfirms();
-  LoadErrors();
-  LoadWarnings();
-	LoadPerformance();
-	LoadTransactions();
+
+  var valid = true;
+  if (valid) {
+    localStorage.removeItem('write_key');
+    localStorage.setItem('write_key',write_key);
+    LoadOverview();
+    LoadActiveStreams();
+    LoadConfirms();
+    LoadErrors();
+    LoadWarnings();
+    LoadPerformance();
+    LoadTransactions();
+  } else {
+    document.getElementById("box-bad-key").innerHTML = "Invalid";
+    setTimeout(function(){
+      document.getElementById("box-bad-key").innerHTML = '';
+    }, 2000);
+  }
 }
 
-function CreateTitle(div, title) {
+// HELPER FUNCTION
+function CreateCardWithTitle(title) {
+  var card = document.createElement("div");
+  card.id = "dashboard-card";
 	var title_div = document.createElement("div");
 	title_div.id = "dashboard-title";
 	title_div.innerHTML = title;
-	div.appendChild(title_div);
-	return div;
+	card.appendChild(title_div);
+	return card;
 }
 
-function LoadOverview() {
-	var dashboard_overview = document.getElementById("dashboard-overview");
-	
-  var dashboard_card = document.createElement("div");
-  dashboard_card.id = "dashboard-card";
-  dashboard_card = CreateTitle(dashboard_card, "Overview");
-	var code_div = document.createElement("div");
-	code_div.id = "body-text";
-	var text = response["code"];
-	code_div.innerHTML = text;
-  dashboard_card.appendChild(code_div);
-	dashboard_overview.appendChild(dashboard_card);
+// HELPER FUNCTION
+function TextDiv(item, pos_neg_color=false, round_digit, exact_color) {
+  var div = document.createElement("div");
+  div.id = "body-text";
+  if (!round_digit) {
+    div.innerHTML = item;
+  } else {
+    var value = parseFloat(item);
+    div.innerHTML = Math.round((Math.pow(10,round_digit) * value)) / Math.pow(10,round_digit);
+  }
+  if (pos_neg_color) {
+    if (parseFloat(item) < 0) {
+      div.style.color = "red";
+    } else {
+      div.style.color = "green";
+    }
+  } else if (exact_color) {
+    div.style.color = exact_color;
+  }
+  return div
+}
 
-	document.getElementById("dashboard-overview") = dashboard_overview;
+
+function LoadOverview() {
+  card = CreateCardWithTitle("Overview");
+  for (var item of ["code", "animal", "balance::"+write_key+".json", "distance_to_bankruptcy"]) {
+    card.appendChild(TextDiv(response[item]));
+  }
+  $("#dashboard-overview").replaceWith(card);
 }
 
 function LoadActiveStreams() {
-  var dashboard_overview = document.getElementById("dashboard-active-streams");
-  
-  var dashboard_card = document.createElement("div");
-  dashboard_card.id = "dashboard-card";
-  dashboard_card = CreateTitle(dashboard_card, "Overview");
-  var code_div = document.createElement("div");
-  code_div.id = "body-text";
-  var text = response["code"];
-  code_div.innerHTML = text;
-  dashboard_card.appendChild(code_div);
-  dashboard_overview.appendChild(dashboard_card);
-
-  document.getElementById("dashboard-active-streams") = dashboard_overview;  
+  card = CreateCardWithTitle("Active Streams");
+  var streams = response["/active/"+write_key];
+  for (var item of streams) {
+    card.appendChild(TextDiv(item));
+  }
+  if (streams.length === 0) {
+    card.appendChild(TextDiv("No Active Streams"));
+  }
+  $("#dashboard-active-streams").replaceWith(card);
 }
 
 function LoadConfirms() {
-  var dashboard_overview = document.getElementById("dashboard-confirms");
-  
-  var dashboard_card = document.createElement("div");
-  dashboard_card.id = "dashboard-card";
-  dashboard_card = CreateTitle(dashboard_card, "Overview");
-  var code_div = document.createElement("div");
-  code_div.id = "body-text";
-  var text = response["code"];
-  code_div.innerHTML = text;
-  dashboard_card.appendChild(code_div);
-  dashboard_overview.appendChild(dashboard_card);
+  card = CreateCardWithTitle("Confirmations");
+  var confirms = response["confirms::"+write_key+".json"];
+  for (var item of confirms) {
+    var item = JSON.parse(item);
+    if (item["operation"] === "set") {
+      card.appendChild(TextDiv("set "+item["examples"][0]["name"], pos_neg_color=false, null, exact_color="#f9c809"));
+    } else if (item["operation"] === "submit") {
+      card.appendChild(TextDiv("submit "+item["name"], pos_neg_color=false, null, exact_color="#7e2857"));
+    } else {
+      card.appendChild(TextDiv("unknown action"));
+    }
+  }
+  if (confirms.length === 0) {
+    card.appendChild(TextDiv("No Actions Yet"));
+  }
 
-  document.getElementById("dashboard-confirms") = dashboard_overview;
+  $("#dashboard-confirms").replaceWith(card);
 }
 
 function LoadErrors() {
-  var dashboard_overview = document.getElementById("dashboard-errors");
-  
-  var dashboard_card = document.createElement("div");
-  dashboard_card.id = "dashboard-card";
-  dashboard_card = CreateTitle(dashboard_card, "Overview");
-  var code_div = document.createElement("div");
-  code_div.id = "body-text";
-  var text = response["code"];
-  code_div.innerHTML = text;
-  dashboard_card.appendChild(code_div);
-  dashboard_overview.appendChild(dashboard_card);
+  card = CreateCardWithTitle("Errors");
+  var errors = response["errors::"+write_key+".json"];
+  for (var item of errors) {
+    card.appendChild(TextDiv(item));
+  }
+  if (errors.length === 0) {
+    card.appendChild(TextDiv("No Errors"));
+  }
+  $("#dashboard-errors").replaceWith(card);
+}
 
-  document.getElementById("dashboard-errors") = dashboard_overview;
+function LoadWarnings() {
+  card = CreateCardWithTitle("Warnings");
+  var warnings = response["warnings::"+write_key+".json"];
+  for (var item of warnings) {
+    card.appendChild(TextDiv(item));
+  }
+  if (warnings.length === 0) {
+    card.appendChild(TextDiv("No Warnings"));
+  }
+  $("#dashboard-warnings").replaceWith(card);
 }
 
 function LoadPerformance() {
-  var dashboard_overview = document.getElementById("dashboard-performance");
-  
-  var dashboard_card = document.createElement("div");
-  dashboard_card.id = "dashboard-card";
-  dashboard_card = CreateTitle(dashboard_card, "Overview");
-  var code_div = document.createElement("div");
-  code_div.id = "body-text";
-  var text = response["code"];
-  code_div.innerHTML = text;
-  dashboard_card.appendChild(code_div);
-  dashboard_overview.appendChild(dashboard_card);
-
-  document.getElementById("dashboard-performance") = dashboard_overview;
+  card = CreateCardWithTitle("Performance");
+  var performance = response["performance::"+write_key+".json"];
+  for (var key in performance) {
+    card.appendChild(TextDiv(key + ":"));
+    card.appendChild(TextDiv(performance[key], pos_neg_color=true, round_digit=4));
+  }
+  if (performance.length === 0) {
+    card.appendChild(TextDiv("Predict Data First"));
+  }
+  $("#dashboard-performance").replaceWith(card);
 }
 
 function LoadTransactions() {
-  var dashboard_overview = document.getElementById("dashboard-transactions");
-  
-  var dashboard_card = document.createElement("div");
-  dashboard_card.id = "dashboard-card";
-  dashboard_card = CreateTitle(dashboard_card, "Overview");
-  var code_div = document.createElement("div");
-  code_div.id = "body-text";
-  var text = response["code"];
-  code_div.innerHTML = text;
-  dashboard_card.appendChild(code_div);
-  dashboard_overview.appendChild(dashboard_card);
-
-  document.getElementById("dashboard-transactions") = dashboard_overview;
+  card = CreateCardWithTitle("Transactions");
+  var transactions = response["transactions::"+write_key+".json"];
+  for (var transaction of transactions) {
+    var data = transaction[1];
+    card.appendChild(TextDiv(data["stream"] + ":"));
+    card.appendChild(TextDiv(data["amount"], pos_neg_color=true, round_digit=4));
+  }
+  if (transactions.length === 0) {
+    card.appendChild(TextDiv("No Transactions"));
+  }
+  $("#dashboard-transactions").replaceWith(card);
 }

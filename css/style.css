@@ -229,15 +229,31 @@ input.box-button-write-key {
   color: white;
   padding: 1.5% 2%;
   text-align: center;
-  text-decoration: none;
   font-size: 0.9em;
   transition-duration: 0.4s;
 }
+#box-bad-key {
+  display: inline;
+  padding: 1.5%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9em;
+  color: red;
+}
 
+
+.dashboard-row {
+  margin: 0 -5px;
+}
+.dashboard-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 .dashboard-column {
   float: left;
-  width: 33%;
-  padding: 0px 10px;
+  width: 29%;
+  padding: 0px 2%;
 }
 @media screen and (max-width: 600px) {
   .column {
@@ -249,13 +265,13 @@ input.box-button-write-key {
 #dashboard-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
-  margin-bottom: 16px;
-  text-align: center;
+  margin-bottom: 30px;
   background-color: #f1f1f1;
 }
 
 #dashboard-title {
   color: black;
+  text-align: center;
   font-weight: bold;
   font-size: 2.0em;
   width: 100%;
