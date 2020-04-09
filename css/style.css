@@ -233,6 +233,27 @@ input.box-button-write-key {
   font-size: 0.9em;
   transition-duration: 0.4s;
 }
+
+.dashboard-column {
+  float: left;
+  width: 33%;
+  padding: 0px 10px;
+}
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+#dashboard-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
 #dashboard-title {
   color: black;
   font-weight: bold;
@@ -241,10 +262,9 @@ input.box-button-write-key {
   padding-bottom: 2%;
 }
 
+
 /*OVERVIEW*/
-#dashboard-overview {
-  width: 100%;
-}
+
 
 /*ACTIVE STREAMS*/
 

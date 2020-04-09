@@ -204,13 +204,13 @@ function LoadDashboard() {
 	// 		console.log(error);
 	// 	})
 	
-	LoadOverview();
+	// LoadOverview();
 	LoadActiveStreams();
+  LoadConfirms();
+  LoadErrors();
+  LoadWarnings();
 	LoadPerformance();
-	LoadConfirms();
 	LoadTransactions();
-	LoadErrors();
-	LoadWarnings();
 }
 
 function CreateTitle(div, title) {
@@ -223,12 +223,96 @@ function CreateTitle(div, title) {
 
 function LoadOverview() {
 	var dashboard_overview = document.getElementById("dashboard-overview");
-	dashboard_overview = CreateTitle(dashboard_overview, "Overview");
+	
+  var dashboard_card = document.createElement("div");
+  dashboard_card.id = "dashboard-card";
+  dashboard_card = CreateTitle(dashboard_card, "Overview");
 	var code_div = document.createElement("div");
 	code_div.id = "body-text";
 	var text = response["code"];
 	code_div.innerHTML = text;
-	dashboard_overview.appendChild(code_div);
+  dashboard_card.appendChild(code_div);
+	dashboard_overview.appendChild(dashboard_card);
 
 	document.getElementById("dashboard-overview") = dashboard_overview;
+}
+
+function LoadActiveStreams() {
+  var dashboard_overview = document.getElementById("dashboard-active-streams");
+  
+  var dashboard_card = document.createElement("div");
+  dashboard_card.id = "dashboard-card";
+  dashboard_card = CreateTitle(dashboard_card, "Overview");
+  var code_div = document.createElement("div");
+  code_div.id = "body-text";
+  var text = response["code"];
+  code_div.innerHTML = text;
+  dashboard_card.appendChild(code_div);
+  dashboard_overview.appendChild(dashboard_card);
+
+  document.getElementById("dashboard-active-streams") = dashboard_overview;  
+}
+
+function LoadConfirms() {
+  var dashboard_overview = document.getElementById("dashboard-confirms");
+  
+  var dashboard_card = document.createElement("div");
+  dashboard_card.id = "dashboard-card";
+  dashboard_card = CreateTitle(dashboard_card, "Overview");
+  var code_div = document.createElement("div");
+  code_div.id = "body-text";
+  var text = response["code"];
+  code_div.innerHTML = text;
+  dashboard_card.appendChild(code_div);
+  dashboard_overview.appendChild(dashboard_card);
+
+  document.getElementById("dashboard-confirms") = dashboard_overview;
+}
+
+function LoadErrors() {
+  var dashboard_overview = document.getElementById("dashboard-errors");
+  
+  var dashboard_card = document.createElement("div");
+  dashboard_card.id = "dashboard-card";
+  dashboard_card = CreateTitle(dashboard_card, "Overview");
+  var code_div = document.createElement("div");
+  code_div.id = "body-text";
+  var text = response["code"];
+  code_div.innerHTML = text;
+  dashboard_card.appendChild(code_div);
+  dashboard_overview.appendChild(dashboard_card);
+
+  document.getElementById("dashboard-errors") = dashboard_overview;
+}
+
+function LoadPerformance() {
+  var dashboard_overview = document.getElementById("dashboard-performance");
+  
+  var dashboard_card = document.createElement("div");
+  dashboard_card.id = "dashboard-card";
+  dashboard_card = CreateTitle(dashboard_card, "Overview");
+  var code_div = document.createElement("div");
+  code_div.id = "body-text";
+  var text = response["code"];
+  code_div.innerHTML = text;
+  dashboard_card.appendChild(code_div);
+  dashboard_overview.appendChild(dashboard_card);
+
+  document.getElementById("dashboard-performance") = dashboard_overview;
+}
+
+function LoadTransactions() {
+  var dashboard_overview = document.getElementById("dashboard-transactions");
+  
+  var dashboard_card = document.createElement("div");
+  dashboard_card.id = "dashboard-card";
+  dashboard_card = CreateTitle(dashboard_card, "Overview");
+  var code_div = document.createElement("div");
+  code_div.id = "body-text";
+  var text = response["code"];
+  code_div.innerHTML = text;
+  dashboard_card.appendChild(code_div);
+  dashboard_overview.appendChild(dashboard_card);
+
+  document.getElementById("dashboard-transactions") = dashboard_overview;
 }
