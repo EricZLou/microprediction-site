@@ -1,0 +1,323 @@
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0 auto;
+  font-family: 'Montserrat', sans-serif;
+  overflow-wrap: break-word;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+a:link {
+  color: #7e2857;
+  text-decoration: none;
+}
+a:visited {
+  color: #7e2857;
+  text-decoration: none;
+}
+a:hover {
+  color: #7e2857;
+  text-decoration: underline;
+}
+a:active {
+  color: #7e2857;
+  text-decoration: none;
+}
+table, th, td {
+  border-collapse: collapse;
+  color: black;
+  width: 100%;
+  text-align: left;
+}
+table {
+  table-layout: fixed;
+}
+th, td {
+  padding: 20px;
+  vertical-align: top;
+  border: 1px solid black;
+}
+
+
+
+/*
+
+
+HEADER
+
+
+*/
+
+#header-container {
+  position: relative;
+  height: 7vh;
+  background: #7e2857;
+}
+#header {
+  position: relative;
+  left: 10%;
+  width: 80%;
+  height: 100%;
+  display: inline-block;
+}
+/*#header-logo {
+  float: left;
+  height: 100%;
+}*/
+#header-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #f9c809;
+  height: 7vh;
+  line-height: 7vh;
+  padding-right: 5%;
+}
+#header-link {
+  color: white;
+  padding: 0px 1%;
+}
+#header-api {
+  float: right;
+  font-size: 1.0em;
+  color: #f9c809;
+  height: 7vh;
+  line-height: 7vh;  
+}
+
+
+/*
+
+
+BODY
+
+
+*/
+
+#body-container {
+  position: relative;
+  left: 10%;
+  width: 80%;
+  height: 100%;
+  min-height: 58vh;
+}
+#body-title {
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 2em;
+  padding-top: 10vh;
+  padding-bottom: 3vh;
+}
+#body-subtitle {
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.3em;
+  padding-top: 5vh;
+  padding-bottom: 3vh;
+}
+#body-text {
+  color: black;
+  font-size: 1.0em;
+  font-weight: normal;
+}
+#body-bold-remark {
+  color: black;
+  font-size: 1.0em;
+  font-weight: bold;
+  padding: 2% 0px;  
+}
+ol.body-list {
+  color: black;
+  font-size: 1.0em;
+  list-style-type: upper-roman;
+}
+ul.body-list {
+  color: black;
+  font-size: 1.0em;
+  list-style: circle;
+}
+li {
+  padding-left: 3%;
+  font-weight: normal;
+}
+
+
+/*
+
+
+HOME
+
+
+*/
+
+#box-round-block {
+  border-radius: 6px;
+  padding: 2%;
+  left: 0;
+  width: 96%;
+  border: 2px solid #f9c809;
+  background: white;
+  display: inline-block;
+}
+#box-left {
+  width: 70%;
+}
+#box-right {
+  width: 30%;
+}
+#box-title {
+  color: black;
+  font-weight: bold;
+  font-size: 2em;
+  padding-bottom: 2%;
+}
+#box-description {
+  color: black;
+  font-size: 1.1em;
+  padding-bottom: 2%;
+}
+#box-img {
+  left: 70%;
+  width: 30%;
+}
+button.box-button-get-started {
+  background-color: #7e2857;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 1% 2%;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition-duration: 0.4s;
+}
+button.box-button-get-started:hover {
+  background-color: #8f3566;
+}
+
+
+/*
+
+
+DASHBOARD
+
+
+*/
+
+input#box-input-write-key[type=text] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition-duration: 0.4s;
+}
+input#box-input-write-key[type=text]:focus {
+  border: 2px solid #7e2857;
+  outline-width: 0;
+}
+input.box-button-write-key {
+  background-color: #7e2857;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 1.5% 2%;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition-duration: 0.4s;
+}
+#dashboard-title {
+  color: black;
+  font-weight: bold;
+  font-size: 2.0em;
+  width: 100%;
+  padding-bottom: 2%;
+}
+
+/*OVERVIEW*/
+#dashboard-overview {
+  width: 100%;
+}
+
+/*ACTIVE STREAMS*/
+
+
+/*PERFORMANCE*/
+
+
+/*CONFIRMS*/
+
+
+/*TRANSACTIONS*/
+
+
+/*ERRORS*/
+
+
+/*WARNINGS*/
+
+
+
+/*
+
+
+GALLERY
+
+
+*/
+
+#gallery-title {
+  color: #7e2857;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/*
+
+
+SPACE
+
+
+*/
+
+#space {
+  height: 10vh;
+  position: relative;
+}
+
+
+/*
+
+
+FOOTER
+
+
+*/
+
+#footer-container {
+  height: 35vh;
+  position: relative;
+  background-color: #34495e;
+}
+#footer {
+  height: 100%;
+  position: relative;
+  left: 20%;
+  width: 60%;
+}
+#footer-info {
+  position: absolute;
+  left: 0%;
+  width: 33%;
+  top: 0%;
+  height: 100%;
+}

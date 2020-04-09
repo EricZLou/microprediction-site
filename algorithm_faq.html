@@ -1,0 +1,113 @@
+
+<h1>FAQ: Creating algorithms and crawlers</h1>
+
+
+The <a href="/">API page</a> and Python client make it easy to write algorithms that make distributional predictions about live quantities. See <a href="/predicting.html">prediction</a> and <a href="/crawling.html">crawling</a> instructions.
+
+<h2>What am I submitting?</h2>
+
+You submit {{num_predictions}} numbers.
+
+<h2>Why aren't predictions a single number?</h2>
+
+Point estimates are are inherently difficult to interpret and combine - which does't mean we won't allow them sooner or later.
+
+<h2>Can my algorithms make their own predictions?</h2>
+
+Absolutely. Why not publish your model residuals?
+<p>
+You achieve <em>at least</em> ongoing performance analysis of your model, and also an accurate distributional description of your residuals. Perhaps also:
+<ol>
+    <li> Sooner or later your residuals will correlate to a data source you don't know about.
+    <li> You'll be able to combine the information with you existing model to make a better one.
+</ol>
+
+<h2>What are the Z-streams?</h2>
+
+Every time a data feed value arrives, an implied z-score is computed based on the existing predictions from yourself and other algorithms. A secondary stream is automatically created where
+algorithms predict these normalized z-scores. Your algorithm may be better at predicting the z-scores than the original margins, or vice versa.
+
+<h2>Can I predict joint outcomes?</h2>
+
+Yes, although technically you are providing scenarios for a scalar value that happens to be the image of z-scores under a Morton space filling Z-curve. Your algorithm can choose to know that or just treat it like any
+other stream. Look for streams with z's and tildes in their names.
+<p>
+You can read about <a href="https://en.wikipedia.org/wiki/Z-order_curve">Z-order curves</a> at Wikipedia. The use of space filling curves as a means of parametrizing Copulas is not entirely standard, but that doesn't make it a terrible idea. We may provide a longer
+technical discussion in due course.
+
+
+<h2>How do I get started?</h2>
+
+See <a href="/predicting.html">prediction</a> and <a href="/crawling.html">crawling</a> instructions.
+
+<h2>Do I have to use Python?</h2>
+No. You can use the API directly. See the <a href="/">API page</a> or read the <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/writer.py">MicroWriter</a> code to infer how to send scenarios.
+
+<h2>Do you have client libraries in other languages?</h2>
+
+No we are waiting for you to write one.
+
+<h2>Over what horizon do I make predictions?</h2>
+
+You can supply a delay parameter chosen from the vector provided in <a href="/config.json">config.json</a>. Your horizon is either 1 minute, 15 minutes or 3 hours.
+
+<h2>Can I predict just one event?</h2>
+
+No. This is not for long term predictions or singular events.
+
+<h2>Can I predict a week in advance?</h2>
+
+No. This is not for long term predictions or singular events.
+
+<h2>Who contributes algorithms?</h2>
+
+As you can see from <a href="predicting.html">predicting</a> and <a href="crawling.html">crawling</a>, absolutely <em>anyone</em> can, including algorithms that create algorithms.
+
+<h2>What prevents me from creating thousands of algorithms?</h2>
+
+Nothing if they are good. However if they underperform they will enter bankruptcy quickly. So to create a vast number of noisy useless algorithms you will need to mine a lot of MUIDs.
+
+<h2>I don't understand MUIDs</h2>
+
+They are just randomly generated numbers that happen to be very lucky, in the sense that the hex digest of their SHA-256 hash looks like a cute animal name. If that doesn't make sense then:
+<ol>
+    <li> We suggest this <a href="https://vimeo.com/397352413">video</a> introduction.
+    <li> Or ... if you know what a <a href="http://www.muid.org/hash/fb74baf628d43892020d803614f91f29">hash</a> is just read the MUID <a href="https://muid.readthedocs.io/en/latest/">README</a>.
+</ol>
+We insist on write_keys being MUIDs to add a bit of mass and discourage abuse, as noted above.
+
+<h2>Is there some way I can help without doing stats?</h2>
+
+Yes you can help us find MUIDs. Email us at info@microprediction.org if you have some spare CPU capacity.
+
+<h2>Is there prizemoney?</h2>
+
+<a href="https://www.intechinvestments.com/">Intech Investments</a> may likely offer compensation for various types of contribution to this project including, but not limited to, the creation of high performing prediction algorithms.
+
+<h2>Will it be maintained?</h2>
+
+Yes. <a href="https://www.intechinvestments.com/">Intech Investments</a> is supporting the open source code development.
+
+<h2>How reliable is the underlying hosted database technology?</h2>
+
+The typically quoted number is 99.99% uptime. We make no warranties.
+
+<h2>Why is the site all JSON?</h2>
+
+It is for robots.
+
+<h2>No really, why is it all JSON?</h2>
+
+A nicer skin is coming soon.
+
+<h2>Where might this lead?</h2>
+
+See the <a href="why.html">why page</a> for futher discussion.
+
+<p>
+
+<a href="/">Back to main API page</a>
+</html>
+
+
+

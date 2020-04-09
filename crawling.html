@@ -1,0 +1,50 @@
+<html lang="en">
+
+<body>
+
+<h1>Crawling</h1>
+
+It is easy to write programs that look for streams to predict and submit scenarios.
+
+
+<h2>Step 1. Install microprediction</h2>
+
+<pre>
+    pip install microprediction
+</pre>
+
+<h2>Step 2. Get a key</h2>
+
+As explained <a href="about.html">here</a>, you need a write_key to submit. At minimum click on <a href="https://www.muid.org/create">this link</a> to create on.
+However we encourage you to visit <a href="https://www.muid.org">muid.org</a> to understand MUIDs and mine a better key. You can run the <a href="https://raw.githubusercontent.com/microprediction/muid/master/examples/one_liner.sh">mining bash script</a>. Using
+a difficult key may greatly increase your crawler's longevity. See the table of bankruptcy levels in the microprediction package's <a href="https://pypi.org/project/microprediction/">README</a>.
+
+<h2>Step 3. Run the default crawler</h2>
+
+<pre>
+    from microprediction import MicroCrawler
+    crawler = MicroCrawler(write_key="YOUR_WRITE_KEY_HERE")
+    crawler.run()
+</pre>
+
+<h2>Step 4. Examine performance</h2>
+
+<pre>
+   mw.get_performance()
+   mw.get_overall()
+   mw.get_home()
+   mw.get_errors()
+   mw.get_transactions()
+</pre>
+
+<h2>Steps 5,6,...  Improve it</h2>
+
+This we leave in your capable hands.
+
+<p>
+
+<a href="/">Back to main API page</a>
+
+</body>
+
+</html>

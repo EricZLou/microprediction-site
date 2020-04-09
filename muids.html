@@ -1,0 +1,55 @@
+
+<html lang="en">
+
+<body>
+
+<h1>Why MUIDs?</h1>
+
+You need a write_key to use the <a href="/">microprediction APIs</a> or python library.
+We use <a href="https://www.muid.org">MUID.org</a> (stands for <em>Memorable Unique Identifiers</em>) as a source of write_keys that take some time to generate. There is an explanatory <a href="https://vimeo.com/397352413">video</a>.
+<p>
+MUID write keys are "heavy" and that's your way of signalling that you are serious. Hopefully you have found or engineered
+a live time series that is important to someone, and you intend to keep publishing it indefinitely.
+Streams that aren't maintained get garbage collected pretty quickly, but we'd prefer not to have spurious streams to begin with. We also require those submitting predictions to possess a MUID. This discourages the creation of a large number of noisy prediction algorithms.
+
+<h2>Minimum key difficulty</h2>
+
+The length of the memorable part of the hash of the key is known as the difficulty. See the <a href="https://vimeo.com/397352413">video</a>. To create
+a stream (see <a href="/crowd.html">crowd</a>) you will require a write_key of difficulty {{min_len}}. To supply predictions the bar is lower and currently
+set at a minimum difficulty of 8.
+
+<h2>Bankruptcy</h2>
+
+All write_keys have an associated balance. See the microprediction package <a href="https://pypi.org/project/microprediction">README</a> for a table of minimum allowed balances. A write_key
+whose balance falls below these thresholds can no longer be used.
+
+<h2>How to get a key</h2>
+
+Your choices are
+<ol>
+    <li> Click <a href="https://www.muid.org/create">this link</a> to get a key of borderline difficulty 8.
+    <li> Run this <a href="https://raw.githubusercontent.com/microprediction/muid/master/examples/one_liner.sh">bash command</a> in terminal.
+    <li> Pip install the muid package and run muid.mine()
+</ol>
+For convenience we copy choice 2 here:
+<pre>
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/microprediction/muid/master/examples/mine_from_venv.sh)"
+</pre>
+It may take a day or so to produce a MUID with difficulty {{min_len}}. If it doesn't work then perhaps you need Python 3 and/or a package manager:
+<pre>
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew install python
+</pre>
+then return to the mining script.
+
+<h2>How to validate a key</h2>
+
+Use a URL like <a href="http://www.muid.org/validate/fb74baf628d43892020d803614f91f29">http://www.muid.org/validate/fb74baf628d43892020d803614f91f29"</a>
+
+
+<p>
+<a href="/">Back to main API page</a>
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Microprediction</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="shortcut icon" href="sources/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <!-- HEADER -->
+    <div id="header-container">
+      <div id="header">
+        <a href="about.html" id="header-name">Microprediction</a>
+        <a href="motivation.html" id="header-link">Motivation</a>
+        <a href="gallery.html" id="header-link">Data Streams</a>
+        <a href="predicting.html" id="header-link">Predict Data</a>
+        <a href="crowd.html" id="header-link">Publish Data</a>
+        <a href="https://www.microprediction.org/" id="header-api">Back to API</a>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div id="body-container">
+      <div id="space"></div>
+      <div id="box-round-block">
+        <div id="box-left">
+          <div id="box-title">The new, simple way to predict live data</div>
+          <div id="box-description">Some nice 2 line description. Some nice 2 line description. Some nice 2 line description. Some nice 2 line description. Some nice 2 line description. </div>
+          <button class="box-button-get-started" onclick="location.href='motivation.html'">Learn More</button>
+          <button class="box-button-get-started" onclick="location.href='dashboard.html'">Go to my Dashboard</button>
+        </div>
+        <div id="box-right">
+          <!-- <img src="sources/forecast.jpg"> -->
+        </div>
+      </div>
+
+      <div id="body-title">Have a live source of data?</div>
+      <div id="body-subtitle">Do you need to:</div>
+      <ul>
+       <li>Monitor it for outliers and extended anomalies,
+       <li>Remove distracting noise, or
+       <li>Predict it a few minutes forward in time?
+      </ul>
+      <div id="body-subtitle">You can achieve this by:</div>
+      <ol>
+        <li> Publishing a scalar value, and</li>
+        <li> Publishing a scalar value again, and </li>
+        <li> ... repeating over an over again to generate a <a href="live/lagged_values::cop.json">stream</a>.</li>
+      </ol>
+      <div id="body-text">See the <a href="/crowd.html">instructions</a>.</div>
+      <div style="height:2em;"></div>
+      <div id="body-text">Do this for long enough and competing time series algorithms will conspire to generate a <a href="/cumulative?name=cop.json&delay=70">distribution</a> of near-future values on multiple horizons, and other useful diagnostics such as <a href="/bar?name=z1~cop~70.json"><em>implied</em> z-scores</a> that tell you how surprising each data point was relative to the community predictions. You can even request a crowd estimate of a joint distribution in two or three dimensions.</div>
+
+      <div id="body-title">Have a good algorithm?</div>
+      <div id="body-text">Think you can predict <a href="bar?name=covid_news_nyc.json">covid</a> news or the distribution of <a href="/bar?name=cop.json">stock price movements</a>? See <a href="predicting.html">predicting</a> and <a href="crawling.html">crawling</a> instructions. Streams with significant monetary rewards are coming soon so fire up your algorithms now.</div>
+
+      <div id="space"></div>
+      <div id="body-bold-remark">See the <a href="why.html">why page</a> for futher motivation.</div>
+      <div id="body-text">This project is supported by <a href="https://www.intechinvestments.com/">Intech Investments</a>.</div>
+
+    </div>
+
+    <!-- SPACE -->
+    <div id="space"></div>
+
+    <!-- FOOTER -->
+    <div id="footer-container"><div id="footer">
+      <a name="footer"></a>
+      <div id="footer-info">
+        <div style="position:absolute; top:20%; height:50%; left:0%; width:100%;">
+          <p style="color: #E64A19">Email</p>
+          <p id="email" style="Color:white;">info@microprediction.org</p>
+        </div>
+        <div style="position:absolute; top:50%; height:50%; left:0%; width:100%;">
+        </div>
+      </div>
+    </div></div>
+
+  </body>
+</html>

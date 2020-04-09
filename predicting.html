@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Making a Prediction</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="shortcut icon" href="sources/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <!-- HEADER -->
+    <div id="header-container">
+      <div id="header">
+        <a href="about.html" id="header-name">Microprediction</a>
+        <a href="motivation.html" id="header-link">Motivation</a>
+        <a href="gallery.html" id="header-link">Data Streams</a>
+        <a href="predicting.html" id="header-link">Predict Data</a>
+        <a href="crowd.html" id="header-link">Publish Data</a>
+        <a href="https://www.microprediction.org/" id="header-api">Back to API</a>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div id="body-container">
+      <div id="body-title">Making a Prediction</div>
+      <div id="body-bold-remark">It is easy to write programs that make predictions.</div>
+      <div id="body-subtitle">[Step 0] Install microprediction</div>
+      <pre>
+    pip install microprediction
+      </pre>
+      <div id="body-text">
+        Or see <a href="https://pypi.org/project/microprediction/">microprediction</a> from PyPI.
+      </div>
+
+      <div id="body-subtitle">[Step 1] Get a key</div>
+      <div id="body-text">
+        See <a href="muids.html">muid instructions</a>. Note especially the table of bankruptcy levels in the microprediction package's <a href="https://pypi.org/project/microprediction/">README</a>. At minimum, visit <a href="https://www.muid.org/create">muid.org</a> to create a minimal strength MUID for prediction submission.
+      </div>
+      <div id="body-subtitle">[Step 2] Choose a live data stream</div>
+      <div id="body-text">
+        Stream <a href="https://www.microprediction.com/streams/">listing</a>. Examining individual summaries such as <a href="/live/summary::cop.json">/live/summary::cop.json</a> or value histories <a href="/live/lagged::cop.json">live/lagged::cop.json</a> or <a href="/live/lagged_values::cop.json">live/lagged_values::cop.json</a>. See also <a href="/plotting.html">plotting</a> instructions.
+      </div>
+      <div id="body-subtitle">[Step 3] Use the MicroWriter to submit scenarios</div>
+      <pre>
+    from microprediction import MicroWriter
+    mw = MicroWriter(write_key="744fd0bec96112c9c5ce92ee904e1a4e")  # Substitute in your own key
+    scenarios = [ i*0.001 for i in range(mw.num_predictions) ]
+    mw.submit(name='cop.json',values=scenarios)
+      </pre>
+      <div id="body-subtitle">[Step 4] Examine performance</div>
+      <pre>
+    mw.get_performance()['cop.json']
+    mw.get_leaderboard(name='cop.json')
+    mw.get_overall()
+    mw.get_home()
+    mw.get_errors()
+    mw.get_transactions()
+      </pre>
+      <div id="body-subtitle">[Step 5, 6, ...] Improve it</div>
+      <div id="body-text">This we leave in your capable hands. Here is a start:</div>
+      <pre>
+    mw.get_lagged_values(name='cop.json')
+    mw.get_summary(name='cop.json')
+      </pre>
+
+      <div id="body-subtitle">Submission API</div>
+      <div id="body-text">You can also make a PUT request to submit/STREAM_NAME, with values in the payload as a comma separated list. See the <a href="/">main API page</a>.</div>
+      <div id="body-subtitle">Questions?</div>
+      <div id="body-text">Try the <a href="algorithm_faq.html">Algorithm FAQ</a>.</div>
+      <div id="body-subtitle">Crawling</div>
+      <div id="body-text">See <a href="crawling.html">crawling</a>.</div>
+
+    </div>
+
+    <!-- SPACE -->
+    <div id="space"></div>
+
+    <!-- FOOTER -->
+    <div id="footer-container"><div id="footer">
+      <a name="footer"></a>
+      <div id="footer-info">
+        <div style="position:absolute; top:20%; height:50%; left:0%; width:100%;">
+          <p style="color: #E64A19">Email</p>
+          <p id="email" style="Color:white;">info@microprediction.org</p>
+        </div>
+        <div style="position:absolute; top:50%; height:50%; left:0%; width:100%;">
+        </div>
+      </div>
+    </div></div>
+
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Publishing Data Streams</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="shortcut icon" href="sources/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <!-- HEADER -->
+    <div id="header-container">
+      <div id="header">
+        <a href="about.html" id="header-name">Microprediction</a>
+        <a href="motivation.html" id="header-link">Motivation</a>
+        <a href="gallery.html" id="header-link">Data Streams</a>
+        <a href="predicting.html" id="header-link">Predict Data</a>
+        <a href="crowd.html" id="header-link">Publish Data</a>
+        <a href="https://www.microprediction.org/" id="header-api">Back to API</a>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div id="body-container">
+      <div id="body-title">Publishing Data Stream</div>
+      <div id="body-bold-remark">Leverage the algorithm crowd.</div>
+      <div id="body-text">
+		Do you want a swarm of fiercely competiting algorithms to predict your data? Just publish it here. State of the art algorithms will find your stream of data and start working for you. They even find relevant data. The quintessential use is live, public, frequently updated data. However there are many ways to use the API for private prediction if you are sneaky.
+      </div>
+      <div id="body-subtitle">[Step 0] Install Microprediction</div>
+	  <pre>
+    pip install microprediction
+	  </pre>
+      <div id="body-text">
+		Or see <a href="https://pypi.org/project/microprediction/">microprediction</a> from PyPI.
+      </div>
+      <div id="body-subtitle">[Step 1] Locate or create a live source of data</div>
+      <div id="body-text">
+      	Take a look at this <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/live/nyc_traffic.py">example</a>. There is a function that returns a single number - the current speed of traffic on the Verrazano Narrows bridge. We will assume you have such a function at your disposal.
+      </div>
+	  <pre>
+    def verrazano_speed():
+      return fetch_live_data(key=VERRAZANO, field="speed")
+	  </pre>
+	  <div id="body-subtitle">[Step 2] Publish the live data periodically</div>
+	  <div id="body-text">
+	  	Take a look at this <a href="https://github.com/microprediction/microprediction/blob/master/feed_examples_live/traffic_live.py">example</a> of a script that uses the <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/writer.py">MicroWriter</a> to publish the speed every 20 minutes. You could do something even simpler such as:
+	  </div>
+	  <pre>
+    from microprediction import MicroWriter
+    import time
+    mw = MicroWriter(write_key="1586411f3ca74133384e2e33a474bdc3")   # <-- More on this in a moment
+    while True:
+      mw.put(name='mytrafficstream.json',value=verrazano_speed())
+      time.sleep(60*20)
+	  </pre>
+	  <div id="body-subtitle"><strike>[Step 3] Hire expensive primadonna data scientists</strike></div>
+	  <div id="body-text">Just kidding. There isn't a step three. You are done.</div>
+
+	  <div id="body-subtitle">How do I get a write_key?</div>
+	  <div id="body-text">You must possess a <em>hash-memorable write_key</em> of difficulty at least {{min_len}}. See <a href="muids.html">MUID instructions</a>.</div>
+	  <div id="body-subtitle">Questions?</div>
+	  <div id="body-text">Try the <a href="crowd_faq.html">Algorithmic Crowd FAQ</a>.</div>
+    </div>
+
+    <!-- SPACE -->
+    <div id="space"></div>
+
+    <!-- FOOTER -->
+    <div id="footer-container"><div id="footer">
+      <a name="footer"></a>
+      <div id="footer-info">
+        <div style="position:absolute; top:20%; height:50%; left:0%; width:100%;">
+          <p style="color: #E64A19">Email</p>
+          <p id="email" style="Color:white;">info@microprediction.org</p>
+        </div>
+        <div style="position:absolute; top:50%; height:50%; left:0%; width:100%;">
+        </div>
+      </div>
+    </div></div>
+
+  </body>
+</html>
