@@ -1,4 +1,4 @@
-const base_url = "https://www.microprediction.com/home/"
+const base_url = "https://www.microprediction.com/home/";
 
 var write_key;
 var resp;
@@ -18,7 +18,6 @@ function FetchAndLoadData(request) {
         document.getElementById("box-log-out").style.display = "inline";
         for (var card of document.getElementsByClassName("dashboard-card")) {
           card.style.display = "block";
-          console.log("here");
         }
         resp = json;
         LoadOverview();
@@ -87,68 +86,6 @@ function CreateCardWithTitle(title) {
 	return card;
 }
 
-// HELPER FUNCTION
-function TextDiv(item, pos_neg_color=false, round_digit, exact_color, bold) {
-  var div = document.createElement("div");
-  div.id = "body-text";
-  if (!round_digit) {
-    div.innerHTML = item;
-  } else {
-    var value = parseFloat(item);
-    div.innerHTML = Math.round((Math.pow(10,round_digit) * value)) / Math.pow(10,round_digit);
-  }
-  if (pos_neg_color) {
-    if (parseFloat(item) < 0) {
-      div.style.color = "red";
-    } else {
-      div.style.color = "green";
-      div.innerHTML = "+" + div.innerHTML;
-    }
-  } else if (exact_color) {
-    div.style.color = exact_color;
-  }
-  if (bold) {
-    div.style.fontWeight = "bold";
-  }
-  return div;
-}
-
-// HELPER FUNCTION
-function JoinDivs(divs, hover, card) {
-  var parent = document.createElement("div");
-  if (hover) {
-    parent.id = "div-hover";
-  }
-  last = divs[divs.length-1];
-  for (var child of divs) {
-    child.style.display = "inline";
-    parent.appendChild(child);
-    child.setAttribute("name",last.textContent);
-  }
-  parent.setAttribute("name",last.textContent);
-  parent.onclick = e => {
-    name = e.target.getAttribute("name");
-    console.log(name);
-    var loc;
-    if (card === "Active Streams" || card === "Performance") {
-      loc = "stream_dashboard.html?stream="+name;
-    } else if (card === "Confirmations") {
-      loc = "confirmations.html";
-    } else if (card === "Transactions") {
-      loc = "transactions.html";
-    } else if (card === "Errors") {
-      ;
-    } else if (card === "Warnings") {
-      ;
-    } else {
-      throw "ERROR";
-    }
-    window.location = loc;
-  }
-  return parent;
-}
-
-// function AddClick()
 
 function LoadOverview() {
   card = CreateCardWithTitle("Overview");

@@ -306,9 +306,6 @@ input#box-button-write-key:hover {
 }
 
 
-/*OVERVIEW*/
-
-
 /*ACTIVE STREAMS*/
 
 
@@ -316,6 +313,40 @@ input#box-button-write-key:hover {
 
 
 /*CONFIRMS*/
+#confirm-card {
+  margin-bottom: 2%;
+  border: 2px solid black;
+  padding: 1% 1%;
+  border-radius: 20px;
+}
+#confirm-time {
+  font-weight: bold;
+}
+#confirm-values {
+  margin-left: 5%;
+}
+#confirm-see-more {
+  text-align: center;
+}
+#confirm-see-more-text {
+  color: black;
+  font-size: 1.0em;
+  font-weight: normal;
+}
+button#confirm-see-more-button {
+  background-color: #7e2857;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 1% 2%;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition-duration: 0.4s;
+}
+button#confirm-see-more-button:hover {
+  background-color: #8f3566;
+}
 
 
 /*TRANSACTIONS*/
