@@ -124,6 +124,15 @@ BODY
   font-size: 1.0em;
   font-weight: normal;
 }
+#body-text-hover {
+  color: black;
+  font-size: 1.0em;
+  font-weight: normal;
+}
+#body-text-hover:hover {
+  background: white;
+  cursor: pointer;
+}
 #body-bold-remark {
   color: black;
   font-size: 1.0em;
@@ -198,6 +207,10 @@ button.box-button-get-started {
 button.box-button-get-started:hover {
   background-color: #8f3566;
 }
+#div-hover:hover {
+  background: white;
+  cursor: pointer;
+}
 
 
 /*
@@ -232,6 +245,9 @@ input#box-button-write-key {
   font-size: 0.9em;
   transition-duration: 0.4s;
 }
+input#box-button-write-key:hover {
+  cursor: pointer;
+}
 #box-bad-key {
   display: inline;
   padding: 1.5%;
@@ -246,6 +262,9 @@ input#box-button-write-key {
   font-size: 0.9em;
   color: #7e2857;
   text-decoration: underline;
+}
+#box-log-out:hover {
+  cursor: pointer;
 }
 
 

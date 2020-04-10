@@ -16,7 +16,6 @@ function FetchAndLoadData(request) {
       if (json["animal"] !== null) {
         localStorage.setItem('write_key',write_key);
         document.getElementById("box-log-out").style.display = "inline";
-        console.log("no");
         for (var card of document.getElementsByClassName("dashboard-card")) {
           card.style.display = "block";
           console.log("here");
@@ -115,15 +114,41 @@ function TextDiv(item, pos_neg_color=false, round_digit, exact_color, bold) {
 }
 
 // HELPER FUNCTION
-function JoinDivs(divs) {
+function JoinDivs(divs, hover, card) {
   var parent = document.createElement("div");
+  if (hover) {
+    parent.id = "div-hover";
+  }
+  last = divs[divs.length-1];
   for (var child of divs) {
     child.style.display = "inline";
     parent.appendChild(child);
+    child.setAttribute("name",last.textContent);
+  }
+  parent.setAttribute("name",last.textContent);
+  parent.onclick = e => {
+    name = e.target.getAttribute("name");
+    console.log(name);
+    var loc;
+    if (card === "Active Streams" || card === "Performance") {
+      loc = "stream_dashboard.html?stream="+name;
+    } else if (card === "Confirmations") {
+      loc = "confirmations.html";
+    } else if (card === "Transactions") {
+      loc = "transactions.html";
+    } else if (card === "Errors") {
+      ;
+    } else if (card === "Warnings") {
+      ;
+    } else {
+      throw "ERROR";
+    }
+    window.location = loc;
   }
   return parent;
 }
 
+// function AddClick()
 
 function LoadOverview() {
   card = CreateCardWithTitle("Overview");
@@ -150,10 +175,11 @@ function LoadOverview() {
 }
 
 function LoadActiveStreams() {
-  card = CreateCardWithTitle("Active Streams");
+  title = "Active Streams";
+  card = CreateCardWithTitle(title);
   var streams = resp["/active/"+write_key];
   for (var item of streams) {
-    card.appendChild(TextDiv(item));
+    card.appendChild(JoinDivs([TextDiv(item.slice(0,-5))], true, title));
   }
   if (streams.length === 0) {
     card.appendChild(TextDiv("No Active Streams"));
@@ -162,7 +188,8 @@ function LoadActiveStreams() {
 }
 
 function LoadConfirms() {
-  card = CreateCardWithTitle("Confirmations");
+  title = "Confirmations";
+  card = CreateCardWithTitle(title);
   var confirms = resp["confirms::"+write_key+".json"];
   for (var item of confirms) {
     var item = JSON.parse(item);
@@ -170,15 +197,15 @@ function LoadConfirms() {
       card.appendChild(
         JoinDivs([
           TextDiv("SET ", pos_neg_color=false, null, exact_color="#f9c809", bold=true),
-          TextDiv(item["examples"][0]["name"])
-        ])
+          TextDiv(item["examples"][0]["name"].slice(0,-5))
+        ], true, title)
       );
     } else if (item["operation"] === "submit") {
       card.appendChild(
         JoinDivs([
           TextDiv("SUBMIT ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
-          TextDiv(item["name"])
-        ])
+          TextDiv(item["name"].slice(0,-5))
+        ], true, title)
       );
     } else {
       card.appendChild(TextDiv("unknown action"));
@@ -192,7 +219,8 @@ function LoadConfirms() {
 }
 
 function LoadErrors() {
-  card = CreateCardWithTitle("Errors");
+  title = "Errors";
+  card = CreateCardWithTitle(title);
   var errors = resp["errors::"+write_key+".json"];
   for (var item of errors) {
     card.appendChild(TextDiv(item));
@@ -204,7 +232,8 @@ function LoadErrors() {
 }
 
 function LoadWarnings() {
-  card = CreateCardWithTitle("Warnings");
+  title = "Warnings";
+  card = CreateCardWithTitle(title);
   var warnings = resp["warnings::"+write_key+".json"];
   for (var item of warnings) {
     card.appendChild(TextDiv(item));
@@ -216,15 +245,16 @@ function LoadWarnings() {
 }
 
 function LoadPerformance() {
-  card = CreateCardWithTitle("Performance");
+  title = "Performance";
+  card = CreateCardWithTitle(title);
   var performance = resp["performance::"+write_key+".json"];
   for (var key in performance) {
     card.appendChild(
       JoinDivs([
         TextDiv(performance[key], pos_neg_color=true, round_digit=4, null, bold=true),
         TextDiv(": ", null, null, null, bold=true),
-        TextDiv(key)
-      ])
+        TextDiv(key.slice(0,-5))
+      ], true, title)
     );
   }
   if (performance.length === 0) {
@@ -234,7 +264,8 @@ function LoadPerformance() {
 }
 
 function LoadTransactions() {
-  card = CreateCardWithTitle("Transactions");
+  title = "Transactions";
+  card = CreateCardWithTitle(title);
   var transactions = resp["transactions::"+write_key+".json"];
   for (var transaction of transactions) {
     var data = transaction[1];
@@ -242,8 +273,8 @@ function LoadTransactions() {
       JoinDivs([
         TextDiv(data["amount"], pos_neg_color=true, round_digit=4, null, bold=true),
         TextDiv(": ", null, null, null, bold=true),
-        TextDiv(data["stream"])
-      ])
+        TextDiv(data["stream"].slice(0,-5))
+      ], true, title)
     );
   }
   if (transactions.length === 0) {
