@@ -58,3 +58,39 @@ function JoinDivs(divs, hover, card) {
   }
   return parent;
 }
+
+function GetUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    vars[key] = value;
+  });
+  return vars;
+}
+
+function Fetch(request) {
+  var value;
+
+  return new Promise(function(resolve, reject) {
+    fetch(request)
+      .then(response => {
+        if (response.status !== 200) {
+          throw "Response status is not 200: " + response.status;
+        } else {
+          return response.json();
+        }
+      })
+      .then(json => {
+        value = json;
+      })
+      .catch(error => {
+        console.log("Erorr Caught");
+        console.log(error);
+      })
+    .then(() => {
+      if (!value) {
+        value = "null";
+      }
+      resolve(value)
+    })
+  });
+}

@@ -3,27 +3,48 @@ const base_url = "https://www.microprediction.com/";
 var resp;
 var stream;
 
-function getUrlVars() {
-  var vars = {};
-  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-    vars[key] = value;
-  });
-  return vars;
-}
-
 function OnLoadStreamDashboard() {
-	var url = base_url;
-  const request = new Request(url, {method: 'GET'});
+	stream = GetUrlVars()["stream"];
 
   LoadDashboardName();
-  // load current value
-  // load bargraph
-  // load lagged
-  // load leaderboard
-  ;
+  
+  // stream is NOT a delayed stream
+  if (!stream.includes("::") && !stream.includes("~")) {
+	  LoadCurrentValue();
+	  LoadBarGraph();
+	  LoadLagged();
+  }
+
+	LoadLeaderboard();
+	LoadCDF();
+
 }
 
 function LoadDashboardName() {
-	stream = getUrlVars()["stream"];
 	document.getElementById("box-title").innerText = stream;
+}
+
+async function LoadCurrentValue() {
+	var url = base_url + "live/" + stream + ".json";
+  const request = new Request(url, {method: 'GET'});
+
+  var value = await Fetch(request);
+
+  document.getElementById("box-current-value-value").innerText = value;
+}
+
+async function LoadBarGraph() {
+	;
+}
+
+async function LoadLagged() {
+	;
+}
+
+async function LoadLeaderboard() {
+	;
+}
+
+async function LoadCDF() {
+	;
 }

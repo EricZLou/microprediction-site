@@ -217,7 +217,7 @@ button.box-button-get-started:hover {
 /*
 
 
-DASHBOARD
+USER DASHBOARD
 
 
 */
@@ -307,13 +307,11 @@ input#box-button-write-key:hover {
 }
 
 
-/*ACTIVE STREAMS*/
+/*
 
+CONFIRMS
 
-/*PERFORMANCE*/
-
-
-/*CONFIRMS*/
+*/
 #confirm-card {
   margin-bottom: 2%;
   margin-left: 3%;
@@ -370,14 +368,48 @@ a#confirm-back-to-top:hover {
 }
 
 
-/*TRANSACTIONS*/
+/*
+
+TRANSACTIONS
+
+*/
 
 
-/*ERRORS*/
+/*
+
+ERRORS
+
+*/
 
 
-/*WARNINGS*/
+/*
 
+WARNINGS
+
+*/
+
+
+/*
+
+
+STREAM DASHBOARD
+
+
+*/
+
+#box-current-value {
+  float: right;
+}
+#box-current-value-text {
+  color: red;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+#box-current-value-value {
+  color: #7e2857;
+  font-size: 1.2em;
+  font-weight: bold;
+}
 
 
 /*
