@@ -206,6 +206,7 @@ button.box-button-get-started {
 }
 button.box-button-get-started:hover {
   background-color: #8f3566;
+  cursor: pointer;
 }
 #div-hover:hover {
   background: white;
@@ -352,6 +353,20 @@ button#confirm-see-more-button {
 }
 button#confirm-see-more-button:hover {
   background-color: #8f3566;
+}
+#confirm-back-to-top {
+  position:fixed; 
+  right: 3%; 
+  bottom: 5%;
+  background-color: #f9c809;
+  padding: 0.5% 0.5%;
+  border-radius: 8px;
+  color: #7e2857;
+  transition-duration: 0.4s;
+}
+a#confirm-back-to-top:hover {
+  text-decoration: none;
+  background-color: #f5d351;
 }
 
 
