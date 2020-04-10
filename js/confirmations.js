@@ -60,7 +60,7 @@ function CreateConfirmDiv(item) {
         TextDiv("SET ", pos_neg_color=false, null, exact_color="#f9c809", bold=true),
         TextDiv(item["examples"][0]["name"].slice(0,-5), null, null, null, bold=true),
         TextDiv(" to "),
-        TextDiv(item["examples"][0]["value"], null, null, null, bold=true)
+        TextDiv(Math.round((Math.pow(10,8) * item["examples"][0]["value"])) / Math.pow(10,8), null, null, null, bold=true)
       ])
     );
     confirm_div.appendChild(TextDiv("Percentiles:"));
@@ -75,6 +75,8 @@ function CreateConfirmDiv(item) {
     		])
     	);
     }
+    percentile_div.appendChild(TextDiv("."));
+    percentile_div.appendChild(TextDiv("."));
     confirm_div.appendChild(percentile_div);
 
   } else if (item["operation"] === "submit") {

@@ -315,9 +315,15 @@ input#box-button-write-key:hover {
 /*CONFIRMS*/
 #confirm-card {
   margin-bottom: 2%;
+  margin-left: 3%;
+  margin-right: 3%;
   border: 2px solid black;
   padding: 1% 1%;
   border-radius: 20px;
+  width: 40%;
+  display: inline-block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #f1f1f1;
 }
 #confirm-time {
   font-weight: bold;
