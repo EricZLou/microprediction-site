@@ -399,6 +399,7 @@ STREAM DASHBOARD
 
 #box-current-value {
   float: right;
+  display: none;
 }
 #box-current-value-text {
   color: red;
@@ -409,6 +410,57 @@ STREAM DASHBOARD
   color: #7e2857;
   font-size: 1.2em;
   font-weight: bold;
+}
+#dashboard-bargraph {
+
+}
+#dashboard-lagged {
+
+}
+#dashboard-leaderboard {
+
+}
+#dashboard-cdf {
+
+}
+
+
+table#dashboard-leaderboard-table {
+  color: white;
+  border-spacing: 0;  
+}
+#dashboard-leaderboard-table tr:first-child {
+  background-color: #7e2857;
+}
+#dashboard-leaderboard-table tr:first-child th {
+  color: #f9c809;
+}
+#dashboard-leaderboard-table tr {
+  background-color: white;
+}
+#dashboard-leaderboard-table tr:nth-child(2) > td {
+  border-top-width: 0;
+}
+#dashboard-leaderboard-table th, #dashboard-leaderboard-table td {
+  margin: 0;
+  padding: .5em 1.5em;
+  text-align: center;
+  border-width: 1px 0;
+  border-color: #7e2857;
+  border-style: solid;
+}
+#dashboard-leaderboard-table th {
+  border-bottom-width: 4px;
+}
+#dashboard-leaderboard-table th:nth-child(even) {
+  border-width: 0 4px;
+  border-color: white;
+  border-style: solid;
+}
+#dashboard-leaderboard-table td:nth-child(even) {
+  border-width: 1px 4px;
+  border-color: #7e2857;
+  border-style: solid;
 }
 
 
