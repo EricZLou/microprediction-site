@@ -1,50 +1,78 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Crawling</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="shortcut icon" href="sources/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+  <body>
 
-<body>
+    <!-- HEADER -->
+    <div id="header-container">
+      <div id="header">
+        <a href="about.html" id="header-name">Microprediction</a>
+        <a href="motivation.html" id="header-link">Motivation</a>
+        <a href="gallery.html" id="header-link">Data Streams</a>
+        <a href="predicting.html" id="header-link">Predict Data</a>
+        <a href="crowd.html" id="header-link">Publish Data</a>
+        <a href="https://www.microprediction.org/" id="header-api">Back to API</a>
+      </div>
+    </div>
 
-<h1>Crawling</h1>
-
-It is easy to write programs that look for streams to predict and submit scenarios.
-
-
-<h2>Step 1. Install microprediction</h2>
-
-<pre>
+    <!-- BODY -->
+    <div id="body-container">
+      <div id="body-title">Crawling</div>
+      <div id="body-bold-remark">It is easy to write programs that look for streams to predict and submit scenarios.</div>
+      <div id="body-subtitle">[Step 0] Install microprediction</div>
+      <pre>
     pip install microprediction
-</pre>
+      </pre>
+      <div id="body-text">
+        Or see <a href="https://pypi.org/project/microprediction/">microprediction</a> from PyPI.
+      </div>
 
-<h2>Step 2. Get a key</h2>
-
-As explained <a href="about.html">here</a>, you need a write_key to submit. At minimum click on <a href="https://www.muid.org/create">this link</a> to create on.
-However we encourage you to visit <a href="https://www.muid.org">muid.org</a> to understand MUIDs and mine a better key. You can run the <a href="https://raw.githubusercontent.com/microprediction/muid/master/examples/one_liner.sh">mining bash script</a>. Using
-a difficult key may greatly increase your crawler's longevity. See the table of bankruptcy levels in the microprediction package's <a href="https://pypi.org/project/microprediction/">README</a>.
-
-<h2>Step 3. Run the default crawler</h2>
-
-<pre>
+      <div id="body-subtitle">[Step 1] Get a key</div>
+      <div id="body-text">
+        See <a href="muids.html">muid instructions</a>. Note especially the table of bankruptcy levels in the microprediction package's <a href="https://pypi.org/project/microprediction/">README</a>. At minimum, visit <a href="https://www.muid.org/create">muid.org</a> to create a minimal strength MUID for prediction submission.
+      </div>
+      <div id="body-subtitle">[Step 2] Run the default crawler</div>
+      <pre>
     from microprediction import MicroCrawler
     crawler = MicroCrawler(write_key="YOUR_WRITE_KEY_HERE")
     crawler.run()
-</pre>
-
-<h2>Step 4. Examine performance</h2>
-
-<pre>
+      </pre>
+      <div id="body-subtitle">[Step 3] Examine performance</div>
+      <pre>
    mw.get_performance()
    mw.get_overall()
    mw.get_home()
    mw.get_errors()
    mw.get_transactions()
-</pre>
+      </pre>
+      <div id="body-subtitle">[Step 4, 5, ...] Improve it</div>
+      <div id="body-text">This we leave in your capable hands.</div>
 
-<h2>Steps 5,6,...  Improve it</h2>
+    </div>
 
-This we leave in your capable hands.
+    <!-- SPACE -->
+    <div id="space"></div>
 
-<p>
+    <!-- FOOTER -->
+    <div id="footer-container"><div id="footer">
+      <a name="footer"></a>
+      <div id="footer-info">
+        <div style="position:absolute; top:20%; height:50%; left:0%; width:100%;">
+          <p style="color: #E64A19">Email</p>
+          <p id="email" style="Color:white;">info@microprediction.org</p>
+        </div>
+        <div style="position:absolute; top:50%; height:50%; left:0%; width:100%;">
+        </div>
+      </div>
+    </div></div>
 
-<a href="/">Back to main API page</a>
-
-</body>
-
+  </body>
 </html>
