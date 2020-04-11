@@ -1,26 +1,64 @@
-
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <title>Plotting Data Streams</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="shortcut icon" href="sources/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+  <body>
 
-<h1>Plotting</h1>
+    <!-- HEADER -->
+    <div id="header-container">
+      <div id="header">
+        <a href="about.html" id="header-name">Microprediction</a>
+        <a href="motivation.html" id="header-link">Motivation</a>
+        <a href="gallery.html" id="header-link">Data Streams</a>
+        <a href="predicting.html" id="header-link">Predict Data</a>
+        <a href="crowd.html" id="header-link">Publish Data</a>
+        <a href="https://www.microprediction.org/" id="header-api">Back to API</a>
+      </div>
+    </div>
 
+    <!-- BODY -->
+    <div id="body-container">
+      <div id="body-title">Plotting Data Streams</div>
+  
+	    <div id="body-subtitle">Historical</div>
+      <div id="body-text">
+				<ul>
+			    <li> Bar plots via <a href="/bar?name=cop.json">/bar?name=cop.json</a> </li>
+			    <li> Histograms via <a href="/histogram?name=cop.json">/histogram?name=cop.json</a> </li>
+				</ul>
+      </div>
 
+	    <div id="body-subtitle">Predictions</div>
+      <div id="body-text">
+				<ul>
+			    <li> CDF via <a href="/cumulative?name=cop.json&delay=70">/cumulative?name=cop.json&delay=70 </a> </li>
+				</ul>
+      </div>
 
-<h3>Historical</h3>
+    </div>
 
-<ul>
-    <li> Bar plots via <a href="/bar?name=cop.json">/bar?name=cop.json</a>
-    <li> Histograms via <a href="/histogram?name=cop.json">/histogram?name=cop.json</a>
-</ul>
+    <!-- SPACE -->
+    <div id="space"></div>
 
-<h3>Predictions</h3>
+    <!-- FOOTER -->
+    <div id="footer-container"><div id="footer">
+      <a name="footer"></a>
+      <div id="footer-info">
+        <div style="position:absolute; top:20%; height:50%; left:0%; width:100%;">
+          <p style="color: #E64A19">Email</p>
+          <p id="email" style="Color:white;">info@microprediction.org</p>
+        </div>
+        <div style="position:absolute; top:50%; height:50%; left:0%; width:100%;">
+        </div>
+      </div>
+    </div></div>
 
-<ul>
-    <li> CDF via <a href="/cumulative?name=cop.json&delay=70">/cumulative?name=cop.json&delay=70</a>
-</ul>
-
-
-
-<a href="/">Back to main API page</a>
-
-
+  </body>
 </html>
