@@ -2,7 +2,6 @@ function Round(item, round_digit) {
   return Math.round((Math.pow(10,round_digit) * item)) / Math.pow(10,round_digit);
 }
 
-// HELPER FUNCTION
 function TextDiv(item, pos_neg_color=false, round_digit, exact_color, bold) {
   var div = document.createElement("div");
   div.id = "body-text";
@@ -28,7 +27,6 @@ function TextDiv(item, pos_neg_color=false, round_digit, exact_color, bold) {
   return div;
 }
 
-// HELPER FUNCTION
 function JoinDivs(divs, hover, card) {
   var parent = document.createElement("div");
   if (hover) {

@@ -6,19 +6,32 @@ var stream;
 var space_div = document.createElement("div");
 space_div.id = "space";
 
-function OnLoadStreamDashboard() {
+async function OnLoadStreamDashboard() {
 	stream = GetUrlVars()["stream"];
 
   LoadDashboardName();
+	await LoadLeaderboard();
   
   // stream is NOT a delayed stream
-  if (!stream.includes("::") && !stream.includes("~")) {
-	  LoadCurrentValue();
-	  LoadBarGraph();
-	  LoadLagged();
+  if (stream.includes("~")) {
+  	var i = stream.indexOf("~") + 1;
+  	var j = stream.lastIndexOf("~");
+  	document.getElementById("box-button-stream-parent").style.display = "inline";
+  	document.getElementById("box-button-stream-parent").onclick = function() {
+  		window.location = "stream_dashboard.html?stream="+stream.slice(i,j);
+  	}
+  } else if (stream.includes("::")) {
+  	var i = stream.indexOf("::") + 2;
+  	document.getElementById("box-button-stream-parent").style.display = "inline";
+  	document.getElementById("box-button-stream-parent").onclick = function() {
+  		window.location = "stream_dashboard.html?stream="+stream.slice(i);
+  	}
   }
 
-	LoadLeaderboard();
+  LoadCurrentValue();
+  LoadBarGraph();
+	LoadLagged();
+
 	LoadCDF();
 }
 
@@ -40,31 +53,6 @@ async function LoadBarGraph() {
 	// var graphs = plot;
 	// Plotly.plot("dashboard-bargraph", graphs, {});
 	;
-}
-
-async function LoadLagged() {
-	var url = base_url + "lagged/" + stream + ".json";
-	const request = new Request(url, {method: 'GET'});
-
-	var value = await Fetch(request);
-
-	lagged_div = document.getElementById("dashboard-lagged");
-
-	var title_div = document.createElement("div");
-	title_div.id = "dashboard-title";
-	title_div.innerHTML = "Lagged Values";
-	leaderboard_div.appendChild(title_div);
-
-	for (group of value) {
-		leaderboard_div.appendChild(
-			JoinDivs([
-				TextDiv(group[0]),
-				TextDiv(": "),
-				TextDiv(group[1])
-			])
-		)
-	}
-	console.log(value);
 }
 
 async function LoadLeaderboard() {
@@ -89,7 +77,7 @@ async function LoadLeaderboard() {
 	}
 
 	let table = document.createElement("TABLE");
-	table.id = "dashboard-leaderboard-table";
+	table.id = "dashboard-table";
 	let new_row = table.insertRow(-1);
 	for (head of ["Rank", "MUID", "Points"]) {
 		let header_cell = document.createElement("TH");
@@ -110,9 +98,97 @@ async function LoadLeaderboard() {
 		place = place + 1;
 	}
 	leaderboard_div.appendChild(table);
-	leaderboard_div.appendChild(space_div);
+}
+
+async function LoadLagged() {
+	var url = base_url + "lagged/" + stream + ".json";
+	const request = new Request(url, {method: 'GET'});
+
+	var lagged_values = await Fetch(request);
+
+	lagged_div = document.getElementById("dashboard-lagged");
+	lagged_div.appendChild(space_div);
+
+	var title_div = document.createElement("div");
+	title_div.id = "dashboard-title";
+	title_div.innerHTML = "Lagged Values";
+	lagged_div.appendChild(title_div);
+
+	if (lagged_values === "null" || lagged_values.length === 0) {
+		lagged_div.appendChild(
+			TextDiv("No lagged values available.", null, null, null, true)
+		);
+		lagged_div.appendChild(space_div);
+		return;
+	}
+
+	let table_container = document.createElement("div");
+	table_container.id = "dashboard-table-container";
+	let table = document.createElement("TABLE");
+	table.id = "dashboard-table";
+	let new_row = table.insertRow(-1);
+	for (head of ["Timestamp", "Value"]) {
+		let header_cell = document.createElement("TH");
+		header_cell.innerHTML = head;
+		new_row.appendChild(header_cell);
+	}
+	var i = 0;
+	for (group of lagged_values) {
+		if (i > 50) {
+			break;
+		}
+		let new_row = table.insertRow(-1);
+		let new_cell = new_row.insertCell(-1);
+		new_cell.appendChild(TextDiv(group[0]));
+		new_cell = new_row.insertCell(-1);
+		new_cell.appendChild(TextDiv(group[1]));
+		i = i + 1;
+	}
+	table_container.appendChild(table);
+	lagged_div.appendChild(table_container);
+	lagged_div.appendChild(space_div);
 }
 
 async function LoadCDF() {
-	;
+	var url = base_url + "cdf/" + stream + ".json";
+	const request = new Request(url, {method: 'GET'});
+
+	var cdf_values = await Fetch(request);
+
+	cdf_div = document.getElementById("dashboard-cdf");
+	cdf_div.appendChild(space_div);
+
+	var title_div = document.createElement("div");
+	title_div.id = "dashboard-title";
+	title_div.innerHTML = "CDF";
+	cdf_div.appendChild(title_div);
+
+	if (cdf_values === "null" || cdf_values["x"].length === 0) {
+		cdf_div.appendChild(
+			TextDiv("No CDF available.", null, null, null, true)
+		);
+		cdf_div.appendChild(space_div);
+		return;
+	}
+
+	let table_container = document.createElement("div");
+	table_container.id = "dashboard-table-container";
+	let table = document.createElement("TABLE");
+	table.id = "dashboard-table";
+	let new_row = table.insertRow(-1);
+	for (head of ["x", "y"]) {
+		let header_cell = document.createElement("TH");
+		header_cell.innerHTML = head;
+		new_row.appendChild(header_cell);
+	}
+	for (idx in cdf_values["x"]) {
+		let new_row = table.insertRow(-1);
+		let new_cell = new_row.insertCell(-1);
+		new_cell.appendChild(TextDiv(cdf_values["x"][idx]));
+		new_cell = new_row.insertCell(-1);
+		new_cell.appendChild(TextDiv(cdf_values["y"][idx]));
+	}
+	table_container.appendChild(table);
+	cdf_div.appendChild(table_container);
+	cdf_div.appendChild(space_div);
 }
