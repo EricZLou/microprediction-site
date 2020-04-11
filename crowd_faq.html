@@ -1,207 +1,272 @@
-
-<h1>FAQ: Using the crowd for microprediction</h1>
-
-The <a href="/">API page</a> and Python client make it easy to request distributional prediction of live data. See <a href="crowd.html">quickstart</a> instructions.
-
-<h2>My people have Ph.D.'s in math, why do I need this?</h2>
-
-It is expensive, time consuming and ultimately impossible for any individual to survey the vast space of modeling techniques and
-potentially relevant data for any given problem. As an aside, we also have Ph.D.'s from institutions such as Princeton and Stanford, and we've been reading papers for many years since then, yet we do not
-believe for a moment we can solve microprediction on our own. Rather, we tap into a diverse group of people and methodologies. We find it invaluable. Perhaps you will too.
-
-<h2>Why don't I use vendor X instead to "micropredict"?</h2>
-
-Perhaps you should. Some are very good. This API provides an easy way to benchmark them. See next answer.
-
-<h2>I already have a good predictive model. Why do I need this?</h2>
-
-Try this:
-<ol>
-    <li> Publish your model residuals (prediction errors), or
-    <li> Publish transformed data, and also use your existing model to <a href="crawling.html">crawl</a>.
-</ol>
-The first option may be slightly easier. See the <a href="crowd.html">instructions</a>. Either way, before long this site will provide you with ongoing performance analysis
-of your model and accurate distributional description of your residuals.
-It may be that your model is great, and you will have proof! On the other hand the following is also possible:
-<ol>
-    <li> Sooner or later your residuals will correlate to a data source you don't know about.
-    <li> You'll be able to combine the information here with you model to make a better one.
-    <li> The algorithm you include here might also predict something else well.
-</ol>
-It is quicker to benchmark an existing prediction methdology than to wax philosophical on the matter.
-
-<h2>Are the predictions here better than elsewhere?</h2>
-
-We make no such claim. But we can certainly make an argument that <em>asymptotically</em> the predictions are likely to be worth the time you take to publish. Every
-week people are adding more self-navigating, self-updating time series models into the mix.
-
-<h2>What tools and models are already deployed behind the API?</h2>
-
-We spend some time assembling some of the best open source prediction packages and ensuring the crawlers make use of them. We are also working to make available some
-hyper-parameter estimation techniques - it costs us nothing on the margin to include them. However the strength of the approach from your perspective will, we think, ultimately be from =the contribution of others.
-
-<h2>Why aren't predictions a single number?</h2>
-
-We may introduce point estimates and appropriate scoring rules. However:
-<ol>
- <li> Single number predictions are inherently difficult to interpret and combine.
- <li> Distributional estimates admit a <em>stateless</em> reward clearing mechanism that (somewhat surprisingly) is O(1) in the number of contributions.
-</ol>
-There are some technical caveats to the last statement, but the software can handle roughly as many incoming scenarios as, say, Nasdaq processes trade orders. No shortage
-of cognitive diversity here! It does mean that authors need
-to think a little more about their algorithms but that also isn't a bad thing. There isn't a shortage of talent on the other side of the API your are about to use and if
-they can't produce a probabilty distribution, you probably don't want them involved.
-
-<h2>Can I retrieve moments, such as the mean prediction?</h2>
-
-The CDF provides a slightly noisy estimate. A better, more precise answer is on the way.
-
-<h2>What are the Z-streams?</h2>
-
-Every time you send a data point an implied z-score is computed based on quarantined predictions from the crowd. A secondary stream is automatically created where
-algorithms predict these normalized numbers. Here's a <a href="/histogram?name=z1~three_body_x~10810.json">histogram</a> plot showing that the z-values are
-roughly normally distributed.
-
-<h2>Can I use this for anomaly / outlier detection?</h2>
-
-Yes because z-streams directly tell you how surprising each data point is.
-
-<h2>Can I ask for joint distributions?</h2>
-
-Yes. This is an advanced use case requiring a truly rare MUID (length {{min_len}}+1, see <a href="/config.json">config.json</a>). You can use the Copula API (or MicroWriter.cset method) to simultaneously set the value of multiple streams.
-This triggers prediction of:
-<ol>
-    <li> Margins
-    <li> Implied z-scores for each margin
-    <li> Pairs and triples of Z-scores projected from R^2 or R^3 back into one dimension using a Morton space filling Z-curve.
-    <li> Implied z-scores of the projected Z-scores.
-</ol>
-If z-scores of z-curve projections of implied z-scores sounds a bit elaborate, it may well be. It is certainly an experimental feature. However it encourages a separation of concerns in attacking an extremely difficult problem - the construction of accurate multi-dimensional joint distributions. You can read about <a href="https://en.wikipedia.org/wiki/Z-order_curve">Z-order curves</a> at Wikipedia.
-The use of space filling curves as a means of indirectly describing Copulas is not entirely standard, but that doesn't make it a terrible idea. Suffice to say for now that the standard deviation of the projection relates closely to
-the correlations of the variables in question. We may provide a longer
-technical discussion in due course.
-
-
-<h2>How do I get started?</h2>
-See <a href="crowd.html">quickstart</a> instructions.
-
-<h2>Do I have to use Python?</h2>
-No. You can use the API directly.
-<ol>
-    <li> Send a PUT request to microprediction.com/live/YOUR_STREAM_NAME with a scalar value in the data payload.
-    <li> Make GET requests (e.g. microprediction.com/cdf/YOUR_STREAM_NAME) to retrieve the predicted distribution.
-</ol>
-See the <a href="/">API page</a>.
-
-<h2>Over what horizon will my data be predicted?</h2>
-
-You data will be predicted roughly 1 minute, 15 minutes and 3 hours ahead. This is a limitation. See the
-current <a href="/config.json">delays parameter</a> for a precise number of seconds. Chances are only one of
-those horizons may be of interest. To place more emphasis on one horizon (add to the market volume, as it were) you can always enter an algorithm using
-a different write_key.
-
-<h2>On what frequency should I publish my data?</h2>
-
-At time of writing, predictions get quarantined for 70 seconds; 15 minutes plus 10 seconds; and 3 hours plus 10 seconds (see <a href="/config.json">config.json</a>).
-For the purpose of discussion, we shall presume that you are most interested in the 15 minute horizon. Then there are two main cases:
-<ol>
-<li> <em>Absolute levels</em>. Say you want people to predict the absolute level of a quantity <em>roughly</em> 15 minutes ahead. You are better off publishing once every 16 or 20 minutes to avoid race conditions. This gives the algorithms
-a minute or so to absorb the most recent data point.
-<li> <em>Changes</em> to near-martingales. On the other hand if you want people to predict a quantity that is approximately a martingale (like a stock price, that is inherently very hard to predict) then you might want to publish the <em>difference</em> of that
-value sampled every 15 minutes instead - just shy of the 910 second quarantine time. The rationale here is that most algorithms will not need to update their predictions very much. They can make their prediction of the difference a few minutes prior to the 15 minute cutoff without unduly hurting their chances.
-</ol>
-In general you should think about using the prediction API the same way you think about time series forecasting pre-processing. Differencing and transformations may be helpful. You want to attract the best algorithms and not just those
-that specialize in finding edge cases to exploit. You can view some <a href="https://github.com/microprediction/microprediction/tree/master/feed_examples_live">examples</a> of feeds
-which exhibit these subtle differences.
-
-<h2>Can I predict just one event?</h2>
-
-No. We don't advocate using this API for long term predictions or singular events.
-
-<h2>Can I predict a week in advance?</h2>
-
-No. We don't advocate using this API for long term predictions or singular events.
-
-<h2>C'mon, what about one day in advance?</h2>
-
-Okay it is a free country. But let's discuss. info@microprediction.org
-
-<h2>Can I predict my own stream?</h2>
-
-Absolutely. See <a href="predicting.html">predicting</a> and <a href="crawling.html">crawling</a> instructions. Use a different key to add volume and draw attention to a stream or horizon.
-
-<h2>Who contributes algorithms?</h2>
-
-As you can see from <a href="predicting.html">predicting</a> and <a href="crawling.html">crawling</a>, absolutely <em>anyone</em> can, including algorithms that create algorithms.
-
-<h2>What prevents someone from creating thousands of spurious algorithms?</h2>
-
-They would need to mine a lot of MUIDs.
-
-<h2>I don't understand MUIDs</h2>
-
-They are just randomly generated numbers that happen to be very lucky, in the sense that the hex digest of their SHA-256 hash looks like a cute animal name. If that doesn't make sense then:
-<ol>
-    <li> We suggest this <a href="https://vimeo.com/397352413">video</a> introduction.
-    <li> Or ... if you know what a <a href="http://www.muid.org/hash/fb74baf628d43892020d803614f91f29">hash</a> is just read the MUID <a href="https://muid.readthedocs.io/en/latest/">README</a>.
-</ol>
-We insist on write_keys being MUIDs to add a bit of mass and discourage abuse.
-
-<h2>I have an important use but don't want to wait for a MUID</h2>
-
-We have a stockpile of MUIDs for worthwhile purposes. Email us info@microprediction.org
-
-<h2>Can I help you generate MUIDs so they can support civic or worthwhile prediction?</h2>
-
-What a great idea! Email us at info@microprediction.org if you have some spare CPU capacity.
-
-<h2>Can I offer prizemoney?</h2>
-
-info@microprediction.org
-
-<h2>Are others offering prizemoney?</h2>
-
-<a href="https://www.intechinvestments.com/">Intech Investments</a> will be offering compensation for various types of contribution to this project including, but not limited to, the creation of high performing prediction algorithms.
-
-<h2>Will it be maintained?</h2>
-
-Yes. <a href="https://www.intechinvestments.com/">Intech Investments</a> is supporting the open source code development.
-
-<h2>What is the underlying transport / database?</h2>
-
-Redis
-
-<h2>Who supports the underlying transport / database?</h2>
-
-Redis Labs.
-
-<h2>How reliable is the underlying hosted database technology?</h2>
-
-Anything less than 99.99% uptime is probably our fault. We want this to be very stable for our own purposes, but we can make no warranties.
-
-<h2>Why is the site all JSON?</h2>
-
-The lack of human-centered navigation may be disconcerting at first. However it is easy for anyone who can write Python to copy and modify a <a href="https://github.com/microprediction/microprediction/blob/master/examples/crawl.py">crawler</a>
-using the <a href="https://pypi.org/project/microprediction/">microprediction package</a>. Crawlers can try out different streams, including yours, and figure out if they are
-good at predicting them or not (relative to other algorithms). We are looking to
-drive the cost of microprediction to zero for you, and this cannot happen if algorithm authors rely on their eyeballs all the time to find good streams to predict, or make economic decisions on behalf of their algorithms.
-
-<h2>No really, why is it all JSON?</h2>
-
-A nicer skin is coming soon for humans - but it will always be robots first.
-
-<h2>Can algorithms create their own streams?</h2>
-
-See the <a href="motivation.html">why page</a> for futher discussion.
-
-<h2>Where can I make suggestions?</h2>
-
-Email info@microprediction.org or create an <a href="https://github.com/microprediction/microprediction/issues">issue</a> on Github.
-
-<p>
-
-<a href="/">Back to main API page</a>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Crowd FAQ</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="shortcut icon" href="sources/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <!-- HEADER -->
+    <div id="header-container">
+      <div id="header">
+        <a href="about.html" id="header-name">Microprediction</a>
+        <a href="motivation.html" id="header-link">Motivation</a>
+        <a href="gallery.html" id="header-link">Data Streams</a>
+        <a href="predicting.html" id="header-link">Predict Data</a>
+        <a href="crowd.html" id="header-link">Publish Data</a>
+        <a href="https://www.microprediction.org/" id="header-api">Back to API</a>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div id="body-container">
+      <div id="body-title">
+        Crowd FAQ: Using the Crowd for Microprediction
+      </div>
+      <div id="body-bold-remark">
+        The API page and Python client make it easy to write algorithms that make distributional predictions about live quantities. See <a href="crowd.html">quickstart</a> instructions.
+      </div>
+      <div id="space"></div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">My people have Ph.D.'s in math, why do I need this?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">It is expensive, time consuming and ultimately impossible for any individual to survey the vast space of modeling techniques and potentially relevant data for any given problem. As an aside, we also have Ph.D.'s from institutions such as Princeton and Stanford, and we've been reading papers for many years since then, yet we do not believe for a moment we can solve microprediction on our own. Rather, we tap into a diverse group of people and methodologies. We find it invaluable. Perhaps you will too.</div>
+        </div>
+
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Why don't I use vendor X instead to "micropredict"?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">Perhaps you should. Some are very good. This API provides an easy way to benchmark them. See next answer.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">I already have a good predictive model. Why do I need this?</div>
+        </div>
+        <div id="faq-a-container">
+          <div id="faq-a">A: </div><div id="faq-text">Try this:
+          <ol>
+            <li> Publish your model residuals (prediction errors), or </li>
+            <li> Publish transformed data, and also use your existing model to <a href="crawling.html">crawl</a>. </li>
+          </ol>
+          The first option may be slightly easier. See the <a href="crowd.html">instructions</a>. Either way, before long this site will provide you with ongoing performance analysis
+          of your model and accurate distributional description of your residuals.
+          It may be that your model is great, and you will have proof! On the other hand the following is also possible:
+          <ol>
+            <li> Sooner or later your residuals will correlate to a data source you don't know about. </li>
+            <li> You'll be able to combine the information here with you model to make a better one. </li>
+            <li> The algorithm you include here might also predict something else well. </li>
+          </ol>
+          It is quicker to benchmark an existing prediction methdology than to wax philosophical on the matter.
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Are the predictions here better than elsewhere?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">We make no such claim. But we can certainly make an argument that <em>asymptotically</em> the predictions are likely to be worth the time you take to publish. Every week people are adding more self-navigating, self-updating time series models into the mix.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">What tools and models are already deployed behind the API?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">We spend some time assembling some of the best open source prediction packages and ensuring the crawlers make use of them. We are also working to make available some hyper-parameter estimation techniques - it costs us nothing on the margin to include them. However the strength of the approach from your perspective will, we think, ultimately be from =the contribution of others.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Why aren't predictions a single number?</div>
+        </div>
+        <div id="faq-a-container">
+          <div id="faq-a">A: </div><div id="faq-text">We may introduce point estimates and appropriate scoring rules. However:
+          <ol>
+            <li> Single number predictions are inherently difficult to interpret and combine.</li>
+            <li> Distributional estimates admit a <em>stateless</em> reward clearing mechanism that (somewhat surprisingly) is O(1) in the number of contributions.</li>
+          </ol>
+          There are some technical caveats to the last statement, but the software can handle roughly as many incoming scenarios as, say, Nasdaq processes trade orders. No shortage of cognitive diversity here! It does mean that authors need to think a little more about their algorithms but that also isn't a bad thing. There isn't a shortage of talent on the other side of the API your are about to use and if they can't produce a probabilty distribution, you probably don't want them involved.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Can I retrieve moments, such as the mean prediction?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">The CDF provides a slightly noisy estimate. A better, more precise answer is on the way.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">What are the Z-streams?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">Every time you send a data point an implied z-score is computed based on quarantined predictions from the crowd. A secondary stream is automatically created where algorithms predict these normalized numbers. Here's a <a href="/histogram?name=z1~three_body_x~10810.json">histogram</a> plot showing that the z-values are roughly normally distributed.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Can I use this for anomaly / outlier detection?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">Yes because z-streams directly tell you how surprising each data point is.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Can I ask for joint distributions?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">Yes. This is an advanced use case requiring a truly rare MUID (length {{min_len}}+1, see <a href="/config.json">config.json</a>). You can use the Copula API (or MicroWriter.cset method) to simultaneously set the value of multiple streams.
+            This triggers prediction of:
+            <ol>
+                <li> Margins</li>
+                <li> Implied z-scores for each margin</li>
+                <li> Pairs and triples of Z-scores projected from R^2 or R^3 back into one dimension using a Morton space filling Z-curve.</li>
+                <li> Implied z-scores of the projected Z-scores.</li>
+            </ol>
+            If z-scores of z-curve projections of implied z-scores sounds a bit elaborate, it may well be. It is certainly an experimental feature. However it encourages a separation of concerns in attacking an extremely difficult problem - the construction of accurate multi-dimensional joint distributions. You can read about <a href="https://en.wikipedia.org/wiki/Z-order_curve">Z-order curves</a> at Wikipedia. The use of space filling curves as a means of indirectly describing Copulas is not entirely standard, but that doesn't make it a terrible idea. Suffice to say for now that the standard deviation of the projection relates closely to the correlations of the variables in question. We may provide a longer technical discussion in due course.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Do I have to use Python?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">No. You can use the API directly.
+            <ol>
+                <li> Send a PUT request to microprediction.com/live/YOUR_STREAM_NAME with a scalar value in the data payload. </li>
+                <li> Make GET requests (e.g. microprediction.com/cdf/YOUR_STREAM_NAME) to retrieve the predicted distribution. </li>
+            </ol>
+            See the <a href="/">API page</a>.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Over what horizon will my data be predicted?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">You data will be predicted roughly 1 minute, 15 minutes and 3 hours ahead. This is a limitation. See the current <a href="/config.json">delays parameter</a> for a precise number of seconds. Chances are only one of those horizons may be of interest. To place more emphasis on one horizon (add to the market volume, as it were) you can always enter an algorithm using a different write_key.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">On what frequency should I publish my data?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">At time of writing, predictions get quarantined for 70 seconds; 15 minutes plus 10 seconds; and 3 hours plus 10 seconds (see <a href="/config.json">config.json</a>). For the purpose of discussion, we shall presume that you are most interested in the 15 minute horizon. Then there are two main cases:
+            <ol>
+              <li> <em>Absolute levels</em>. Say you want people to predict the absolute level of a quantity <em>roughly</em> 15 minutes ahead. You are better off publishing once every 16 or 20 minutes to avoid race conditions. This gives the algorithms a minute or so to absorb the most recent data point.</li>
+              <li> <em>Changes</em> to near-martingales. On the other hand if you want people to predict a quantity that is approximately a martingale (like a stock price, that is inherently very hard to predict) then you might want to publish the <em>difference</em> of that value sampled every 15 minutes instead - just shy of the 910 second quarantine time. The rationale here is that most algorithms will not need to update their predictions very much. They can make their prediction of the difference a few minutes prior to the 15 minute cutoff without unduly hurting their chances.</li>
+            </ol>
+            In general you should think about using the prediction API the same way you think about time series forecasting pre-processing. Differencing and transformations may be helpful. You want to attract the best algorithms and not just those that specialize in finding edge cases to exploit. You can view some <a href="https://github.com/microprediction/microprediction/tree/master/feed_examples_live">examples</a> of feeds which exhibit these subtle differences.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Can I predict my own stream?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">Absolutely. See <a href="predicting.html">predicting</a> and <a href="crawling.html">crawling</a> instructions. Use a different key to add volume and draw attention to a stream or horizon.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Who contributes algorithms?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">As you can see from <a href="predicting.html">predicting</a> and <a href="crawling.html">crawling</a>, absolutely <em>anyone</em> can, including algorithms that create algorithms.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">What prevents someone from creating thousands of spurious algorithms?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">They would need to mine a lot of MUIDs.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">I don't understand MUIDs</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">They are just randomly generated numbers that happen to be very lucky, in the sense that the hex digest of their SHA-256 hash looks like a cute animal name. If that doesn't make sense then:
+            <ol>
+                <li> We suggest this <a href="https://vimeo.com/397352413">video</a> introduction.</li>
+                <li> Or ... if you know what a <a href="http://www.muid.org/hash/fb74baf628d43892020d803614f91f29">hash</a> is just read the MUID <a href="https://muid.readthedocs.io/en/latest/">README</a>.</li>
+            </ol>
+            We insist on write_keys being MUIDs to add a bit of mass and discourage abuse.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">I have an important use but don't want to wait for a MUID</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">We have a stockpile of MUIDs for worthwhile purposes. Email us info@microprediction.org</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Can I help you generate MUIDs so they can support civic or worthwhile prediction?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">What a great idea! Email us at info@microprediction.org if you have some spare CPU capacity.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Can I offer prizemoney?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">info@microprediction.org</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Are others offering prizemoney?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text"><a href="https://www.intechinvestments.com/">Intech Investments</a> will be offering compensation for various types of contribution to this project including, but not limited to, the creation of high performing prediction algorithms.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Will it be maintained?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">Yes. <a href="https://www.intechinvestments.com/">Intech Investments</a> is supporting the open source code development.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">How reliable is the underlying hosted database technology?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">The typically quoted number is 99.99% uptime. We make no warranties.</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">What is the underlying transport / database?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">Redis</div>
+        </div>
+
+        <div id="faq-q-container">
+            <div id="faq-q">Q: </div><div id="faq-text">Who supports the underlying transport / database?</div>
+        </div>
+        <div id="faq-a-container">
+            <div id="faq-a">A: </div><div id="faq-text">Redis Labs.</div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- SPACE -->
+    <div id="space"></div>
+
+    <!-- FOOTER -->
+    <div id="footer-container"><div id="footer">
+      <a name="footer"></a>
+      <div id="footer-info">
+        <div style="position:absolute; top:20%; height:50%; left:0%; width:100%;">
+          <p style="color: #E64A19">Email</p>
+          <p id="email" style="Color:white;">info@microprediction.org</p>
+        </div>
+      </div>
+    </div></div>
+
+  </body>
 </html>
-
-
-
