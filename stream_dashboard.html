@@ -13,7 +13,7 @@
     <script src="js/stream_dashboard.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
-  <body onload="OnLoadStreamDashboard()">
+  <body onload="OnLoadStreamDashboard({{plot}})">
 
     <!-- HEADER -->
     <div id="header-container">
@@ -44,6 +44,7 @@
       <div id="space"></div>
 
       <div id="dashboard-bargraph"></div>
+      <div id="space"></div>
 
       <div id="dashboard-leaderboard"></div>
       <div id="space"></div>

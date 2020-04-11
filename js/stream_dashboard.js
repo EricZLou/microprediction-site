@@ -6,7 +6,7 @@ var stream;
 var space_div = document.createElement("div");
 space_div.id = "space";
 
-async function OnLoadStreamDashboard() {
+async function OnLoadStreamDashboard(plot) {
 	stream = GetUrlVars()["stream"];
 
   LoadDashboardName();
@@ -29,10 +29,11 @@ async function OnLoadStreamDashboard() {
   }
 
   LoadCurrentValue();
-  LoadBarGraph();
-	LoadLagged();
-
+  LoadLagged();
 	LoadCDF();
+	if (!stream.includes("~") && !stream.includes("::")) {
+		LoadBarGraph(plot);
+	}
 }
 
 function LoadDashboardName() {
@@ -49,10 +50,9 @@ async function LoadCurrentValue() {
   document.getElementById("box-current-value-value").innerText = value;
 }
 
-async function LoadBarGraph() {
-	// var graphs = plot;
-	// Plotly.plot("dashboard-bargraph", graphs, {});
-	;
+async function LoadBarGraph(plot) {
+	var graphs = plot;
+	Plotly.plot("dashboard-bargraph", graphs, {});
 }
 
 async function LoadLeaderboard() {
