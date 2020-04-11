@@ -1,55 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MUIDs</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="shortcut icon" href="sources/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+  <body>
 
-<html lang="en">
+    <!-- HEADER -->
+    <div id="header-container">
+      <div id="header">
+        <a href="about.html" id="header-name">Microprediction</a>
+        <a href="motivation.html" id="header-link">Motivation</a>
+        <a href="gallery.html" id="header-link">Data Streams</a>
+        <a href="predicting.html" id="header-link">Predict Data</a>
+        <a href="crowd.html" id="header-link">Publish Data</a>
+        <a href="https://www.microprediction.org/" id="header-api">Back to API</a>
+      </div>
+    </div>
 
-<body>
-
-<h1>Why MUIDs?</h1>
-
-You need a write_key to use the <a href="/">microprediction APIs</a> or python library.
-We use <a href="https://www.muid.org">MUID.org</a> (stands for <em>Memorable Unique Identifiers</em>) as a source of write_keys that take some time to generate. There is an explanatory <a href="https://vimeo.com/397352413">video</a>.
-<p>
-MUID write keys are "heavy" and that's your way of signalling that you are serious. Hopefully you have found or engineered
-a live time series that is important to someone, and you intend to keep publishing it indefinitely.
-Streams that aren't maintained get garbage collected pretty quickly, but we'd prefer not to have spurious streams to begin with. We also require those submitting predictions to possess a MUID. This discourages the creation of a large number of noisy prediction algorithms.
-
-<h2>Minimum key difficulty</h2>
-
-The length of the memorable part of the hash of the key is known as the difficulty. See the <a href="https://vimeo.com/397352413">video</a>. To create
-a stream (see <a href="/crowd.html">crowd</a>) you will require a write_key of difficulty {{min_len}}. To supply predictions the bar is lower and currently
-set at a minimum difficulty of 8.
-
-<h2>Bankruptcy</h2>
-
-All write_keys have an associated balance. See the microprediction package <a href="https://pypi.org/project/microprediction">README</a> for a table of minimum allowed balances. A write_key
-whose balance falls below these thresholds can no longer be used.
-
-<h2>How to get a key</h2>
-
-Your choices are
-<ol>
-    <li> Click <a href="https://www.muid.org/create">this link</a> to get a key of borderline difficulty 8.
-    <li> Run this <a href="https://raw.githubusercontent.com/microprediction/muid/master/examples/one_liner.sh">bash command</a> in terminal.
-    <li> Pip install the muid package and run muid.mine()
-</ol>
-For convenience we copy choice 2 here:
-<pre>
+    <!-- BODY -->
+    <div id="body-container">
+      <div id="body-title">
+        Memorable Unique IDs
+      </div>
+      <div id="body-bold-remark">
+        You need a write_key to use the microprediction API or python library.
+      </div>
+      <div id="body-text">
+      	We use <a href="https://www.muid.org">MUID.org</a> (stands for <em>Memorable Unique Identifiers</em>) as a source of write_keys that take some time to generate. There is an explanatory <a href="https://vimeo.com/397352413">video</a>.
+      </div>
+      <div id="body-text">
+      	MUID write keys are "heavy" and that's your way of signalling that you are serious. Hopefully you have found or engineered a live time series that is important to someone, and you intend to keep publishing it indefinitely. Streams that aren't maintained get garbage collected pretty quickly, but we'd prefer not to have spurious streams to begin with. We also require those submitting predictions to possess a MUID. This discourages the creation of a large number of noisy prediction algorithms.
+      </div>
+      <div id="body-subtitle">
+        Minimum key difficulty
+      </div>
+      <div id="body-text">
+		The length of the memorable part of the hash of the key is known as the difficulty. See the <a href="https://vimeo.com/397352413">video</a>. To create a stream, you will require a write_key of difficulty {{min_len}}. To supply predictions the bar is lower and currently set at a minimum difficulty of 8.
+      </div>
+      <div id="body-subtitle">
+      	Bankruptcy
+      </div>
+      <div id="body-text">
+      	All write_keys have an associated balance. See the microprediction package <a href="https://pypi.org/project/microprediction">README</a> for a table of minimum allowed balances. A write_key whose balance falls below these thresholds can no longer be used.
+      </div>
+      <div id="body-subtitle">
+      	How to get a key
+      </div>
+      <div id="body-text">
+      	Your choices are
+				<ul>
+			    <li> Click <a href="https://www.muid.org/create">this link</a> to get a key of borderline difficulty 8.</li>
+			    <li> Run this <a href="https://raw.githubusercontent.com/microprediction/muid/master/examples/one_liner.sh">bash command</a> in terminal.</li>
+			    <li> Pip install the muid package and run muid.mine()</li>
+				</ul>
+      </div>
+      <div id="body-text">
+      	For convenience we copy choice 2 here:
+				<pre>
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/microprediction/muid/master/examples/mine_from_venv.sh)"
-</pre>
-It may take a day or so to produce a MUID with difficulty {{min_len}}. If it doesn't work then perhaps you need Python 3 and/or a package manager:
-<pre>
+				</pre>
+				It may take a day or so to produce a MUID with difficulty {{min_len}}. If it doesn't work then perhaps you need Python 3 and/or a package manager:
+				<pre>
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew install python
-</pre>
-then return to the mining script.
+				</pre>
+				then return to the mining script.
+    	</div>
+    	<div id="body-subtitle">
+    		How to validate a key
+    	</div>
+    	<div id="body-text">
+    		Use the validate API call at <a href="https://www.muid.org">MUID.org</a>
+    	</div>
+    </div>
 
-<h2>How to validate a key</h2>
 
-Use a URL like <a href="http://www.muid.org/validate/fb74baf628d43892020d803614f91f29">http://www.muid.org/validate/fb74baf628d43892020d803614f91f29"</a>
+    <!-- SPACE -->
+    <div id="space"></div>
 
+    <!-- FOOTER -->
+    <div id="footer-container"><div id="footer">
+      <a name="footer"></a>
+      <div id="footer-info">
+        <div style="position:absolute; top:20%; height:50%; left:0%; width:100%;">
+          <p style="color: #E64A19">Email</p>
+          <p id="email" style="Color:white;">info@microprediction.org</p>
+        </div>
+      </div>
+    </div></div>
 
-<p>
-<a href="/">Back to main API page</a>
-
-</body>
-
+  </body>
 </html>
