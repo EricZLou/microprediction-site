@@ -513,6 +513,41 @@ GALLERY
 /*
 
 
+FAQ
+
+
+*/
+
+#faq-q-container {
+  margin-bottom: 1%;
+}
+#faq-q {
+  color: #7e2857;
+  font-size: 1.0em;
+  font-weight: bold;
+  display: inline;
+}
+#faq-a-container {
+  margin-left: 2%;
+  margin-bottom: 3%;
+}
+#faq-a {
+  color: #f5d351;
+  font-size: 1.0em;
+  font-weight: bold;
+  display: inline;
+}
+#faq-text {
+  color: black;
+  font-size: 1.0em;
+  font-weight: normal;
+  display: inline;
+}
+
+
+/*
+
+
 SPACE
 
 
