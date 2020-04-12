@@ -5,6 +5,7 @@ body {
   margin: 0 auto;
   font-family: 'Montserrat', sans-serif;
   overflow-wrap: break-word;
+  min-width: 1200px;
 }
 img {
   max-width: 100%;
