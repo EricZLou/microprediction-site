@@ -99,7 +99,7 @@ PERSISTENT DASBHOARD
 button#persistent-dashboard-button {
   position: fixed;
   top: 30vh;
-  height: 20vh;
+  height: 160px;
   left: 0px;
   width: 3%;
   background-color: #7e2857;
