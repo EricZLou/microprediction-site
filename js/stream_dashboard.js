@@ -12,13 +12,15 @@ async function OnLoadStreamDashboard(plot) {
   LoadDashboardName();
 	await LoadLeaderboard();
   
-  // stream is NOT a delayed stream
   if (stream.includes("~")) {
-  	var i = stream.indexOf("~") + 1;
-  	var j = stream.lastIndexOf("~");
-  	document.getElementById("box-button-stream-parent").style.display = "inline";
-  	document.getElementById("box-button-stream-parent").onclick = function() {
-  		window.location = "stream_dashboard.html?stream="+stream.slice(i,j);
+  	var first = stream.indexOf("~") + 1;
+  	var last = stream.lastIndexOf("~");
+  	var mid = stream.indexOf("~",first);
+  	if (mid === last) {
+	  	document.getElementById("box-button-stream-parent").style.display = "inline";
+	  	document.getElementById("box-button-stream-parent").onclick = function() {
+	  		window.location = "stream_dashboard.html?stream="+stream.slice(first,last);
+	  	};  		
   	}
   } else if (stream.includes("::")) {
   	var i = stream.indexOf("::") + 2;
