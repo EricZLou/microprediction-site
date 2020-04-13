@@ -1,35 +1,30 @@
 const base_url = "https://www.microprediction.com/";
 
-var resp;
 var stream;
+var horizon;
+var json_name;
 
 var space_div = document.createElement("div");
 space_div.id = "space";
 
 async function OnLoadStreamDashboard(plot) {
 	stream = GetUrlVars()["stream"];
+	horizon = GetUrlVars()["horizon"];
+
+	if (horizon && !["70", "310", "910"].includes(horizon)) {
+		horizon = "70";
+	}
+
+	if (!horizon) {
+		json_name = stream + ".json";
+	} else {
+		json_name = horizon + "::" + stream + ".json";
+	}
 
   LoadDashboardName();
 	await LoadLeaderboard();
-  
-  if (stream.includes("~")) {
-  	var first = stream.indexOf("~") + 1;
-  	var last = stream.lastIndexOf("~");
-  	var mid = stream.indexOf("~",first);
-  	if (mid === last) {
-	  	document.getElementById("box-button-stream-parent").style.display = "inline";
-	  	document.getElementById("box-button-stream-parent").onclick = function() {
-	  		window.location = "stream_dashboard.html?stream="+stream.slice(first,last);
-	  	};  		
-  	}
-  } else if (stream.includes("::")) {
-  	var i = stream.indexOf("::") + 2;
-  	document.getElementById("box-button-stream-parent").style.display = "inline";
-  	document.getElementById("box-button-stream-parent").onclick = function() {
-  		window.location = "stream_dashboard.html?stream="+stream.slice(i);
-  	}
-  }
-
+	LoadHorizon();
+  LoadButtonStream();
   LoadCurrentValue();
   LoadLagged();
 	LoadCDF();
@@ -43,13 +38,55 @@ function LoadDashboardName() {
 }
 
 async function LoadCurrentValue() {
-	var url = base_url + "live/" + stream + ".json";
+	var url = base_url + "live/" + json_name;
   const request = new Request(url, {method: 'GET'});
 
   var value = await Fetch(request);
 
-  document.getElementById("box-current-value").style.display = "block";
-  document.getElementById("box-current-value-value").innerText = value;
+  if (value !== "null") {
+	  document.getElementById("box-current-value").style.display = "block";
+	  document.getElementById("box-current-value-value").innerText = value;  	
+  }
+}
+
+function LoadHorizon() {
+	if (!horizon) {
+		return;
+	}
+	document.getElementById("box-horizon").style.display = "inline";
+	var horizon_button = document.getElementById("horizon-" + horizon);
+	horizon_button.style.backgroundColor = "#8f3566";
+	horizon_button.style.color = "#f9c809";
+	horizon_button.style.fontWeight = "bold";
+
+	document.getElementById("horizon-70").onclick = function() {
+		window.location = "stream_dashboard.html?stream="+stream+"&horizon=70";
+	}
+	document.getElementById("horizon-310").onclick = function() {
+		window.location = "stream_dashboard.html?stream="+stream+"&horizon=310";
+	}
+	document.getElementById("horizon-910").onclick = function() {
+		window.location = "stream_dashboard.html?stream="+stream+"&horizon=910";
+	}
+}
+
+function LoadButtonStream() {
+	var button = document.getElementById("box-button-stream");
+  if (horizon) {
+  	button.innerText = "Go to Stream";
+  	button.style.display = "inline";
+  	button.onclick = function() {
+  		window.location = "stream_dashboard.html?stream="+stream;
+  	}
+  } else if (stream.includes("z1")) {
+  	button.innerText = "Go to Parent";
+  	button.style.display = "inline";
+  	var first = stream.indexOf("~") + 1;
+  	var last = stream.lastIndexOf("~");
+  	button.onclick = function() {
+  		window.location = "stream_dashboard.html?stream="+stream.slice(first, last);
+  	}  	
+  }
 }
 
 async function LoadBarGraph(plot) {
@@ -58,7 +95,7 @@ async function LoadBarGraph(plot) {
 }
 
 async function LoadLeaderboard() {
-	var url = base_url + "leaderboards/" + stream + ".json";
+	var url = base_url + "leaderboards/" + json_name;
 	const request = new Request(url, {method: 'GET'});
 
 	var dict = await Fetch(request);
@@ -103,7 +140,7 @@ async function LoadLeaderboard() {
 }
 
 async function LoadLagged() {
-	var url = base_url + "lagged/" + stream + ".json";
+	var url = base_url + "lagged/" + json_name;
 	const request = new Request(url, {method: 'GET'});
 
 	var lagged_values = await Fetch(request);
@@ -152,7 +189,7 @@ async function LoadLagged() {
 }
 
 async function LoadCDF() {
-	var url = base_url + "cdf/" + stream + ".json";
+	var url = base_url + "cdf/" + json_name;
 	const request = new Request(url, {method: 'GET'});
 
 	var cdf_values = await Fetch(request);

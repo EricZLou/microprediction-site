@@ -41,10 +41,14 @@ function JoinDivs(divs, hover, card) {
   parent.setAttribute("name",last.textContent);
   parent.onclick = e => {
     name = e.target.getAttribute("name");
-    console.log(name);
     var loc;
     if (card === "Active Streams" || card === "Performance") {
-      loc = "stream_dashboard.html?stream="+name;
+      var horizon_idx = name.indexOf("::");
+      if (horizon_idx === -1) {
+        loc = "stream_dashboard.html?stream="+name;
+      } else {
+        loc = "stream_dashboard.html?stream="+name.slice(horizon_idx+2)+"&horizon="+name.slice(0, horizon_idx);
+      }
     } else if (card === "Confirmations") {
       loc = "confirmations.html";
     } else if (card === "Transactions") {
