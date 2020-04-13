@@ -1,3 +1,7 @@
+function LoadHeader() {
+  $("#my-header").load("header.html"); 
+}
+
 function Round(item, round_digit) {
   return Math.round((Math.pow(10,round_digit) * item)) / Math.pow(10,round_digit);
 }

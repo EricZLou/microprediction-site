@@ -31,32 +31,52 @@
 
     <!-- BODY -->
     <div id="body-container">
-      <div id="body-title">Making a Prediction</div>
-      <div id="body-bold-remark">It is easy to write programs that make predictions.</div>
-      <div id="body-subtitle">[Step 0] Install microprediction</div>
+      <div id="body-title">Submitting predictions</div>
+      <div id="body-text"> A prediction
+      is actually a vector of many scenarios intended to represent the distribution.</div>
+      <div id="body-subtitle">0. Install microprediction</div>
       <pre>
     pip install microprediction
       </pre>
       <div id="body-text">
-        Or see <a href="https://pypi.org/project/microprediction/">microprediction</a> from PyPI.
+        See the <a href="https://pypi.org/project/microprediction/">microprediction package</a> on PyPI.
       </div>
 
-      <div id="body-subtitle">[Step 1] Get a key</div>
+      <div id="body-subtitle">1. Get a key</div>
       <div id="body-text">
-        See <a href="muids.html">muid instructions</a>. Note especially the table of bankruptcy levels in the microprediction package's <a href="https://pypi.org/project/microprediction/">README</a>. At minimum, visit <a href="https://www.muid.org/create">muid.org</a> to create a minimal strength MUID for prediction submission.
+        Two options:
+        <ol>
+          <li> Click <a href="https://www.muid.org/create">here</a> for an instant key.</li>
+          <li> Or see <a href="muids.html">muid instructions</a> for ways to mine a more rare key.</li>
+        </ol>
+        Rare keys prolong your algorithm's life. See the table of bankruptcy levels in the <a href="https://pypi.org/project/microprediction/">README</a>.
       </div>
-      <div id="body-subtitle">[Step 2] Choose a live data stream</div>
+      <div id="body-subtitle">2. Choose a live data stream</div>
       <div id="body-text">
-        Stream <a href="https://www.microprediction.com/streams/">listing</a>. Examining individual summaries such as <a href="/live/summary::cop.json">/live/summary::cop.json</a> or value histories <a href="/live/lagged::cop.json">live/lagged::cop.json</a> or <a href="/live/lagged_values::cop.json">live/lagged_values::cop.json</a>. See also <a href="/plotting.html">plotting</a> instructions.
+        If you are new, see the <a href="/gallery.html">gallery</a> for some ideas. To programmatically select a suitable stream you
+        might find the following types of JSON page useful:
+        <ul>
+          <li> Stream listings such as <a href="https://www.microprediction.com/budgets/">budget</a>, <a href="https://www.microprediction.com/volumes/">volumes</a> or
+          <a href="https://www.microprediction.com/sponsors/">sponsors</a>.</li>
+          <li> Stream summaries such as <a href="/live/summary::cop.json">/live/summary::cop.json</a></li>
+          <li> Stream value histories <a href="/live/lagged::cop.json">live/lagged::cop.json</a> or <a href="/live/lagged_values::cop.json">live/lagged_values::cop.json</a>.</li>
+        </ul>
       </div>
-      <div id="body-subtitle">[Step 3] Use the MicroWriter to submit scenarios</div>
+      <div id="body-subtitle">3. Choose a horizon</div>
+      <div id="body-text">
+          You can supply a delay parameter chosen from the vector of delays in <a href="/config.json">config.json</a>.
+      </div>
+      <div id="body-subtitle">4. Use the MicroWriter to submit scenarios</div>
+      You can directly POST scenarios using the API, but Python folks will probably prefer:
       <pre>
     from microprediction import MicroWriter
     mw = MicroWriter(write_key="744fd0bec96112c9c5ce92ee904e1a4e")  # Substitute in your own key
     scenarios = [ i*0.001 for i in range(mw.num_predictions) ]
     mw.submit(name='cop.json',values=scenarios)
       </pre>
-      <div id="body-subtitle">[Step 4] Examine performance</div>
+      <div id="body-subtitle">5. Examine performance</div>
+      Use your write_key to log into the <a href="https://www.microprediction.com/dashboard.html">dashboard.html</a>. To manage
+      things programmatically the following types of calls may help.
       <pre>
     mw.get_performance()['cop.json']
     mw.get_leaderboard(name='cop.json')
@@ -65,7 +85,7 @@
     mw.get_errors()
     mw.get_transactions()
       </pre>
-      <div id="body-subtitle">[Step 5, 6, ...] Improve it</div>
+      <div id="body-subtitle">6, 7, 8... Improve it</div>
       <div id="body-text">This we leave in your capable hands. Here is a start:</div>
       <pre>
     mw.get_lagged_values(name='cop.json')

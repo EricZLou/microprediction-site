@@ -12,27 +12,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
     <script src="js/stream_dashboard.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+      $(function() {
+        $("#my-header").load("https://cors-anywhere.herokuapp.com/https://www.microprediction.com/header.html");
+        $("#my-footer").load("https://cors-anywhere.herokuapp.com/https://www.microprediction.com/footer.html");
+      });
+    </script>
   </head>
-  <!-- <body onload="OnLoadStreamDashboard({{plot}})"> -->
   <body onload="OnLoadStreamDashboard()">
 
     <!-- HEADER -->
-    <div id="header-container">
-      <div id="header">
-        <a href="about.html" id="header-name">Microprediction</a>
-        <a href="motivation.html" id="header-link">Motivation</a>
-        <a href="gallery.html" id="header-link">Data Streams</a>
-        <a href="predicting.html" id="header-link">Predict Data</a>
-        <a href="crowd.html" id="header-link">Publish Data</a>
-        <a href="https://www.microprediction.org/" id="header-api">Back to API</a>
-      </div>
-    </div>
-
-    <button id="persistent-dashboard-button" onclick="location.href='dashboard.html'">
-      <div id="persistent-dashboard-text">
-        Dashboard
-      </div>
-    </button>
+    <div id="my-header"></div>
 
     <!-- BODY -->
     <div id="body-container">
