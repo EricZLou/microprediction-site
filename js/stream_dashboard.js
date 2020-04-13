@@ -165,7 +165,7 @@ async function LoadCDF() {
 	title_div.innerHTML = "CDF";
 	cdf_div.appendChild(title_div);
 
-	if (cdf_values === "null" || cdf_values["x"].length === 0) {
+	if (cdf_values === "null" || !cdf_values["x"] || cdf_values["x"].length === 0) {
 		cdf_div.appendChild(
 			TextDiv("No CDF available.", null, null, null, true)
 		);
