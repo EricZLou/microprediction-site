@@ -8,7 +8,17 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <body onload="OnLoadConfirmations()">
+    <script>
+      $(function() {
+        $("#my-header").load("https://cors-anywhere.herokuapp.com/https://www.microprediction.com/header.html");
+        $("#my-footer").load("https://cors-anywhere.herokuapp.com/https://www.microprediction.com/footer.html");
+      });
+    </script>
+  </head>
+  <body>
+
+    <!-- HEADER -->
+    <div id="my-header"></div>
 
     <!-- BODY -->
     <div id="body-container">
