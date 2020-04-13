@@ -64,10 +64,6 @@ HEADER
   height: 100%;
   display: inline-block;
 }
-/*#header-logo {
-  float: left;
-  height: 100%;
-}*/
 #header-name {
   font-size: 1.2em;
   font-weight: bold;
@@ -75,6 +71,7 @@ HEADER
   height: 7vh;
   line-height: 7vh;
   padding-right: 5%;
+  display: inline;
 }
 #header-link {
   color: white;
