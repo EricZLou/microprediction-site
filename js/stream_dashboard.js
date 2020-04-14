@@ -28,7 +28,7 @@ async function OnLoadStreamDashboard(plot) {
   LoadCurrentValue();
   LoadLagged();
 	LoadCDF();
-	if (!stream.includes("~") && !stream.includes("::")) {
+	if (!horizon) {
 		LoadBarGraph(plot);
 	}
 }
