@@ -31,8 +31,8 @@ function LoadConfirmations() {
   confirmations_div = document.getElementById("confirmations");
   for (var idx in resp) {
     if (Number(idx) === resp.length - 1) {
-      document.getElementById("confirm-see-more-button").style.display = "none";
-      document.getElementById("confirm-see-more-text").style.display = "inline";
+      document.getElementById("see-more-button").style.display = "none";
+      document.getElementById("see-more-text").style.display = "inline";
     }
     if (idx >= max_visible) {
       if (idx >= max_visible + 50) {
@@ -47,7 +47,7 @@ function LoadConfirmations() {
 
 function CreateConfirmDiv(item) {
   confirm_div = document.createElement("div");
-  confirm_div.id = "confirm-card";
+  confirm_div.id = "confirm-transact-card";
 
   time_div = document.createElement("div");
   time_div.id = "confirm-time";
