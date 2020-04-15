@@ -50,7 +50,7 @@ function CreateTransactDiv(item) {
   transact_div.id = "confirm-transact-card";
 
   amount_div = TextDiv(item["amount"], true, 5, null, true);
-  stream_div = TextDiv(item["stream"], null, null, null, true);
+  stream_div = TextDiv(item["stream"].slice(0, -5), null, null, null, true);
   delay_div = TextDiv(item["delay"], null, null, null, true);
   time_div = TextDiv(item["settlement_time"].slice(0, 16), null, null, null, true);
 
