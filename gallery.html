@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="sources/icon_jupiter.ico" type="image/x-icon">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
       $(function() {
@@ -17,22 +18,26 @@
   </head>
   <body>
 
-    <!-- HEADER -->
     <div id="my-header"></div>
 
-    <!-- BODY -->
     <div id="body-container">
-      <div id="body-title">live data streams</div>
+      <div id="body-title">Gallery of live data streams</div>
       <div id="body-bold-remark">
-        Algorithms live here and get smarter by looking at real, live data. Here are some examples.
+        <a href="crawling.html">Crawlers</a> live here and get smarter by looking at real, live data.
       </div>
-  
+      <div id="body-text">
+        They navigate using data page like <a href="https://www.microprediction.com/budgets/">this</a> or <a href="https://www.microprediction.com/sponsors/">this</a>.
+        Human eyes aren't a requirement for navigation to streams, and we won't be able to keep this page up to date, but we thought you might like to click around to a few.
+      </div>
+
+      <div id="body-subtitle">Featured streams</div>
+
       <table>
         <tr>
           <th>
             <div id="gallery-title">COVID-19</div>
             <div id="body-bold-remark">
-              Live data streams in light of COVID-19.
+              Pandemic related streams you won't find elsewhere
             </div>
             <div id="body-text">
               <ul>
@@ -44,7 +49,7 @@
           <th>
             <div id="gallery-title">Civic</div>
             <div id="body-bold-remark">
-              For daily commuter activity.
+              Illustrative live examples
             </div>
             <div id="body-text">
               <ul>
@@ -56,25 +61,26 @@
         </tr>
         <tr>
           <th>
-            <div id="gallery-title">Commercial</div>
+            <div id="gallery-title">Stocks</div>
             <div id="body-bold-remark">
-              Live data streams of commercial activity.
+              A novel approach to joint distribution prediction
             </div>
             <div id="body-text">
               <ul>
-                <li><a href="stream_dashboard.html?stream=cop">Conoco-Phillips (COP) minutely price change</a></li>
-                <li><a href="stream_dashboard.html?stream=z2~cop~fcx~70">Conoco-Phillips and Freeport-McMoRan (FCX) minutely price change implied z-scores projected onto 1-dimension using a Morton Z-order curve to map from R^2 to R</a></li>
+                <li><a href="stream_dashboard.html?stream=cop">Conoco-Phillips</a>  (COP) minutely price changes. </li>
+                <li>A projection of the implied z-scores of joint minutely prices changes of <a href="stream_dashboard.html?stream=z2~cop~fcx~70">Conoco-Phillips and Freeport-McMoRan</a> projected onto 1-dimension using a Z-order space filling curve. </li>
               </ul>
+              See the <a href="predicting_faq.html">Predicting FAQ</a> for more explanation.
             </div>
           </th>
           <th>
             <div id="gallery-title">Simulated</div>
             <div id="body-bold-remark">
-              There are also a small number of synthetic feeds with known generative models.
+              For algorithm training these may be useful.
             </div>
             <div id="body-text">
               <ul>
-                <li><a href="stream_dashboard.html?stream=z1~three_body_x~70">Three body simulation with noisy measurements z-score versus 70 second ahead predictions.</a></li>
+                <li><a href="stream_dashboard.html?stream=three_body_x">Three body simulation</a> with noisy measurements. </li>
               </ul>
             </div>
           </th>
@@ -83,15 +89,12 @@
 
       <div id="body-subtitle">Goals</div>
       <div id="body-text">
-        We promote cross subsidy between commercial and civic prediction. An algorithm developed for commercial prediction use can easily crawl to other feeds. Indeed that happens by default. There is a bigger picture lurking here that motivates our work.
+        We promote cross subsidy between commercial and civic prediction. Start <a href="crawling.html">crawling</a> today.
       </div>
 
     </div>
 
-    <!-- SPACE -->
     <div id="space"></div>
-
-    <!-- FOOTER -->
     <div id="my-footer"></div>
 
   </body>

@@ -35,7 +35,7 @@ function FetchAndLoadData(request) {
       }
     })
     .catch(error => {
-      console.log("Erorr Caught");
+      console.log("Error Caught");
       console.log(error);
     })
 }
@@ -57,11 +57,11 @@ function OnLoadDashboard() {
 }
 
 function LoadDashboard() {
-	write_key = document.getElementById("box-input-write-key").value;
+  write_key = document.getElementById("box-input-write-key").value;
   if (write_key !== "") {
     var url = base_url+write_key+"/";
     const request = new Request(url, {method: 'GET'});
-    FetchAndLoadData(request);    
+    FetchAndLoadData(request);
   }
 }
 
@@ -79,11 +79,11 @@ function LogOut() {
 function CreateCardWithTitle(title) {
   var card = document.createElement("div");
   card.className = "dashboard-card";
-	var title_div = document.createElement("div");
-	title_div.id = "dashboard-title";
-	title_div.innerHTML = title;
-	card.appendChild(title_div);
-	return card;
+  var title_div = document.createElement("div");
+  title_div.id = "dashboard-title";
+  title_div.innerHTML = title;
+  card.appendChild(title_div);
+  return card;
 }
 
 

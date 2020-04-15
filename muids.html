@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="sources/icon_jupiter.ico" type="image/x-icon">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
       $(function() {
@@ -17,71 +18,93 @@
   </head>
   <body>
 
-    <!-- HEADER -->
     <div id="my-header"></div>
 
-    <!-- BODY -->
     <div id="body-container">
       <div id="body-title">
-        Memorable Unique IDs
+        Memorable Unique Identifiers
       </div>
       <div id="body-bold-remark">
-        You need a write_key to use the microprediction API or python library.
+        We created the concept of a memorable unique identifier (and <a href="https://www.muid.org">MUID.org</a>) in order to:
+      </div>
+      <ul>
+        <li> Keep things democratic </li>
+        <li> Have one less join, because the sha256 hash of your write_key is your public identity, </li>
+        <li> Discourage spurious streams, and</li>
+        <li> Discourage noisy predictions and crawlers.</li>
+      </ul>
+      <p>
+        By construction Memorable Unique Identifiers are rare and that's your way of signalling that you are serious.
+        Hopefully you have found or engineered a live time series that is important to someone, and you intend to keep publishing it indefinitely.
+        Streams that aren't maintained get garbage collected pretty quickly, but we'd prefer not to have spurious streams to begin with.
+      </p>
+      <div id="body-subtitle">
+        Video introduction
+      </div>
+
+      <iframe src="https://player.vimeo.com/video/397352413" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+      <div id="body-subtitle">
+        Minimum key difficulty settings
       </div>
       <div id="body-text">
-      	We use <a href="https://www.muid.org">MUID.org</a> (stands for <em>Memorable Unique Identifiers</em>) as a source of write_keys that take some time to generate. There is an explanatory <a href="https://vimeo.com/397352413">video</a>.
-      </div>
-      <div id="body-text">
-      	MUID write keys are "heavy" and that's your way of signalling that you are serious. Hopefully you have found or engineered a live time series that is important to someone, and you intend to keep publishing it indefinitely. Streams that aren't maintained get garbage collected pretty quickly, but we'd prefer not to have spurious streams to begin with. We also require those submitting predictions to possess a MUID. This discourages the creation of a large number of noisy prediction algorithms.
+        The length of the memorable part of the hash of the key (such as Losable Flea) is known as the difficulty.
+        <ul>
+          <li> To create a stream, you will require a write_key of difficulty {{min_len}}.
+          <li> To create a copula stream (joint distributions) you will require a write_key of difficulty {{min_len}}+1.
+          <li> To supply predictions the bar is lower and currently set at a minimum difficulty of {{min_len}}-4.
+        </ul>
+        If you mine a better nom de plume than <i>Foldable Cat</i> then by all means <a href="https://www.quora.com/What-are-the-most-amusing-hash-memorable-identifiers-you-have-generated">let everyone know</a>.
       </div>
       <div id="body-subtitle">
-        Minimum key difficulty
+        Bankruptcy
       </div>
       <div id="body-text">
-		The length of the memorable part of the hash of the key is known as the difficulty. See the <a href="https://vimeo.com/397352413">video</a>. To create a stream, you will require a write_key of difficulty {{min_len}}. To supply predictions the bar is lower and currently set at a minimum difficulty of 8.
+        All write_keys have an associated balance. See the microprediction package <a href="https://pypi.org/project/microprediction">README</a> for a table of minimum allowed balances. A write_key whose balance falls below these thresholds can no longer be used.
       </div>
       <div id="body-subtitle">
-      	Bankruptcy
+        How to get a MUID to use as a write_key
       </div>
       <div id="body-text">
-      	All write_keys have an associated balance. See the microprediction package <a href="https://pypi.org/project/microprediction">README</a> for a table of minimum allowed balances. A write_key whose balance falls below these thresholds can no longer be used.
+        Your choices are:
+        <ol>
+          <li> Click <a href="https://www.muid.org/create">this link</a> to get a key of borderline difficulty 8.</li>
+          <li> Run this <a href="https://raw.githubusercontent.com/microprediction/muid/master/examples/one_liner.sh">bash command</a> in terminal.</li>
+          <li> Pip install the muid package and run muid.mine()</li>
+          <li> Beg. Email info@microprediction.org and explain your intended use</li>
+        </ol>
+        Nice people have been donating their CPU time to mine this <a href="/donations/all">stockpile</a> of MUIDs intended
+        for civic, educational or scientific purposes.
       </div>
+
       <div id="body-subtitle">
-      	How to get a key
+        Start mining MUIDs with a cut and paste (mac/linux only)
       </div>
       <div id="body-text">
-      	Your choices are
-				<ul>
-			    <li> Click <a href="https://www.muid.org/create">this link</a> to get a key of borderline difficulty 8.</li>
-			    <li> Run this <a href="https://raw.githubusercontent.com/microprediction/muid/master/examples/one_liner.sh">bash command</a> in terminal.</li>
-			    <li> Pip install the muid package and run muid.mine()</li>
-				</ul>
-      </div>
-      <div id="body-text">
-      	For convenience we copy choice 2 here:
-				<pre>
+        For convenience we copy choice 2 here:
+        <pre>
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/microprediction/muid/master/examples/mine_from_venv.sh)"
-				</pre>
-				It may take a day or so to produce a MUID with difficulty {{min_len}}. If it doesn't work then perhaps you need Python 3 and/or a package manager:
-				<pre>
+        </pre>
+        It may take a day or so to produce a MUID with difficulty {{min_len}}. If it doesn't work then perhaps you need Python 3 and/or a package manager:
+        <pre>
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew install python
-				</pre>
-				then return to the mining script.
-    	</div>
-    	<div id="body-subtitle">
-    		How to validate a key
-    	</div>
-    	<div id="body-text">
-    		Use the validate API call at <a href="https://www.muid.org">MUID.org</a>
-    	</div>
+        </pre>
+        then return to the mining script.
+      </div>
+      <div id="body-subtitle">
+        Miner not working?
+      </div>
+      Log an <a href="https://github.com/microprediction/muid/issues">issue</a> on Github please.
+      <div id="body-subtitle">
+        How to validate a key
+      </div>
+      <div id="body-text">
+        Use the validate API call at <a href="https://www.muid.org">MUID.org</a>. For example <a href="https://www.muid.org/validate/fb74baf628d43892020d803614f91f29">www.muid.org/validate/fb74baf628d43892020d803614f91f29</a>.
+      </div>
     </div>
 
-
-    <!-- SPACE -->
     <div id="space"></div>
-
-    <!-- FOOTER -->
     <div id="my-footer"></div>
 
   </body>

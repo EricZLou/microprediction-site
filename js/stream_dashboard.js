@@ -45,7 +45,7 @@ async function LoadCurrentValue() {
 
   if (value !== "null") {
 	  document.getElementById("box-current-value").style.display = "block";
-	  document.getElementById("box-current-value-value").innerText = value;  	
+	  document.getElementById("box-current-value-value").innerText = value;
   }
 }
 
@@ -85,7 +85,7 @@ function LoadButtonStream() {
   	var last = stream.lastIndexOf("~");
   	button.onclick = function() {
   		window.location = "stream_dashboard.html?stream="+stream.slice(first, last);
-  	}  	
+  	}
   }
 }
 
