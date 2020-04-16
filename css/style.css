@@ -264,11 +264,11 @@ HOME
   border: 2px solid #f9c809;
   background: white;
 }
-#box-left {
-  width: 70%;
-}
-#box-right {
-  width: 30%;
+#box-img {
+  left: 70%;
+  height: 190px;
+  float: right;
+  padding: 0% 80px;
 }
 #box-title {
   color: black;
@@ -280,10 +280,6 @@ HOME
   color: black;
   font-size: 1.1em;
   padding-bottom: 2%;
-}
-#box-img {
-  left: 70%;
-  width: 30%;
 }
 button.box-button-get-started {
   background-color: #7e2857;

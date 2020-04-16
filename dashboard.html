@@ -27,17 +27,15 @@
       <div id="space"></div>
 
       <div id="box-round-block">
-        <div id="box-left">
-          <div id="box-log-out" onclick="LogOut()">Log Out</div>
-          <div id="box-title">Dashboard</div>
-          <div id="box-description">View all information associated with your write key, including your active streams, performance, and transactions.</div>
-          <input type="text" name="write_key" id="box-input-write-key" placeholder="Your write key">
-          <input type="submit" id="box-button-write-key" value="Submit" onclick="LoadDashboard()">
-          <div id="box-bad-key"></div>
+        <img src="sources/dashboard.png" id="box-img">
+        <div id="box-log-out" onclick="LogOut()">Log Out</div>
+        <div id="box-title">Dashboard</div>
+        <div id="box-description">
+          View all information associated with your write key, including your active streams, performance, and transactions.
         </div>
-        <div id="box-right">
-          <!-- <img src="sources/forecast.jpg"> -->
-        </div>
+        <input type="text" name="write_key" id="box-input-write-key" placeholder="Your write key">
+        <input type="submit" id="box-button-write-key" value="Submit" onclick="LoadDashboard()">
+        <div id="box-bad-key"></div>
       </div>
 
       <div id="space"></div>
