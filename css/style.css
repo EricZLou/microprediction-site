@@ -311,7 +311,7 @@ USER DASHBOARD
 */
 
 input#box-input-write-key[type=text] {
-  width: 50%;
+  width: 40%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -336,6 +336,7 @@ input#box-button-write-key {
 }
 input#box-button-write-key:hover {
   cursor: pointer;
+  background-color: #8f3566;
 }
 #box-bad-key {
   display: inline;
@@ -354,6 +355,7 @@ input#box-button-write-key:hover {
 }
 #box-log-out:hover {
   cursor: pointer;
+  font-weight: bold;
 }
 
 
@@ -386,6 +388,14 @@ input#box-button-write-key:hover {
 }
 
 #dashboard-title {
+  color: black;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2.0em;
+  width: 100%;
+  padding-bottom: 2%;
+}
+#dashboard-title-cdf {
   color: black;
   text-align: center;
   font-weight: bold;
@@ -520,7 +530,7 @@ STREAM DASHBOARD
   float: left;
   width: 48%;
 }
-#dashboard-cdf {
+#dashboard-cdf-container {
   display: inline;
   float: right;
   width: 48%;
@@ -692,7 +702,7 @@ FOOTER
 #footer-container {
   height: 35vh;
   position: relative;
-  background-color: #34495e;
+  background-color: #555F60;
 }
 #footer {
   height: 100%;

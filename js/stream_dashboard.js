@@ -7,7 +7,7 @@ var json_name;
 var space_div = document.createElement("div");
 space_div.id = "space";
 
-async function OnLoadStreamDashboard(plot) {
+async function OnLoadStreamDashboard(plot_cdf, plot_bar) {
 	stream = GetUrlVars()["stream"];
 	horizon = GetUrlVars()["horizon"];
 
@@ -27,9 +27,10 @@ async function OnLoadStreamDashboard(plot) {
   LoadButtonStream();
   LoadCurrentValue();
   LoadLagged();
-	LoadCDF();
-	if (!horizon) {
-		LoadBarGraph(plot);
+	if (horizon) {
+		LoadCDF(plot_cdf);
+	} else {
+		LoadBarGraph(plot_bar);
 	}
 }
 
@@ -141,6 +142,7 @@ async function LoadLeaderboard() {
 
 async function LoadLagged() {
 	var url = base_url + "lagged/" + json_name;
+	console.log(url);
 	const request = new Request(url, {method: 'GET'});
 
 	var lagged_values = await Fetch(request);
@@ -152,6 +154,8 @@ async function LoadLagged() {
 	title_div.id = "dashboard-title";
 	title_div.innerHTML = "Lagged Values";
 	lagged_div.appendChild(title_div);
+
+	console.log(lagged_values);
 
 	if (lagged_values === "null" || lagged_values.length === 0) {
 		lagged_div.appendChild(
@@ -188,46 +192,8 @@ async function LoadLagged() {
 	lagged_div.appendChild(space_div);
 }
 
-async function LoadCDF() {
-	var url = base_url + "cdf/" + json_name;
-	const request = new Request(url, {method: 'GET'});
-
-	var cdf_values = await Fetch(request);
-
-	cdf_div = document.getElementById("dashboard-cdf");
-	cdf_div.appendChild(space_div);
-
-	var title_div = document.createElement("div");
-	title_div.id = "dashboard-title";
-	title_div.innerHTML = "CDF";
-	cdf_div.appendChild(title_div);
-
-	if (cdf_values === "null" || !cdf_values["x"] || cdf_values["x"].length === 0) {
-		cdf_div.appendChild(
-			TextDiv("No CDF available.", null, null, null, true)
-		);
-		cdf_div.appendChild(space_div);
-		return;
-	}
-
-	let table_container = document.createElement("div");
-	table_container.id = "dashboard-table-container";
-	let table = document.createElement("TABLE");
-	table.id = "dashboard-table";
-	let new_row = table.insertRow(-1);
-	for (head of ["x", "y"]) {
-		let header_cell = document.createElement("TH");
-		header_cell.innerHTML = head;
-		new_row.appendChild(header_cell);
-	}
-	for (idx in cdf_values["x"]) {
-		let new_row = table.insertRow(-1);
-		let new_cell = new_row.insertCell(-1);
-		new_cell.appendChild(TextDiv(cdf_values["x"][idx]));
-		new_cell = new_row.insertCell(-1);
-		new_cell.appendChild(TextDiv(cdf_values["y"][idx]));
-	}
-	table_container.appendChild(table);
-	cdf_div.appendChild(table_container);
-	cdf_div.appendChild(space_div);
+async function LoadCDF(plot) {
+	document.getElementById("dashboard-title-cdf").style.display = "inline-block";
+	var graphs = plot;
+	Plotly.plot("dashboard-cdf", graphs, {});
 }
