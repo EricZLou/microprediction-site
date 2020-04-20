@@ -413,6 +413,7 @@ input#box-button-write-key:hover {
   border-radius: 8px;
   color: #7e2857;
   transition-duration: 0.4s;
+  z-index: 999;
 }
 a#back-to-top-button:hover {
   text-decoration: none;
