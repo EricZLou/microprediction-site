@@ -87,6 +87,14 @@ function LoadButtonStream() {
   	button.onclick = function() {
   		window.location = "stream_dashboard.html?stream="+stream.slice(first, last);
   	}
+  } else if (stream.includes("z2") || stream.includes("z3")) {
+		;
+  } else {
+  	button.innerText = "Go to Z1";
+  	button.style.display = "inline";
+  	button.onclick = function() {
+  		window.location = "stream_dashboard.html?stream=z1~"+stream+"~70";
+  	}
   }
 }
 
@@ -142,7 +150,6 @@ async function LoadLeaderboard() {
 
 async function LoadLagged() {
 	var url = base_url + "lagged/" + json_name;
-	console.log(url);
 	const request = new Request(url, {method: 'GET'});
 
 	var lagged_values = await Fetch(request);
@@ -154,8 +161,6 @@ async function LoadLagged() {
 	title_div.id = "dashboard-title";
 	title_div.innerHTML = "Lagged Values";
 	lagged_div.appendChild(title_div);
-
-	console.log(lagged_values);
 
 	if (lagged_values === "null" || lagged_values.length === 0) {
 		lagged_div.appendChild(
