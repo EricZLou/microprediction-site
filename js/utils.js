@@ -100,3 +100,12 @@ function Fetch(request) {
     })
   });
 }
+
+function UnixToHMS(unix) {
+  var date = new Date(unix * 1000);
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hours = "0" + date.getHours();
+  var minutes = "0" + date.getMinutes();
+  return month+"/"+day + " " + hours.substr(-2) + ":" + minutes.substr(-2);
+}

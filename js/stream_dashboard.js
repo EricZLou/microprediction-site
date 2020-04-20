@@ -187,7 +187,7 @@ async function LoadLagged() {
 		}
 		let new_row = table.insertRow(-1);
 		let new_cell = new_row.insertCell(-1);
-		new_cell.appendChild(TextDiv(group[0]));
+		new_cell.appendChild(TextDiv(UnixToHMS(group[0])));
 		new_cell = new_row.insertCell(-1);
 		new_cell.appendChild(TextDiv(group[1]));
 		i = i + 1;
