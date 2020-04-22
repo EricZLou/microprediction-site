@@ -146,20 +146,21 @@ HEADER
 /*
 
 
-PERSISTENT DASBHOARD
+PERSISTENT BUTTONS
 
 
 */
 
 button#persistent-dashboard-button {
   position: fixed;
-  top: 30vh;
+  top: 140px;
   height: 160px;
   left: 0px;
   width: 3%;
   background-color: #7e2857;
-  border-radius: 0px 15px 15px 0px;
+  border-radius: 0px 15px 0px 0px;
   border: none;
+  border-bottom: 1px solid #cf97b6;
   text-align: center;
   outline:none;
   margin: 0;
@@ -170,7 +171,27 @@ button#persistent-dashboard-button:hover {
   background-color: #8f3566;
   cursor: pointer;
 }
-#persistent-dashboard-text {
+button#persistent-leaderboard-button {
+  position: fixed;
+  top: 300px;
+  height: 160px;
+  left: 0px;
+  width: 3%;
+  background-color: #7e2857;
+  border-radius: 0px 0px 15px 0px;
+  border: none;
+  border-top: 1px solid #cf97b6;
+  text-align: center;
+  outline:none;
+  margin: 0;
+  padding: 0;
+  transition-duration: 0.4s;
+}
+button#persistent-leaderboard-button:hover {
+  background-color: #8f3566;
+  cursor: pointer;
+}
+#persistent-text {
   writing-mode: vertical-rl;
   text-orientation: mixed;
   display: inline-block;
@@ -203,6 +224,10 @@ BODY
   font-size: 2em;
   padding-top: 10vh;
   padding-bottom: 3vh;
+  /*position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: white;*/
 }
 #body-subtitle {
   color: black;
@@ -624,6 +649,49 @@ button#box-button-stream:hover {
 #box-horizon-button-group button:hover {
   background-color: #8f3566;
 }
+
+#dropbtn2 {
+  background-color: #7e2857;
+  margin-left: 5%;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 0.9em;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition-duration: 0.4s;
+  display: none;
+  white-space: nowrap;
+}
+#dropbtn2:hover, #dropbtn2:focus {
+  background-color: #8f3566;
+  outline: 0;
+}
+.dropdown2 {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content2 {
+  border-radius: 8px;
+  display: none;
+  position: absolute;
+  background-color: #cf97b6;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content2 a {
+  color: white;
+  font-size: 0.9em;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown2 a:hover {background-color: #7e2857;}
+.show {display: block;}
 
 
 

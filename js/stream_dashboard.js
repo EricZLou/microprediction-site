@@ -90,11 +90,28 @@ function LoadButtonStream() {
   } else if (stream.includes("z2") || stream.includes("z3")) {
 		;
   } else {
+  	button = document.getElementById("dropbtn2")
   	button.innerText = "Go to Z1";
   	button.style.display = "inline";
   	button.onclick = function() {
-  		window.location = "stream_dashboard.html?stream=z1~"+stream+"~70";
+		  document.getElementById("z1-dropdown").classList.toggle("show");
   	}
+  	document.getElementById("dropdown-70").href = "stream_dashboard.html?stream=z1~"+stream.slice(first, last)+"~70"
+  	document.getElementById("dropdown-310").href = "stream_dashboard.html?stream=z1~"+stream.slice(first, last)+"~310"
+  	document.getElementById("dropdown-910").href = "stream_dashboard.html?stream=z1~"+stream.slice(first, last)+"~910"
+  }
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('#dropbtn2')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content2");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
   }
 }
 
