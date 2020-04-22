@@ -3,6 +3,16 @@ const base_url = "https://www.microprediction.com/home/";
 var write_key;
 var resp;
 
+function LoadAll() {
+  LoadOverview();
+  LoadActiveStreams();
+  LoadConfirms();
+  LoadErrors();
+  LoadWarnings();
+  LoadPerformance();
+  LoadTransactions();
+}
+
 function FetchAndLoadData(request) {
   fetch(request)
     .then(response => {
@@ -20,13 +30,39 @@ function FetchAndLoadData(request) {
           card.style.display = "block";
         }
         resp = json;
-        LoadOverview();
-        LoadActiveStreams();
-        LoadConfirms();
-        LoadErrors();
-        LoadWarnings();
-        LoadPerformance();
-        LoadTransactions();
+        LoadAll();
+      } else {
+        document.getElementById("box-bad-key").innerHTML = "Invalid";
+        setTimeout(function(){
+          document.getElementById("box-bad-key").innerHTML = '';
+        }, 2000);
+      }
+    })
+    .catch(error => {
+      console.log("Error Caught");
+      console.log(error);
+    })
+}
+
+function FetchAndLoadDataAndRefresh(request) {
+  fetch(request)
+    .then(response => {
+      if (response.status !== 200) {
+        throw "Response status is not 200: " + response.status;
+      } else {
+        return response.json();
+      }
+    })
+    .then(json => {
+      if (json["animal"] !== null) {
+        localStorage.setItem('write_key',write_key);
+        document.getElementById("box-log-out").style.display = "inline";
+        for (var card of document.getElementsByClassName("dashboard-card")) {
+          card.style.display = "block";
+        }
+        resp = json;
+        LoadAll();
+        location.reload();
       } else {
         document.getElementById("box-bad-key").innerHTML = "Invalid";
         setTimeout(function(){
@@ -61,7 +97,10 @@ function LoadDashboard() {
   if (write_key !== "") {
     var url = base_url+write_key+"/";
     const request = new Request(url, {method: 'GET'});
-    FetchAndLoadData(request);
+    if (localStorage.getItem('write_key'))
+      FetchAndLoadDataAndRefresh(request);
+    else
+      FetchAndLoadData(request);
   }
 }
 
@@ -72,6 +111,7 @@ function LogOut() {
   }
   document.getElementById("box-input-write-key").value = "";
   localStorage.removeItem("write_key");
+  location.reload();
 }
 
 
