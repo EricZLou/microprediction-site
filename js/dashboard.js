@@ -1,7 +1,10 @@
-const base_url = "https://www.microprediction.com/home/";
+const base_url = "https://www.microprediction.com/"
+const home_url = base_url+"home/";
+
 
 var write_key;
 var resp;
+var all_active_streams;
 
 function LoadAll() {
   LoadOverview();
@@ -13,8 +16,8 @@ function LoadAll() {
   LoadTransactions();
 }
 
-function FetchAndLoadData(request) {
-  fetch(request)
+function FetchAndLoadData(request, refresh) {
+  return fetch(request)
     .then(response => {
       if (response.status !== 200) {
         throw "Response status is not 200: " + response.status;
@@ -31,6 +34,7 @@ function FetchAndLoadData(request) {
         }
         resp = json;
         LoadAll();
+        if (refresh) location.reload();
       } else {
         document.getElementById("box-bad-key").innerHTML = "Invalid";
         setTimeout(function(){
@@ -44,39 +48,15 @@ function FetchAndLoadData(request) {
     })
 }
 
-function FetchAndLoadDataAndRefresh(request) {
-  fetch(request)
-    .then(response => {
-      if (response.status !== 200) {
-        throw "Response status is not 200: " + response.status;
-      } else {
-        return response.json();
-      }
-    })
-    .then(json => {
-      if (json["animal"] !== null) {
-        localStorage.setItem('write_key',write_key);
-        document.getElementById("box-log-out").style.display = "inline";
-        for (var card of document.getElementsByClassName("dashboard-card")) {
-          card.style.display = "block";
-        }
-        resp = json;
-        LoadAll();
-        location.reload();
-      } else {
-        document.getElementById("box-bad-key").innerHTML = "Invalid";
-        setTimeout(function(){
-          document.getElementById("box-bad-key").innerHTML = '';
-        }, 2000);
-      }
-    })
-    .catch(error => {
-      console.log("Error Caught");
-      console.log(error);
-    })
+function FetchActiveStreams() {
+  var url = base_url+"active/"+write_key;
+  request = new Request(url, {method: 'GET'});
+  return fetch(request)
+    .then(response => {return response.json();})
+    .then(json => {all_active_streams = json;})
 }
 
-function OnLoadDashboard() {
+async function OnLoadDashboard() {
   var text_box = document.getElementById("box-input-write-key");
   text_box.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
@@ -85,22 +65,24 @@ function OnLoadDashboard() {
     }
   });
   write_key = localStorage.getItem('write_key');
-  var url = base_url+write_key+"/";
+  var url = home_url+write_key+"/";
   const request = new Request(url, {method: 'GET'});
   if (write_key) {
-    FetchAndLoadData(request);
+    await FetchActiveStreams();
+    await FetchAndLoadData(request);
   }
 }
 
-function LoadDashboard() {
+async function LoadDashboard() {
   write_key = document.getElementById("box-input-write-key").value;
   if (write_key !== "") {
-    var url = base_url+write_key+"/";
+    var url = home_url+write_key+"/";
     const request = new Request(url, {method: 'GET'});
+    await FetchActiveStreams();
     if (localStorage.getItem('write_key'))
-      FetchAndLoadDataAndRefresh(request);
+      await FetchAndLoadData(request, refresh=true);
     else
-      FetchAndLoadData(request);
+      await FetchAndLoadData(request);
   }
 }
 
@@ -117,7 +99,7 @@ function LogOut() {
 
 // HELPER FUNCTION
 function CreateCardWithTitle(title) {
-  var card = document.createElement("div");
+  let card = document.createElement("div");
   card.className = "dashboard-card";
   var title_div = document.createElement("div");
   title_div.id = "dashboard-title";
@@ -128,7 +110,7 @@ function CreateCardWithTitle(title) {
 
 
 function LoadOverview() {
-  card = CreateCardWithTitle("Overview");
+  let card = CreateCardWithTitle("Overview");
   card.appendChild(TextDiv(resp["code"], null, null, null, bold=true));
   card.appendChild(
     JoinDivs([
@@ -152,16 +134,55 @@ function LoadOverview() {
 }
 
 function LoadActiveStreams() {
-  title = "Active Streams";
-  card = CreateCardWithTitle(title);
-  var streams = resp["/active/"+write_key];
-  for (var item of streams) {
-    card.appendChild(JoinDivs([TextDiv(item.slice(0,-5))], true, title));
+  let title = "Active Streams";
+  let card_some = CreateCardWithTitle(title);
+  let card_all = CreateCardWithTitle(title);
+  let streams = resp["/active/"+write_key];
+  for (let item of streams) {
+    card_some.appendChild(JoinDivs([TextDiv(item.slice(0,-5))], true, title));
   }
+
   if (streams.length === 0) {
-    card.appendChild(TextDiv("No Active Streams"));
+    card_some.appendChild(TextDiv("No Active Streams"));
+  } else if (streams.length < 10) {
+    ;
+  } else {
+    if (all_active_streams.length > 10) {
+      // create show line
+      let show_more = document.createElement("div");
+      show_more.id = "body-text";
+      show_more.innerHTML = "Show More";
+      show_more.style.textAlign = "center";
+      show_more.style.fontWeight = "bold";
+      let show_less = show_more.cloneNode(true);
+      show_less.innerHTML = "Show Less";
+      let show_more_line = document.createElement("div");
+      show_more_line.id = "div-hover";
+      show_more_line.appendChild(show_more);
+      let show_less_line = document.createElement("div");
+      show_less_line.id = "div-hover";
+      show_less_line.appendChild(show_less);
+      
+      for (let item of all_active_streams) {
+        card_all.appendChild(JoinDivs([TextDiv(item.slice(0,-5))], true, title));
+      }
+      card_some.appendChild(show_more_line);
+      card_all.appendChild(show_less_line);
+
+      show_more_line.onclick = e => {
+        card_some.style.display = "none";
+        card_all.style.display = "block";
+      }
+      show_less_line.onclick = e => {
+        card_some.style.display = "block";
+        card_all.style.display = "none";
+      }      
+    }
   }
-  $("#dashboard-active-streams").replaceWith(card);
+  document.getElementById("dashboard-active-streams").appendChild(card_some);
+  document.getElementById("dashboard-active-streams").appendChild(card_all);
+  card_some.style.display = "block";
+  card_all.style.display = "none";
 }
 
 function LoadConfirms() {
