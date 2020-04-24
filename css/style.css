@@ -53,23 +53,20 @@ HEADER
 */
 
 #header-container {
-  width: 95%;
   background-color: #7e2857;
   padding-left: 5%;
   padding-right: 0%;
 }
 .header {
-  /*overflow: hidden;*/
-  background-color: #7e2857;
-  height: 7vh;
+  height: 80px;
 }
 #header-name {
   float: left;
   font-size: 20px;
   font-weight: bold;
   color: #f9c809;
-  height: 7vh;
-  line-height: 7vh;
+  height: 80px;
+  line-height: 80px;
   padding-right: 5%;
   display: inline;
 }
@@ -78,8 +75,8 @@ HEADER
   font-size: 14px;
   color: white;
   text-align: center;
-  height: 7vh;
-  line-height: 7vh;
+  height: 80px;
+  line-height: 80px;
   padding: 0px 15px;
   text-decoration: none;
   font-weight: bold;
@@ -94,8 +91,8 @@ HEADER
   border: none;
   outline: none;
   color: white;
-  height: 7vh;
-  line-height: 7vh;
+  height: 80px;
+  line-height: 80px;
   padding: 0px 15px;
   background-color: inherit;
   font-family: inherit;
@@ -119,6 +116,7 @@ HEADER
   text-decoration: none;
   display: block;
   text-align: left;
+  height: 80px;
 }
 .dropdown-content a:hover {
   background-color: #ddd;
@@ -153,10 +151,12 @@ PERSISTENT BUTTONS
 
 button#persistent-dashboard-button {
   position: fixed;
-  top: 140px;
-  height: 160px;
+  top: 220px;
+  height: 140px;
   left: 0px;
+  min-width: 40px;
   width: 3%;
+  max-width: 60px;
   background-color: #7e2857;
   border-radius: 0px 15px 0px 0px;
   border: none;
@@ -166,6 +166,7 @@ button#persistent-dashboard-button {
   margin: 0;
   padding: 0;
   transition-duration: 0.4s;
+  z-index: 1;
 }
 button#persistent-dashboard-button:hover {
   background-color: #8f3566;
@@ -173,10 +174,12 @@ button#persistent-dashboard-button:hover {
 }
 button#persistent-leaderboard-button {
   position: fixed;
-  top: 300px;
-  height: 160px;
+  top: 360px;
+  height: 150px;
   left: 0px;
+  min-width: 40px;
   width: 3%;
+  max-width: 60px;
   background-color: #7e2857;
   border-radius: 0px 0px 15px 0px;
   border: none;
@@ -186,6 +189,7 @@ button#persistent-leaderboard-button {
   margin: 0;
   padding: 0;
   transition-duration: 0.4s;
+  z-index: 1;
 }
 button#persistent-leaderboard-button:hover {
   background-color: #8f3566;
@@ -215,27 +219,28 @@ BODY
   left: 10%;
   width: 80%;
   height: 100%;
-  min-height: 48vh;
+  /*min-height: 48vh;*/
 }
 #body-title {
   color: black;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 2em;
-  padding-top: 10vh;
-  padding-bottom: 3vh;
-  /*position: -webkit-sticky;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #b7c3c9;
+  padding-left: 10%;
+/*  position: -webkit-sticky;
   position: sticky;
   top: 0;
-  background-color: white;*/
-}
+*/}
 #body-subtitle {
   color: black;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1.3em;
-  padding-top: 5vh;
-  padding-bottom: 3vh;
+  padding-top: 30px;
+  padding-bottom: 20px;
 }
 #body-text {
   color: black;
@@ -255,7 +260,7 @@ BODY
   color: black;
   font-size: 1.0em;
   font-weight: bold;
-  padding: 2% 0px;  
+  padding: 20px 0px;
 }
 ol.body-list {
   color: black;
@@ -268,7 +273,7 @@ ul.body-list {
   list-style: circle;
 }
 li {
-  padding-left: 3%;
+  padding-left: 10px;
   font-weight: normal;
 }
 
@@ -291,7 +296,7 @@ HOME
 }
 #box-img {
   left: 70%;
-  height: 190px;
+  max-width: 10vw;
   float: right;
   padding: 0% 80px;
 }

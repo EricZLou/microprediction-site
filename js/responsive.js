@@ -1,12 +1,9 @@
-var w = window.innerWidth;
-var h = window.innerHeight;
-
 function resize_fn() {
-	console.log(w);
-	console.log(h);
+	var w = window.innerWidth;
+	var h = window.innerHeight;
 	if (w <= 1200) {
-		console.log('load the small header footer');
+		document.getElementById("body-title").innerText = "small";
 	} else {
-		console.log('load the big header footer');
+		document.getElementById("body-title").innerText = "big"
 	}
 }
