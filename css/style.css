@@ -771,6 +771,22 @@ FAQ
 }
 
 
+
+/*
+
+
+STREAM SEARCH
+
+
+*/
+
+#stream-search {
+  height: 50vh;
+  overflow: auto;
+}
+
+
+
 /*
 
 

@@ -42,7 +42,7 @@ function JoinDivs(divs, hover, card) {
   parent.onclick = e => {
     name = e.target.getAttribute("name");
     var loc;
-    if (card === "Active Streams" || card === "Performance") {
+    if (card === "Active Streams" || card === "Performance" || card === "Stream Search") {
       var horizon_idx = name.indexOf("::");
       if (horizon_idx === -1) {
         loc = "stream_dashboard.html?stream="+name;
