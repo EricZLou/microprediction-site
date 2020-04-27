@@ -166,7 +166,7 @@ async function LoadLeaderboard() {
 }
 
 async function LoadLagged() {
-  var url = base_url + "lagged/" + json_name;
+  var url = base_url + "lagged/" + stream + ".json";;
   const request = new Request(url, {method: 'GET'});
 
   var lagged_values = await Fetch(request);
