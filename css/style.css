@@ -44,6 +44,20 @@ th, td {
 
 
 
+@media screen {
+  #header-small { display: none; }
+  #header-big { display: block; }
+}
+
+@media screen and (max-width: 1200px) {
+  #header-big { display: none; }
+  #header-small { display: block; }
+}
+
+
+
+
+
 /*
 
 
@@ -52,7 +66,7 @@ HEADER
 
 */
 
-#header-container {
+#header-container-big {
   background-color: #7e2857;
   padding-left: 5%;
   padding-right: 0%;
@@ -138,6 +152,13 @@ HEADER
   color: #7e2857;
   font-weight: bold;
   background-color: inherit;
+}
+
+#navbar-section {
+  color: white;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 
 
@@ -787,7 +808,8 @@ FOOTER
 #footer-left {
   position: absolute;
   left: 0%;
-  width: 33%;
+  /*width: 33%;*/
+  width: 100%;      /* temp */
   top: 0%;
   height: 100%;
 }
