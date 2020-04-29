@@ -72,33 +72,62 @@ function LoadHorizon() {
 }
 
 function LoadButtonStream() {
-  var button = document.getElementById("box-button-stream");
   if (horizon) {
-    button.innerText = "Go to Stream";
+    let button = document.getElementById("box-button-left");
+    button.innerHTML = "Go to Stream &rarr;";
     button.style.display = "inline";
     button.onclick = function() {
       window.location = "stream_dashboard.html?stream="+stream;
     }
-  } else if (stream.includes("z1")) {
-    button.innerText = "Go to Parent";
-    button.style.display = "inline";
-    var first = stream.indexOf("~") + 1;
-    var last = stream.lastIndexOf("~");
-    button.onclick = function() {
-      window.location = "stream_dashboard.html?stream="+stream.slice(first, last);
+  } else if (stream.includes("z1") || stream.includes("z2") || stream.includes("z3")) {
+    let l_button = document.getElementById("box-button-left");
+    l_button.innerHTML = "&larr; Go to Competitions";
+    l_button.style.display = "inline";
+    l_button.onclick = function() {
+      window.location = "stream_dashboard.html?stream="+stream+"&horizon=70";
     }
-  } else if (stream.includes("z2") || stream.includes("z3")) {
-    ;
+    if (stream.includes("z1")) {
+      let r_button = document.getElementById("box-button-right");
+      r_button.innerHTML = "Go to Parent &rarr;";
+      r_button.style.display = "inline";
+      var first = stream.indexOf("~") + 1;
+      var last = stream.lastIndexOf("~");
+      r_button.onclick = function() {
+        window.location = "stream_dashboard.html?stream="+stream.slice(first, last);
+      }      
+    }
+    else {
+      let streams = [];
+      let search_idx = 3;
+      while (stream.indexOf('~', search_idx) !== -1) {
+        streams.push(stream.slice(search_idx, stream.indexOf('~', search_idx)));
+        search_idx = stream.indexOf('~', search_idx) + 1;
+      }
+      let button = document.getElementById("dropbtn2")
+      button.innerHTML = "Go to Parent &rarr;";
+      button.style.display = "inline";
+      button.onclick = function() {
+        document.getElementById("dropdown").classList.toggle("show");
+      }
+      for (let i in streams) {
+        document.getElementById("dropdown_"+i).href = "stream_dashboard.html?stream="+streams[i];
+        document.getElementById("dropdown_"+i).innerText = streams[i];
+        document.getElementById("dropdown_"+i).style.display = "block";
+      }
+    }
   } else {
-    button = document.getElementById("dropbtn2")
-    button.innerText = "Go to Z1";
+    let button = document.getElementById("dropbtn2")
+    button.innerHTML = " &larr; Go to Z1";
     button.style.display = "inline";
     button.onclick = function() {
-      document.getElementById("z1-dropdown").classList.toggle("show");
+      document.getElementById("dropdown").classList.toggle("show");
     }
-    document.getElementById("dropdown-70").href = "stream_dashboard.html?stream=z1~"+stream.slice(first, last)+"~70"
-    document.getElementById("dropdown-310").href = "stream_dashboard.html?stream=z1~"+stream.slice(first, last)+"~310"
-    document.getElementById("dropdown-910").href = "stream_dashboard.html?stream=z1~"+stream.slice(first, last)+"~910"
+    let times = [70, 310, 910]
+    for (let i in times) {
+      document.getElementById("dropdown_"+i).href = "stream_dashboard.html?stream=z1~"+stream.slice(first, last)+"~"+times[i];
+      document.getElementById("dropdown_"+i).innerText = times[i];
+      document.getElementById("dropdown_"+i).style.display = "block";
+    }
   }
 }
 
