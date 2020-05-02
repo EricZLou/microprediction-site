@@ -16,8 +16,7 @@
     <script>
       $(function() {
         $("#header-small").load("https://www.microprediction.com/header_small.html");
-        // $("#header-big").load("https://www.microprediction.com/header_big.html");
-        $("#header-big").load("https://www.microprediction.com/header_test.html");
+        $("#header-big").load("https://www.microprediction.com/header_big.html");
         $("#my-footer").load("https://www.microprediction.com/footer.html");
       });
     </script>
@@ -37,7 +36,11 @@
         <div id="box-title">Dashboard</div>
         <div id="box-description">
           View all information associated with your write key, including your active streams, performance, and transactions.
+          <div id="box-info-loaded-from">
+            Information loaded from <a href="" id="box-href">/home/{write_key}</a>
+          </div>
         </div>
+
         <input type="text" name="write_key" id="box-input-write-key" placeholder="Your write key">
         <input type="submit" id="box-button-write-key" value="Submit" onclick="LoadDashboard()">
         <div id="box-bad-key"></div>

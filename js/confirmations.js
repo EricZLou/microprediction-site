@@ -20,6 +20,9 @@ function OnLoadConfirmations() {
   .then(json => {
     resp = json;
     LoadConfirmations();
+    let name = "confirms/" + write_key + "/";
+    document.getElementById("box-href").href = name;
+    document.getElementById("box-info-loaded-from").style.display = "inline-block";
   })
   .catch(error => {
     console.log("Error Caught");

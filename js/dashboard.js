@@ -29,6 +29,9 @@ function FetchAndLoadData(request, refresh) {
       if (json["animal"] !== null) {
         localStorage.setItem('write_key',write_key);
         document.getElementById("box-log-out").style.display = "inline";
+        let name = "home/" + write_key;
+        document.getElementById("box-href").href = name;
+        document.getElementById("box-info-loaded-from").style.display = "inline-block";
         for (var card of document.getElementsByClassName("dashboard-card")) {
           card.style.display = "block";
         }
@@ -92,6 +95,7 @@ function LogOut() {
     card.style.display = "none";
   }
   document.getElementById("box-input-write-key").value = "";
+  document.getElementById("box-info-loaded-from").style.display = "none";
   localStorage.removeItem("write_key");
   location.reload();
 }
