@@ -35,7 +35,7 @@ async function OnLoadStreamDashboard(plot_cdf, plot_bar) {
 }
 
 function LoadDashboardName() {
-  document.getElementById("box-title").innerText = stream;
+  document.getElementById("box-stream-name").innerText = stream;
 }
 
 async function LoadCurrentValue() {
@@ -46,7 +46,7 @@ async function LoadCurrentValue() {
 
   if (value !== "null") {
     document.getElementById("box-current-value").style.display = "block";
-    document.getElementById("box-current-value-value").innerText = value;
+    document.getElementById("box-current-value-value").innerText = Round(parseFloat(value), 5);
   }
 }
 
@@ -145,6 +145,7 @@ window.onclick = function(event) {
 }
 
 async function LoadBarGraph(plot) {
+  document.getElementById("dashboard-bargraph-container").style.display = "block";
   var graphs = plot;
   Plotly.plot("dashboard-bargraph", graphs, {});
 }
@@ -157,11 +158,6 @@ async function LoadLeaderboard() {
 
   leaderboard_div = document.getElementById("dashboard-leaderboard");
 
-  var title_div = document.createElement("div");
-  title_div.id = "dashboard-title";
-  title_div.innerHTML = "Leaderboard";
-  leaderboard_div.appendChild(title_div);
-
   if (Object.keys(dict).length === 0) {
     leaderboard_div.appendChild(
       TextDiv("No leaderboard available.", null, null, null, true)
@@ -171,7 +167,9 @@ async function LoadLeaderboard() {
   }
 
   let table = document.createElement("TABLE");
-  table.id = "dashboard-table";
+  table.classList.add("dashboard-table");
+  table.classList.add("dashboard-table-small");
+  table.classList.add("dashboard-table-leaderboard");
   let new_row = table.insertRow(-1);
   for (head of ["Rank", "MUID", "Points"]) {
     let header_cell = document.createElement("TH");
@@ -201,12 +199,7 @@ async function LoadLagged() {
   var lagged_values = await Fetch(request);
 
   lagged_div = document.getElementById("dashboard-lagged");
-  lagged_div.appendChild(space_div);
-
-  var title_div = document.createElement("div");
-  title_div.id = "dashboard-title";
-  title_div.innerHTML = "Lagged Values";
-  lagged_div.appendChild(title_div);
+  lagged_div = document.getElementById("dashboard-lagged");
 
   if (lagged_values === "null" || lagged_values.length === 0) {
     lagged_div.appendChild(
@@ -219,7 +212,9 @@ async function LoadLagged() {
   let table_container = document.createElement("div");
   table_container.id = "dashboard-table-container";
   let table = document.createElement("TABLE");
-  table.id = "dashboard-table";
+  table.classList.add("dashboard-table");
+  table.classList.add("dashboard-table-small");
+  table.style.flex = "1";
   let new_row = table.insertRow(-1);
   for (head of ["Timestamp", "Value"]) {
     let header_cell = document.createElement("TH");
@@ -235,16 +230,15 @@ async function LoadLagged() {
     let new_cell = new_row.insertCell(-1);
     new_cell.appendChild(TextDiv(UnixToHMS(group[0])));
     new_cell = new_row.insertCell(-1);
-    new_cell.appendChild(TextDiv(group[1]));
+    new_cell.appendChild(TextDiv(Round(parseFloat(group[1]), 5)));
     i = i + 1;
   }
   table_container.appendChild(table);
   lagged_div.appendChild(table_container);
-  lagged_div.appendChild(space_div);
 }
 
 async function LoadCDF(plot) {
-  document.getElementById("dashboard-title-cdf").style.display = "inline-block";
+  document.getElementById("dashboard-cdf-container").style.display = "inline-block";
   var graphs = plot;
   Plotly.plot("dashboard-cdf", graphs, {});
 }
