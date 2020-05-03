@@ -144,12 +144,6 @@ window.onclick = function(event) {
   }
 }
 
-async function LoadBarGraph(plot) {
-  document.getElementById("dashboard-bargraph-container").style.display = "block";
-  var graphs = plot;
-  Plotly.plot("dashboard-bargraph", graphs, {});
-}
-
 async function LoadLeaderboard() {
   var url = base_url + "leaderboards/" + json_name;
   const request = new Request(url, {method: 'GET'});
@@ -216,7 +210,13 @@ async function LoadLagged() {
   table.classList.add("dashboard-table-small");
   table.style.flex = "1";
   let new_row = table.insertRow(-1);
-  for (head of ["Timestamp", "Value"]) {
+  let headers = [];
+  if (stream.includes("z1") || stream.includes("z2") || stream.includes("z3")) {
+    headers = ["Timestamp", "Z-Score"];
+  } else {
+    headers = ["Timestamp", "Data"];
+  }
+  for (head of headers) {
     let header_cell = document.createElement("TH");
     header_cell.innerHTML = head;
     new_row.appendChild(header_cell);
@@ -237,8 +237,14 @@ async function LoadLagged() {
   lagged_div.appendChild(table_container);
 }
 
+async function LoadBarGraph(plot) {
+  document.getElementById("dashboard-bargraph-container").style.display = "block";
+  var graphs = plot;
+  Plotly.plot("dashboard-bargraph", graphs, {}, {responsive:true});
+}
+
 async function LoadCDF(plot) {
   document.getElementById("dashboard-cdf-container").style.display = "inline-block";
   var graphs = plot;
-  Plotly.plot("dashboard-cdf", graphs, {});
+  Plotly.plot("dashboard-cdf", graphs, {}, {responsive:true});
 }
