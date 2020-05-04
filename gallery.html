@@ -36,9 +36,10 @@
 
       <div id="body-subtitle">Featured streams</div>
 
-      <table>
-        <tr>
-          <th>
+      <div class="dashboard-row">
+        <div class="dashboard-column" style="width: 48%">
+
+          <div class="dashboard-card">
             <div id="gallery-title">COVID-19</div>
             <div id="body-bold-remark">
               Pandemic related streams you won't find elsewhere
@@ -49,22 +50,8 @@
                 <li><a href="stream_dashboard.html?stream=covid_news_nyc">NYC Covid-related headline count</a></li>
               </ul>
             </div>
-          </th>
-          <th>
-            <div id="gallery-title">Civic</div>
-            <div id="body-bold-remark">
-              Illustrative live examples
-            </div>
-            <div id="body-text">
-              <ul>
-                <li><a href="stream_dashboard.html?stream=bronx_traffic_absolute_speed">Traffic speed at an intersection in the Bronx</a></li>
-                <li><a href="stream_dashboard.html?stream=bart_delays">Aggregated delays on the BART</a></li>
-              </ul>
-            </div>
-          </th>
-        </tr>
-        <tr>
-          <th>
+          </div>
+          <div class="dashboard-card">
             <div id="gallery-title">Stocks</div>
             <div id="body-bold-remark">
               A novel approach to joint distribution prediction
@@ -76,8 +63,23 @@
               </ul>
               See the <a href="predicting_faq.html">Predicting FAQ</a> for more explanation.
             </div>
-          </th>
-          <th>
+          </div>
+        </div>
+
+        <div class="dashboard-column" style="width: 48%">
+          <div class="dashboard-card">
+            <div id="gallery-title">Civic</div>
+            <div id="body-bold-remark">
+              Illustrative live examples
+            </div>
+            <div id="body-text">
+              <ul>
+                <li><a href="stream_dashboard.html?stream=bronx_traffic_absolute_speed">Traffic speed at an intersection in the Bronx</a></li>
+                <li><a href="stream_dashboard.html?stream=bart_delays">Aggregated delays on the BART</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="dashboard-card">
             <div id="gallery-title">Simulated</div>
             <div id="body-bold-remark">
               For algorithm training these may be useful.
@@ -87,9 +89,9 @@
                 <li><a href="stream_dashboard.html?stream=three_body_x">Three body simulation</a> with noisy measurements. </li>
               </ul>
             </div>
-          </th>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
 
       <div id="body-subtitle">Goals</div>
       <div id="body-text">
