@@ -164,9 +164,9 @@ async function LoadLeaderboard() {
   }
 
   let table = document.createElement("TABLE");
-  table.classList.add("dashboard-table");
-  table.classList.add("dashboard-table-small");
-  table.classList.add("dashboard-table-leaderboard");
+  table.classList.add("default-table");
+  table.classList.add("default-table-small");
+  table.classList.add("leaderboard-table");
   let new_row = table.insertRow(-1);
   for (head of ["Rank", "MUID", "Points"]) {
     let header_cell = document.createElement("TH");
@@ -206,11 +206,9 @@ async function LoadLagged() {
     return;
   }
 
-  let table_container = document.createElement("div");
-  table_container.id = "dashboard-table-container";
   let table = document.createElement("TABLE");
-  table.classList.add("dashboard-table");
-  table.classList.add("dashboard-table-small");
+  table.classList.add("default-table");
+  table.classList.add("default-table-small");
   table.style.flex = "1";
   let new_row = table.insertRow(-1);
   let headers = [];
@@ -236,8 +234,7 @@ async function LoadLagged() {
     new_cell.appendChild(TextDiv(Round(parseFloat(group[1]), 5)));
     i = i + 1;
   }
-  table_container.appendChild(table);
-  lagged_div.appendChild(table_container);
+  lagged_div.appendChild(table);
 }
 
 async function LoadBarGraph(plot) {

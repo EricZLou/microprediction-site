@@ -1,0 +1,44 @@
+/********************************************************
+ ********************************************************
+            ROUND BOX ON USER DASHBOARD.html, 
+            TRANSACTIONS.html, & CONFIRMATIONS.html
+ ********************************************************
+ ********************************************************/
+
+
+#box-round-block {
+  border-radius: 6px;
+  padding: 2%;
+  left: 0;
+  width: 96%;
+  border: 2px solid #f9c809;
+  background: white;
+}
+#box-img {
+  left: 70%;
+  max-width: 10vw;
+  float: right;
+  padding: 0% 80px;
+}
+#box-title {
+  color: black;
+  font-weight: bold;
+  font-size: 2em;
+  padding-bottom: 2%;
+  margin-right: 60px;
+}
+#box-description {
+  color: black;
+  font-size: 1.1em;
+  padding-bottom: 2%;
+}
+#box-info-loaded-from {
+  display: none;
+  color: #7e2857;
+  font-weight: bold;
+}
+#box-href {
+  color: #f9c809;
+  text-decoration: underline;
+}
+

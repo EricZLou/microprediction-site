@@ -1,0 +1,275 @@
+/********************************************************
+ ********************************************************
+ ********************************************************
+                  STREAM_DASHBOARD.html
+ ********************************************************
+ ********************************************************
+ ********************************************************/
+
+
+/* Less white space on left and right */
+#body-dashboard-container {
+  position: relative;
+  left: 5%;
+  width: 95%;
+  height: 100%;
+}
+#dashboard {
+  display: flex;
+}
+
+
+
+/********************************************************
+ ********************************************************
+            LEFT PARTITION OF STREAM DASHBOARD
+ ********************************************************
+ ********************************************************/
+
+
+/****************************************
+          BASIC DEFINITIONS
+ ****************************************/
+
+#dashboard-left {
+  width: 25%;
+  min-width: 350px;
+  height: 500px;
+  overflow: auto;
+  display: inline-flex;
+  flex-direction: column;
+  border-radius: 6px;
+  border: 2px solid #f9c809;
+  padding: 20px 20px;
+  margin-right: 2%;
+}
+
+/* Stream name */
+#box-stream-name {
+  color: black;
+  font-weight: bold;
+  font-size: 1.8em;
+  padding-bottom: 2%;
+}
+
+/* Live value */
+#box-current-value {
+  display: none;
+}
+#box-current-value-value {
+  color: #7e2857;
+  font-size: 1.2em;
+  font-weight: bold;
+  height: 40px;
+  line-height: 40px;
+}
+
+/* Format for Leaderboard Table */
+#dashboard-leaderboard {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+}
+.leaderboard-table tr th:nth-child(1) {
+  width: 20%;
+}
+.leaderboard-table tr th:nth-child(2) {
+  width: 50%;
+}
+.leaderboard-table tr th:nth-child(3) {
+  width: 30%;
+}
+
+/* Red text: "Horizon" and "Live Current Value" */
+#box-red-text {
+  color: red;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding-right: 10px;
+  float: left;
+  height: 40px;
+  line-height: 40px;
+}
+
+
+/****************************************
+    LEFT BUTTON:  "go to competitions"
+    RIGHT BUTTON: "go to parent"
+                  "go to stream"
+ ****************************************/
+
+button#box-button-left, button#box-button-right {
+  background-color: #7e2857;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 12px 16px;
+  margin: 0px 4px;
+  font-size: 0.9em;
+  transition-duration: 0.4s;
+  display: none;
+  flex: 1;
+}
+button#box-button-left:hover, button#box-button-right:hover {
+  background-color: #8f3566;
+  cursor: pointer;
+}
+
+
+/****************************************
+        TRIPLET HORIZON BUTTONS
+ ****************************************/
+
+#box-horizon {
+  display: none;
+}
+#box-horizon-button-group {
+  display: flex;
+}
+#box-horizon-button-group button {
+  background-color: #7e2857;
+  border: 2px solid #8f3566;
+  color: white;
+  border-radius: 15px;
+  margin: 0px 4px;
+  height: 40px;
+  cursor: pointer;
+  float: left;
+  transition-duration: 0.4s;
+  flex: 1;
+}
+#box-horizon-button-group button:hover {
+  background-color: #8f3566;
+}
+
+
+/****************************************
+            DROPDOWN BUTTON
+ ****************************************/
+
+.dropdown2 {
+  flex: 1;
+  display: none;
+}
+#dropbtn2 {
+  background-color: #7e2857;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 0.9em;
+  transition-duration: 0.4s;
+  width: 100%;
+}
+#dropbtn2:hover, #dropbtn2:focus {
+  background-color: #8f3566;
+  outline: 0;
+}
+.dropdown-content2 {
+  margin-top: 40px;
+  border-radius: 8px;
+  display: none;
+  position: absolute;
+  background-color: #cf97b6;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  text-align: center;
+  z-index: 1;
+}
+.dropdown-content2 a {
+  color: white;
+  font-size: 0.9em;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown2 a:hover {background-color: #7e2857;}
+.show {display: block;}
+
+
+
+/********************************************************
+ ********************************************************
+          MIDDLE PARTITION OF STREAM DASHBOARD
+ ********************************************************
+ ********************************************************/
+
+
+#dashboard-middle {
+  width: 20%;
+  min-width: 250px;
+  height: 540px;
+  vertical-align: top;
+  border-radius: 6px;
+  overflow: auto;
+  display: inline-flex;
+  flex-direction: column;
+}
+#dashboard-lagged {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+}
+
+
+
+/********************************************************
+ ********************************************************
+          RIGHT PARTITION OF STREAM DASHBOARD
+ ********************************************************
+ ********************************************************/
+
+
+#dashboard-right {
+  width: 100%;
+  height: 540px;
+  display: inline-block;
+  vertical-align: top;
+}
+#dashboard-bargraph-container, 
+#dashboard-cdf-container {
+  display: none;
+  width: 100%;
+}
+
+
+
+/********************************************************
+ ********************************************************
+          DYNAMIC RESIZING FOR STREAM DASHBOARD
+ ********************************************************
+ ********************************************************/
+
+
+/* Put graph underneath */
+@media screen and (max-width: 1200px) {
+  #dashboard {
+    display: inline-block;
+  }
+  #dashboard-left {
+    width: 45%;
+  }
+  #dashboard-middle {
+    width: 40%;
+  }
+}
+
+/* Put everything in its own row */
+@media screen and (max-width: 800px) {
+  #dashboard {
+    display: inline-block;
+  }
+  #dashboard-left {
+    width: 90%;
+  }
+  #dashboard-middle {
+    width: 90%;
+    padding: 20px 20px;
+  }
+  #dashboard-right {
+    width: 90%;
+    padding: 20px 20px;
+    flex: none;
+  }
+}

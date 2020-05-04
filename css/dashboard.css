@@ -1,0 +1,114 @@
+/********************************************************
+ ********************************************************
+                    DASHBOARD.html
+ ********************************************************
+ ********************************************************/
+
+
+/****************************************
+            INSIDE ROUND BOX
+ ****************************************/
+
+/* Text block to enter write_key */
+input#box-input-write-key[type=text] {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition-duration: 0.4s;
+}
+input#box-input-write-key[type=text]:focus {
+  border: 2px solid #7e2857;
+  outline-width: 0;
+}
+/* Submit button for text block */
+input#box-button-write-key {
+  background-color: #7e2857;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 1.5% 2%;
+  text-align: center;
+  font-size: 0.9em;
+  transition-duration: 0.4s;
+}
+input#box-button-write-key:hover {
+  cursor: pointer;
+  background-color: #8f3566;
+}
+
+/* "Invalid" text if invalid key entered */
+#box-bad-key {
+  display: inline;
+  padding: 1.5%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9em;
+  color: red;
+}
+
+#box-log-out {
+  display: none;
+  float: right;
+  font-size: 0.9em;
+  color: #7e2857;
+  text-decoration: underline;
+}
+#box-log-out:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+/****************************************
+            ROWS AND COLUMNS
+ ****************************************/
+
+/* Split up original 3 columns into 2 shadow-column divs
+   and 1 shadow-column-last div to make window resizing 
+   easier. */
+.shadow-column-last {
+  float: left;
+  width: 31%;
+  padding: 0px 1%;
+}
+.shadow-column-semi {
+  width: 100%;
+  display: inline-block;
+}
+
+/* Default: Show 3 columns */
+
+/* Show 2 columns */
+@media screen and (max-width: 1200px) {
+  .shadow-column {
+    float: left;
+    width: 48%;
+  }
+  .shadow-column-last {
+    margin: 0 -1%;
+    width: 100%;
+  }
+  .shadow-column-semi {
+    float: left;
+    width: 48%;
+    padding: 0px 1%;
+  }
+}
+
+/* Show 1 column */
+@media screen and (max-width: 800px) {
+  .shadow-column {
+    width: 100%;
+  }
+  .shadow-column-last {
+    margin: 0 -1%;
+    width: 100%;
+  }
+  .shadow-column-semi {
+    width: 100%;
+  }
+}

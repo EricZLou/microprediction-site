@@ -32,7 +32,7 @@ function FetchAndLoadData(request, refresh) {
         let name = "home/" + write_key;
         document.getElementById("box-href").href = name;
         document.getElementById("box-info-loaded-from").style.display = "inline-block";
-        for (var card of document.getElementsByClassName("dashboard-card")) {
+        for (var card of document.getElementsByClassName("shadow-card")) {
           card.style.display = "block";
         }
         resp = json;
@@ -91,7 +91,7 @@ async function LoadDashboard() {
 
 function LogOut() {
   document.getElementById("box-log-out").style.display = "none";
-  for (var card of document.getElementsByClassName("dashboard-card")) {
+  for (var card of document.getElementsByClassName("shadow-card")) {
     card.style.display = "none";
   }
   document.getElementById("box-input-write-key").value = "";
@@ -104,7 +104,7 @@ function LogOut() {
 // HELPER FUNCTION
 function CreateCardWithTitle(title) {
   let card = document.createElement("div");
-  card.className = "dashboard-card";
+  card.className = "shadow-card";
   var title_div = document.createElement("div");
   title_div.id = "dashboard-title";
   title_div.innerHTML = title;

@@ -17,7 +17,7 @@ async function LoadLeaderboard() {
   }
 
   let table = document.createElement("TABLE");
-  table.classList.add("dashboard-table");
+  table.classList.add("default-table");
   let new_row = table.insertRow(-1);
   for (head of ["Rank", "MUID", "Points"]) {
     let header_cell = document.createElement("TH");

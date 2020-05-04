@@ -1,0 +1,73 @@
+/********************************************************
+ ********************************************************
+                  CONFIRMATIONS.html
+                  TRANSACTIONS.html
+ ********************************************************
+ ********************************************************/
+
+
+/* GO TO TOP BUTTON */
+#back-to-top-button {
+  position:fixed; 
+  right: 3%; 
+  bottom: 5%;
+  background-color: #f9c809;
+  padding: 0.5% 0.5%;
+  border-radius: 8px;
+  color: #7e2857;
+  transition-duration: 0.4s;
+  z-index: 999;
+}
+a#back-to-top-button:hover {
+  text-decoration: none;
+  background-color: #f5d351;
+}
+
+/* SEE MORE BUTTON */
+#see-more {
+  text-align: center;
+}
+button#see-more-button {
+  background-color: #7e2857;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 1% 2%;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition-duration: 0.4s;
+}
+button#see-more-button:hover {
+  background-color: #8f3566;
+  cursor: pointer;
+}
+#see-more-text {
+  color: black;
+  font-size: 1.0em;
+  font-weight: normal;
+}
+
+/* SMALL ROUND BOX WITH SHADOW */
+#confirm-transact-card {
+  margin-bottom: 2%;
+  margin-left: 3%;
+  margin-right: 3%;
+  border: 2px solid black;
+  padding: 1% 1%;
+  border-radius: 20px;
+  width: 40%;
+  display: inline-block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #f1f1f1;
+}
+
+/* EXTRAS: CONFIRMATIONS */
+#confirm-time {
+  font-weight: bold;
+}
+#confirm-values {
+  margin-left: 5%;
+}
+/* EXTRAS: TRANSACTIONS */
+
