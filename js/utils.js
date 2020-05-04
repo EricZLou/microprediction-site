@@ -107,5 +107,6 @@ function UnixToHMS(unix) {
   var day = date.getDate();
   var hours = "0" + date.getHours();
   var minutes = "0" + date.getMinutes();
-  return month+"/"+day + " " + hours.substr(-2) + ":" + minutes.substr(-2);
+  var seconds = "0" + date.getSeconds();
+  return month+"/"+day + " " + hours.substr(-2) + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
 }
