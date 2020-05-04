@@ -97,6 +97,7 @@ function LoadButtonStream() {
       }      
     }
     else {
+      let button_div = document.getElementsByClassName("dropdown2")[0];
       let streams = [];
       let search_idx = 3;
       while (stream.indexOf('~', search_idx) !== -1) {
@@ -105,7 +106,7 @@ function LoadButtonStream() {
       }
       let button = document.getElementById("dropbtn2")
       button.innerHTML = "Go to Parent &rarr;";
-      button.style.display = "inline";
+      button_div.style.display = "inline-flex";
       button.onclick = function() {
         document.getElementById("dropdown").classList.toggle("show");
       }
@@ -116,9 +117,10 @@ function LoadButtonStream() {
       }
     }
   } else {
-    let button = document.getElementById("dropbtn2")
+    let button_div = document.getElementsByClassName("dropdown2")[0];
+    let button = document.getElementById("dropbtn2");
     button.innerHTML = " &larr; Go to Z1";
-    button.style.display = "inline";
+    button_div.style.display = "inline-flex";
     button.onclick = function() {
       document.getElementById("dropdown").classList.toggle("show");
     }
