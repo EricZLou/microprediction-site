@@ -123,9 +123,10 @@ function LoadButtonStream() {
       document.getElementById("dropdown").classList.toggle("show");
     }
     let times = [70, 310, 910]
+    let time_words = ["1 min", "5 min", "15 min"]
     for (let i in times) {
       document.getElementById("dropdown_"+i).href = "stream_dashboard.html?stream=z1~"+stream.slice(first, last)+"~"+times[i];
-      document.getElementById("dropdown_"+i).innerText = times[i];
+      document.getElementById("dropdown_"+i).innerText = time_words[i];
       document.getElementById("dropdown_"+i).style.display = "block";
     }
   }
