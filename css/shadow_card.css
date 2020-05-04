@@ -14,11 +14,16 @@
   clear: both;
 }
 
-/* Assume 3 columns */
 .shadow-column {
   float: left;
-  width: 31%;
+  width: 100%;
   padding: 0px 1%;
+}
+.third {
+  width: 31%;
+}
+.half {
+  width: 48%;
 }
 
 
