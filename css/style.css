@@ -423,6 +423,30 @@ button#persistent-leaderboard-button:hover {
   letter-spacing: 0.2em;
 }
 
+#mobile-persistent-buttons {
+  display: none;
+}
+#mobile-link {
+  color: #f9c809;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 10px;  
+  display: block;
+}
+
+
+@media screen and (max-width: 475px) {
+  button#persistent-dashboard-button {
+    display: none;
+  }
+  button#persistent-leaderboard-button {
+    display: none;
+  }
+  #mobile-persistent-buttons {
+    display: inline-block;
+  }
+}
+
 
 
 /********************************************************
