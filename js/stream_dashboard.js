@@ -117,6 +117,12 @@ function LoadButtonStream() {
       }
     }
   } else {
+    let l_button = document.getElementById("box-button-left");
+    l_button.innerHTML = "&larr; Go to Competitions";
+    l_button.style.display = "inline";
+    l_button.onclick = function() {
+      window.location = "stream_dashboard.html?stream="+stream+"&horizon=70";
+    }
     let button_div = document.getElementsByClassName("dropdown2")[0];
     let button = document.getElementById("dropbtn2");
     button.innerHTML = " &larr; Go to Z1";
