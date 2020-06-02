@@ -5,6 +5,7 @@ const home_url = base_url+"home/";
 var write_key;
 var resp;
 var all_active_streams;
+var all_confirms;
 
 function LoadAll() {
   LoadOverview();
@@ -59,6 +60,14 @@ function FetchActiveStreams() {
     .then(json => {all_active_streams = json;})
 }
 
+function FetchConfirms() {
+  var url = base_url+"confirms/"+write_key+"/";
+  request = new Request(url, {method: 'GET'});
+  return fetch(request)
+    .then(response => {return response.json();})
+    .then(json => {all_confirms = json;})
+}
+
 async function OnLoadDashboard() {
   var text_box = document.getElementById("box-input-write-key");
   text_box.addEventListener("keyup", function(event) {
@@ -72,6 +81,7 @@ async function OnLoadDashboard() {
   const request = new Request(url, {method: 'GET'});
   if (write_key) {
     await FetchActiveStreams();
+    await FetchConfirms();
     await FetchAndLoadData(request);
   }
 }
@@ -82,6 +92,7 @@ async function LoadDashboard() {
     var url = home_url+write_key+"/";
     const request = new Request(url, {method: 'GET'});
     await FetchActiveStreams();
+    await FetchConfirms();
     if (localStorage.getItem('write_key'))
       await FetchAndLoadData(request, refresh=true);
     else
@@ -192,28 +203,54 @@ function LoadActiveStreams() {
 function LoadConfirms() {
   title = "Confirmations";
   card = CreateCardWithTitle(title);
-  var confirms = resp["confirms::"+write_key+".json"];
-  for (var item of confirms) {
+  var prev_action = "";
+  var prev_name = "";
+  let idx = 0;
+  for (var item of all_confirms) {
+    if (idx === 20) break;
     var item = JSON.parse(item);
     if (item["operation"] === "set") {
+      if (prev_action === "set" && prev_name === item["examples"][0]["name"]) {        
+        continue;
+      }
       card.appendChild(
         JoinDivs([
           TextDiv("SET ", pos_neg_color=false, null, exact_color="#f9c809", bold=true),
           TextDiv(item["examples"][0]["name"].slice(0,-5))
         ], true, title)
       );
+      prev_action = "set";
+      prev_name = item["examples"][0]["name"];
     } else if (item["operation"] === "submit") {
+      if (prev_action === "submit" && prev_name === item["name"]) {        
+        continue;
+      }
       card.appendChild(
         JoinDivs([
           TextDiv("SUBMIT ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
           TextDiv(item["name"].slice(0,-5))
         ], true, title)
       );
+      prev_action = "submit";
+      prev_name = item["name"];
+    } else if (item["operation"] === "touch") {
+      if (prev_action === "touch" && prev_name === item["name"]) {        
+        continue;
+      }
+      card.appendChild(
+        JoinDivs([
+          TextDiv("TOUCH ", pos_neg_color=false, null, exact_color="#339B26", bold=true),
+          TextDiv(item["name"].slice(0,-5))
+        ], true, title)
+      );
+      prev_action = "touch";
+      prev_name = item["name"];
     } else {
       card.appendChild(TextDiv("unknown action"));
     }
+    idx++;
   }
-  if (confirms.length === 0) {
+  if (all_confirms.length === 0) {
     card.appendChild(TextDiv("No Actions Yet"));
   }
 

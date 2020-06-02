@@ -102,6 +102,23 @@ function CreateConfirmDiv(item) {
     }
     confirm_div.appendChild(values_div);
 
+  } else if (item["operation"] === "touch") {
+    confirm_div.appendChild(
+      JoinDivs([
+        TextDiv("TOUCH ", pos_neg_color=false, null, exact_color="#339B26", bold=true),
+        TextDiv(item["name"].slice(0,-5), null, null, null, bold=true)
+      ])
+    );
+    random_div = document.createElement("div");
+    random_div.id = "confirm-values";
+    random_div.appendChild(TextDiv("."));
+    random_div.appendChild(TextDiv("."));
+    random_div.appendChild(TextDiv("."));
+    random_div.appendChild(TextDiv("."));
+    random_div.appendChild(TextDiv("."));
+    random_div.appendChild(TextDiv("."));
+    confirm_div.appendChild(random_div);
+
   } else {
     confirm_div.appendChild(TextDiv("unknown action"));
   }

@@ -94,7 +94,7 @@ function LoadButtonStream() {
       var last = stream.lastIndexOf("~");
       r_button.onclick = function() {
         window.location = "stream_dashboard.html?stream="+stream.slice(first, last);
-      }      
+      }
     }
     else {
       let button_div = document.getElementsByClassName("dropdown2")[0];
