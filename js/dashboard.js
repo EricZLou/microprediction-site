@@ -1,4 +1,4 @@
-const base_url = "https://www.microprediction.com/"
+const base_url = "https://www.microprediction.org/"
 const home_url = base_url+"home/";
 
 

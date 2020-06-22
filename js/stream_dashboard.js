@@ -7,7 +7,7 @@ var json_name;
 var space_div = document.createElement("div");
 space_div.id = "space";
 
-async function OnLoadStreamDashboard(plot_cdf, plot_bar) {
+async function OnLoadStreamDashboard(plot_x) {
   stream = GetUrlVars()["stream"];
   horizon = GetUrlVars()["horizon"];
 
@@ -28,9 +28,9 @@ async function OnLoadStreamDashboard(plot_cdf, plot_bar) {
   LoadCurrentValue();
   LoadLagged();
   if (horizon) {
-    LoadCDF(plot_cdf);
+    LoadCDF(plot_x);
   } else {
-    LoadBarGraph(plot_bar);
+    LoadBarGraph(plot_x);
   }
 }
 
