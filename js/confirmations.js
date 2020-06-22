@@ -1,4 +1,4 @@
-const base_url = "https://www.microprediction.com/confirms/";
+const base_url = home_url + "confirms/";
 
 var write_key;
 var resp;

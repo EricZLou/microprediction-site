@@ -1,3 +1,5 @@
+const home_url = "https://www.microprediction.org/";
+
 function Round(item, round_digit) {
   return Math.round((Math.pow(10,round_digit) * item)) / Math.pow(10,round_digit);
 }

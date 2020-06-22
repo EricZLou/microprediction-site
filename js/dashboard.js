@@ -1,5 +1,4 @@
-const base_url = "https://www.microprediction.org/"
-const home_url = base_url+"home/";
+const base_url = home_url;
 
 
 var write_key;
@@ -77,7 +76,7 @@ async function OnLoadDashboard() {
     }
   });
   write_key = localStorage.getItem('write_key');
-  var url = home_url+write_key+"/";
+  var url = base_url+"home/"+write_key+"/";
   const request = new Request(url, {method: 'GET'});
   if (write_key) {
     await FetchActiveStreams();
@@ -89,7 +88,7 @@ async function OnLoadDashboard() {
 async function LoadDashboard() {
   write_key = document.getElementById("box-input-write-key").value;
   if (write_key !== "") {
-    var url = home_url+write_key+"/";
+    var url = base_url+"home/"+write_key+"/";
     const request = new Request(url, {method: 'GET'});
     await FetchActiveStreams();
     await FetchConfirms();

@@ -1,4 +1,4 @@
-const base_url = "https://www.microprediction.com/";
+const base_url = home_url;
 
 var stream;
 var horizon;

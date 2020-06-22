@@ -1,4 +1,4 @@
-const base_url = "https://www.microprediction.com/";
+const base_url = home_url;
 
 async function LoadLeaderboard() {
   var url = base_url + "overall/";
