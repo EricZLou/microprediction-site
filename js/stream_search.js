@@ -1,4 +1,4 @@
-const base_url = "https://www.microprediction.org/";
+const base_url = home_url;
 
 var full_div;
 
