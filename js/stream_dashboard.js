@@ -104,7 +104,7 @@ function LoadButtonStream() {
         streams.push(stream.slice(search_idx, stream.indexOf('~', search_idx)));
         search_idx = stream.indexOf('~', search_idx) + 1;
       }
-      let button = document.getElementById("dropbtn2")
+      let button = document.getElementById("dropbtn2");
       button.innerHTML = "Go to Parent &rarr;";
       button_div.style.display = "inline-flex";
       button.onclick = function() {
@@ -136,19 +136,6 @@ function LoadButtonStream() {
       document.getElementById("dropdown_"+i).href = "stream_dashboard.html?stream=z1~"+stream.slice(first, last)+"~"+times[i];
       document.getElementById("dropdown_"+i).innerText = time_words[i];
       document.getElementById("dropdown_"+i).style.display = "block";
-    }
-  }
-}
-
-window.onclick = function(event) {
-  if (!event.target.matches('#dropbtn2')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content2");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
     }
   }
 }

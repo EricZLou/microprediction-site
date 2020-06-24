@@ -6,7 +6,40 @@ var resp;
 var all_active_streams;
 var all_confirms;
 
+
 function LoadAll() {
+  let button = document.getElementById("dropbtn2");
+  let dropdown = document.getElementById("dropdown");
+  button.onclick = function() {
+    dropdown.classList.toggle("show");
+  }
+  let pairs = JSON.parse(localStorage.getItem('microprediction_keys'));
+  for (let pair of pairs) {
+    let drop = document.createElement("a");
+    drop.href = "";
+    drop.innerText = pair[1];
+    drop.onclick = function() {
+      localStorage.setItem('microprediction_key_current', JSON.stringify(pair));
+      document.getElementById('box-input-write-key').value = pair[0];
+      LoadDashboard();
+    }
+    drop.style.display = "block";
+    dropdown.appendChild(drop);
+  }
+  if (pairs.length > 1) {
+    let log_out_all = document.createElement("a");
+    log_out_all.href = "";
+    log_out_all.innerText = "Log Out All";
+    log_out_all.classList.add("log-out");
+    log_out_all.onclick = function() {
+      localStorage.removeItem('microprediction_key_current');
+      localStorage.removeItem('microprediction_keys');
+      location.reload();
+    };
+    log_out_all.style.display = "block";
+    dropdown.appendChild(log_out_all);
+  }
+
   LoadOverview();
   LoadActiveStreams();
   LoadConfirms();
@@ -14,6 +47,56 @@ function LoadAll() {
   LoadWarnings();
   LoadPerformance();
   LoadTransactions();
+}
+
+// 'microprediction_keys' is a list of pairs, each pair is [key, animal]
+
+function AddLocalStorage() {
+  let pair = [write_key, resp["animal"]];
+  localStorage.setItem('microprediction_key_current', JSON.stringify(pair));
+  let pairs = JSON.parse(localStorage.getItem('microprediction_keys'));
+  if (!pairs) {
+    pairs = [];
+  }
+  let includes = false;
+  for (let p of pairs) {
+    if (p[0] === pair[0] && p[1] === pair[1])
+      includes = true;
+  }
+  if (!includes) {
+    pairs.push(pair);
+    localStorage.setItem('microprediction_keys', JSON.stringify(pairs));
+  }
+}
+
+function LogOut() {
+  RemoveLocalStorage();
+}
+
+function RemoveLocalStorage() {
+  let pairs = JSON.parse(localStorage.getItem('microprediction_keys'));
+  let current = JSON.parse(localStorage.getItem('microprediction_key_current'));
+  console.log(pairs.length);
+  if (pairs.length === 1) {
+    RemoveAllLocalStorage();
+    return;
+  }
+  for (let i = 0; i < pairs.length; i++) {
+    if (pairs[i][0] === current[0] && pairs[i][1] === current[1]) {
+      pairs.splice(i, i+1);
+      localStorage.setItem('microprediction_keys', JSON.stringify(pairs));
+      localStorage.setItem('microprediction_key_current', JSON.stringify(pairs[0]));
+      document.getElementById('box-input-write-key').value = pairs[0][0];
+      LoadDashboard();
+      break;
+    }
+  }
+}
+
+function RemoveAllLocalStorage() {
+  localStorage.removeItem('microprediction_key_current');
+  localStorage.removeItem('microprediction_keys');
+  location.reload();
 }
 
 function FetchAndLoadData(request, refresh) {
@@ -27,17 +110,21 @@ function FetchAndLoadData(request, refresh) {
     })
     .then(json => {
       if (json["animal"] !== null) {
-        localStorage.setItem('write_key',write_key);
-        document.getElementById("box-log-out").style.display = "inline";
+        resp = json;
+
+        AddLocalStorage();
+
+        document.getElementsByClassName("dropdown2")[0].style.display = "inline-flex";
         let name = "home/" + write_key;
         document.getElementById("box-href").href = name;
         document.getElementById("box-info-loaded-from").style.display = "inline-block";
         for (var card of document.getElementsByClassName("shadow-card")) {
           card.style.display = "block";
         }
-        resp = json;
         LoadAll();
+
         if (refresh) location.reload();
+
       } else {
         document.getElementById("box-bad-key").innerHTML = "Invalid";
         setTimeout(function(){
@@ -67,6 +154,7 @@ function FetchConfirms() {
     .then(json => {all_confirms = json;})
 }
 
+// called immediately when the page loads
 async function OnLoadDashboard() {
   var text_box = document.getElementById("box-input-write-key");
   text_box.addEventListener("keyup", function(event) {
@@ -75,16 +163,18 @@ async function OnLoadDashboard() {
       document.getElementById("box-button-write-key").click();
     }
   });
-  write_key = localStorage.getItem('write_key');
-  var url = base_url+"home/"+write_key+"/";
-  const request = new Request(url, {method: 'GET'});
-  if (write_key) {
+  pair = JSON.parse(localStorage.getItem('microprediction_key_current'));
+  if (pair) {
+    write_key = pair[0]
+    var url = base_url+"home/"+write_key+"/";
+    const request = new Request(url, {method: 'GET'});
     await FetchActiveStreams();
     await FetchConfirms();
     await FetchAndLoadData(request);
   }
 }
 
+// called when the user enters a write key in the text box
 async function LoadDashboard() {
   write_key = document.getElementById("box-input-write-key").value;
   if (write_key !== "") {
@@ -92,22 +182,12 @@ async function LoadDashboard() {
     const request = new Request(url, {method: 'GET'});
     await FetchActiveStreams();
     await FetchConfirms();
-    if (localStorage.getItem('write_key'))
+    // refresh the page if the page is already displaying a valid write key
+    if (localStorage.getItem('microprediction_key_current'))
       await FetchAndLoadData(request, refresh=true);
     else
       await FetchAndLoadData(request);
   }
-}
-
-function LogOut() {
-  document.getElementById("box-log-out").style.display = "none";
-  for (var card of document.getElementsByClassName("shadow-card")) {
-    card.style.display = "none";
-  }
-  document.getElementById("box-input-write-key").value = "";
-  document.getElementById("box-info-loaded-from").style.display = "none";
-  localStorage.removeItem("write_key");
-  location.reload();
 }
 
 
