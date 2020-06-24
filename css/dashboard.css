@@ -51,18 +51,6 @@ input#box-button-write-key:hover {
   color: red;
 }
 
-#box-log-out {
-  display: none;
-  font-size: 0.9em;
-  margin-top: 8px;
-  color: #7e2857;
-  font-weight: bold;
-}
-#box-log-out:hover {
-  cursor: pointer;
-  font-weight: bold;
-}
-
 
 /****************************************
             ROWS AND COLUMNS
