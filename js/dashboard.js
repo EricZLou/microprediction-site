@@ -83,12 +83,12 @@ function RemoveLocalStorage() {
   }
   for (let i = 0; i < pairs.length; i++) {
     if (pairs[i][0] === current[0] && pairs[i][1] === current[1]) {
-      pairs.splice(i, i+1);
+      pairs.splice(i, 1);
       localStorage.setItem('microprediction_keys', JSON.stringify(pairs));
       localStorage.setItem('microprediction_key_current', JSON.stringify(pairs[0]));
       document.getElementById('box-input-write-key').value = pairs[0][0];
       LoadDashboard();
-      break;
+      return;
     }
   }
 }
