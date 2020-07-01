@@ -5,7 +5,7 @@ var resp;
 var max_visible = 0;
 
 function OnLoadConfirmations() {
-  write_key = localStorage.getItem('write_key');
+  write_key = JSON.parse(localStorage.getItem('microprediction_key_current'))[0];
   var url = base_url+write_key+"/";
   const request = new Request(url, {method: 'GET'});
 
@@ -60,7 +60,7 @@ function CreateConfirmDiv(item) {
   if (item["operation"] === "set") {
     confirm_div.appendChild(
       JoinDivs([
-        TextDiv("SET ", pos_neg_color=false, null, exact_color="#f9c809", bold=true),
+        TextDiv("SET ", pos_neg_color=false, null, exact_color="#706398", bold=true),
         TextDiv(item["examples"][0]["name"].slice(0,-5), null, null, null, bold=true),
         TextDiv(" to "),
         TextDiv(Math.round((Math.pow(10,8) * item["examples"][0]["value"])) / Math.pow(10,8), null, null, null, bold=true)
@@ -85,7 +85,7 @@ function CreateConfirmDiv(item) {
   } else if (item["operation"] === "submit") {
     confirm_div.appendChild(
       JoinDivs([
-        TextDiv("SUBMIT ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
+        TextDiv("SUBMIT ", pos_neg_color=false, null, exact_color="#00A176", bold=true),
         TextDiv(item["name"].slice(0,-5), null, null, null, bold=true),
         TextDiv(" with "),
         TextDiv(item["delays"], null, null, null, bold=true),
@@ -105,7 +105,7 @@ function CreateConfirmDiv(item) {
   } else if (item["operation"] === "touch") {
     confirm_div.appendChild(
       JoinDivs([
-        TextDiv("TOUCH ", pos_neg_color=false, null, exact_color="#339B26", bold=true),
+        TextDiv("TOUCH ", pos_neg_color=false, null, exact_color="#C1573D", bold=true),
         TextDiv(item["name"].slice(0,-5), null, null, null, bold=true)
       ])
     );

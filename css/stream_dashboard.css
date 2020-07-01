@@ -39,7 +39,7 @@
   display: inline-flex;
   flex-direction: column;
   border-radius: 6px;
-  border: 2px solid #f9c809;
+  border: 2px solid #706398;
   padding: 20px 20px;
   margin-right: 2%;
 }
@@ -57,7 +57,7 @@
   display: none;
 }
 #box-current-value-value {
-  color: #7e2857;
+  color: #00A176;
   font-size: 1.2em;
   font-weight: bold;
   height: 40px;
@@ -82,7 +82,7 @@
 
 /* Red text: "Horizon" and "Live Current Value" */
 #box-red-text {
-  color: red;
+  color: #706398;
   font-size: 1.1em;
   font-weight: bold;
   padding-right: 10px;
@@ -99,7 +99,7 @@
  ****************************************/
 
 button#box-button-left, button#box-button-right {
-  background-color: #7e2857;
+  background-color: #00A176;
   border: none;
   border-radius: 8px;
   color: white;
@@ -111,7 +111,6 @@ button#box-button-left, button#box-button-right {
   flex: 1;
 }
 button#box-button-left:hover, button#box-button-right:hover {
-  background-color: #8f3566;
   cursor: pointer;
 }
 
@@ -127,8 +126,8 @@ button#box-button-left:hover, button#box-button-right:hover {
   display: flex;
 }
 #box-horizon-button-group button {
-  background-color: #7e2857;
-  border: 2px solid #8f3566;
+  background-color: #00A176;
+  border: 2px solid #00A176;
   color: white;
   border-radius: 15px;
   margin: 0px 4px;
@@ -137,9 +136,6 @@ button#box-button-left:hover, button#box-button-right:hover {
   float: left;
   transition-duration: 0.4s;
   flex: 1;
-}
-#box-horizon-button-group button:hover {
-  background-color: #8f3566;
 }
 
 

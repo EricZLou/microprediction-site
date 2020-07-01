@@ -11,16 +11,15 @@
   position:fixed; 
   right: 3%; 
   bottom: 5%;
-  background-color: #f9c809;
+  background-color: #706398;
   padding: 0.5% 0.5%;
   border-radius: 8px;
-  color: #7e2857;
+  color: #FFF;
   transition-duration: 0.4s;
   z-index: 999;
 }
 a#back-to-top-button:hover {
   text-decoration: none;
-  background-color: #f5d351;
 }
 
 /* SEE MORE BUTTON */
@@ -28,7 +27,7 @@ a#back-to-top-button:hover {
   text-align: center;
 }
 button#see-more-button {
-  background-color: #7e2857;
+  background-color: #00A176;
   border: none;
   border-radius: 8px;
   color: white;
@@ -39,7 +38,6 @@ button#see-more-button {
   transition-duration: 0.4s;
 }
 button#see-more-button:hover {
-  background-color: #8f3566;
   cursor: pointer;
 }
 #see-more-text {

@@ -15,19 +15,19 @@ img {
   max-height: 100%;
 }
 a:link {
-  color: #7e2857;
+  color: #00A176;
   text-decoration: none;
 }
 a:visited {
-  color: #7e2857;
+  color: #00A176;
   text-decoration: none;
 }
 a:hover {
-  color: #7e2857;
+  color: #00A176;
   text-decoration: underline;
 }
 a:active {
-  color: #7e2857;
+  color: #00A176;
   text-decoration: none;
 }
 table, th, td {
@@ -129,10 +129,10 @@ button:focus {
   border-collapse: collapse;
 }
 .default-table tr:first-child {
-  background-color: #7e2857;
+  background-color: #00A176;
 }
 .default-table tr:first-child th {
-  color: #f9c809;
+  color: #FFF;
 }
 .default-table tr {
   background-color: white;
@@ -145,7 +145,7 @@ button:focus {
   padding: 0.5em 1.5em;
   text-align: center;
   border-width: 1px 0;
-  border-color: #7e2857;
+  border-color: #00A176;
   border-style: solid;
 }
 .default-table th {
@@ -154,7 +154,7 @@ button:focus {
 }
 .default-table td:nth-child(n+2) {
   border-left-width: 4px;
-  border-color: #7e2857;
+  border-color: #00A176;
   border-style: solid;
 }
 
@@ -194,7 +194,7 @@ button:focus {
  ****************************************/
 
 #header-container-big {
-  background-color: #7e2857;
+  background-color: #00A176;
   padding-left: 5%;
   padding-right: 0%;
 }
@@ -207,7 +207,7 @@ button:focus {
   float: left;
   font-size: 20px;
   font-weight: bold;
-  color: #f9c809;
+  color: #FFF;
   height: 80px;
   line-height: 80px;
   padding-right: 5%;
@@ -244,7 +244,7 @@ button:focus {
   margin: 0;
 }
 .header a:hover, .dropdown:hover .dropbtn:hover {
-  color: #cf97b6;
+  color: #A9B0B7;
 }
 .dropdown-content {
   display: none;
@@ -273,15 +273,12 @@ button:focus {
 /* Go to API button */
 #header-api {
   float: right;
-  background-color: #f9c809;
+  background-color: #706398;
   padding: 0px 10px;
   transition-duration: 0.4s;
 }
-#header-api:hover {
-  background-color: #f2d561;
-}
 #header-api a {
-  color: #7e2857;
+  color: #FFF;
   font-weight: bold;
   background-color: inherit;
 }
@@ -310,7 +307,7 @@ button:focus {
 #footer-container {
   height: 35vh;
   position: relative;
-  background-color: #555F60;
+  background-color: #A9B0B7;
 }
 #footer {
   height: 100%;
@@ -378,10 +375,10 @@ button#persistent-dashboard-button {
   min-width: 40px;
   width: 3%;
   max-width: 60px;
-  background-color: #7e2857;
+  background-color: #00A176;
   border-radius: 0px 15px 0px 0px;
   border: none;
-  border-bottom: 1px solid #cf97b6;
+  border-bottom: 1px solid #FFF;
   text-align: center;
   outline:none;
   margin: 0;
@@ -397,10 +394,10 @@ button#persistent-leaderboard-button {
   min-width: 40px;
   width: 3%;
   max-width: 60px;
-  background-color: #7e2857;
+  background-color: #00A176;
   border-radius: 0px 0px 15px 0px;
   border: none;
-  border-top: 1px solid #cf97b6;
+  border-top: 1px solid #FFF;
   text-align: center;
   outline:none;
   margin: 0;
@@ -410,14 +407,14 @@ button#persistent-leaderboard-button {
 }
 button#persistent-dashboard-button:hover, 
 button#persistent-leaderboard-button:hover {
-  background-color: #8f3566;
+  background-color: #706398;
   cursor: pointer;
 }
 #persistent-text {
   writing-mode: vertical-rl;
   text-orientation: mixed;
   display: inline-block;
-  color: #f9c809;
+  color: #FFF;
   font-size: 1.2em;
   font-weight: bold;
   letter-spacing: 0.2em;
@@ -427,7 +424,7 @@ button#persistent-leaderboard-button:hover {
   display: none;
 }
 #mobile-link {
-  color: #f9c809;
+  color: #FFF;
   font-weight: bold;
   padding-top: 20px;
   padding-bottom: 10px;  
@@ -498,7 +495,7 @@ button#persistent-leaderboard-button:hover {
   display: none;
 }
 #dropbtn2 {
-  background-color: #7e2857;
+  background-color: #00A176;
   border-radius: 8px;
   border: none;
   color: white;
@@ -508,7 +505,6 @@ button#persistent-leaderboard-button:hover {
   width: 100%;
 }
 #dropbtn2:hover, #dropbtn2:focus {
-  background-color: #8f3566;
   outline: 0;
 }
 .dropdown-content2 {
@@ -516,7 +512,7 @@ button#persistent-leaderboard-button:hover {
   border-radius: 8px;
   display: none;
   position: absolute;
-  background-color: #cf97b6;
+  background-color: #00A176;
   min-width: 160px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -530,15 +526,13 @@ button#persistent-leaderboard-button:hover {
   text-decoration: none;
   display: block;
 }
-.dropdown2 a:hover {background-color: #7e2857;}
 .dropdown-content2 .log-out {
-  color: #7e2857;
-  background-color: #f9c809;
+  color: #FFF;
+  background-color: #706398;
   font-size: 0.9em;
   font-weight: bold;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
-.dropdown2 .log-out:hover {background-color: white;}
 .show {display: block;}

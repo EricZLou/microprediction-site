@@ -3,16 +3,18 @@ const base_url = home_url;
 var stream;
 var horizon;
 var json_name;
+var delays;
 
 var space_div = document.createElement("div");
 space_div.id = "space";
 
-async function OnLoadStreamDashboard(plot_x) {
+async function OnLoadStreamDashboard(plot_x, all_delays) {
+  delays = ["70", "310", "910", "3555"];
   stream = GetUrlVars()["stream"];
   horizon = GetUrlVars()["horizon"];
 
-  if (horizon && !["70", "310", "910"].includes(horizon)) {
-    horizon = "70";
+  if (horizon && !delays.includes(horizon)) {
+    horizon = delays[0];
   }
 
   if (!horizon) {
@@ -54,24 +56,27 @@ function LoadHorizon() {
   if (!horizon) {
     return;
   }
-  document.getElementById("box-horizon").style.display = "inline";
-  var horizon_button = document.getElementById("horizon-" + horizon);
-  horizon_button.style.backgroundColor = "#8f3566";
-  horizon_button.style.color = "#f9c809";
-  horizon_button.style.fontWeight = "bold";
 
-  document.getElementById("horizon-70").onclick = function() {
-    window.location = "stream_dashboard.html?stream="+stream+"&horizon=70";
-  }
-  document.getElementById("horizon-310").onclick = function() {
-    window.location = "stream_dashboard.html?stream="+stream+"&horizon=310";
-  }
-  document.getElementById("horizon-910").onclick = function() {
-    window.location = "stream_dashboard.html?stream="+stream+"&horizon=910";
+  document.getElementById("box-horizon").style.display = "inline";
+  var button_group = document.getElementById("box-horizon-button-group");
+  for (let delay of delays) {
+    let btn = document.createElement("button");
+    btn.innerText = delay + " sec";
+    btn.onclick = function() {
+      window.location = "stream_dashboard.html?stream="+stream+"&horizon="+delay;
+    }
+    // current button
+    if (delay === horizon) {
+      btn.style.backgroundColor = "#706398";
+      btn.style.color = "#FFF";
+      btn.style.fontWeight = "bold";
+    }
+    button_group.appendChild(btn);
   }
 }
 
 function LoadButtonStream() {
+  // IF THERE IS A HORIZON AKA "70::", HAVE A "GO TO STREAM" BUTTON
   if (horizon) {
     let button = document.getElementById("box-button-left");
     button.innerHTML = "Go to Stream &rarr;";
@@ -79,6 +84,7 @@ function LoadButtonStream() {
     button.onclick = function() {
       window.location = "stream_dashboard.html?stream="+stream;
     }
+  // OTHERWISE, IF IT IS A Z STREAM, HAVE A "GO TO COMPETITIONS" BUTTON AND A "GO TO PARENT" NAV
   } else if (stream.includes("z1") || stream.includes("z2") || stream.includes("z3")) {
     let l_button = document.getElementById("box-button-left");
     l_button.innerHTML = "&larr; Go to Competitions";
@@ -105,17 +111,22 @@ function LoadButtonStream() {
         search_idx = stream.indexOf('~', search_idx) + 1;
       }
       let button = document.getElementById("dropbtn2");
+      let button_content = document.getElementById("dropdown");
       button.innerHTML = "Go to Parent &rarr;";
       button_div.style.display = "inline-flex";
+      for (let stream of streams) {
+        let a = document.createElement("a");
+        a.href = "stream_dashboard.html?stream="+stream;
+        a.innerText = stream;
+        a.style.display = "block";
+        button_content.appendChild(a);
+      }
       button.onclick = function() {
         document.getElementById("dropdown").classList.toggle("show");
       }
-      for (let i in streams) {
-        document.getElementById("dropdown_"+i).href = "stream_dashboard.html?stream="+streams[i];
-        document.getElementById("dropdown_"+i).innerText = streams[i];
-        document.getElementById("dropdown_"+i).style.display = "block";
-      }
     }
+  // ELSE, IT IS JUST A NORMAL STREAM AKA "BART_DELAYS.JSON"
+  // SHOW A "GO TO COMPETITIONS" AND A "GO TO Z1" DROPDOWN
   } else {
     let l_button = document.getElementById("box-button-left");
     l_button.innerHTML = "&larr; Go to Competitions";
@@ -125,17 +136,19 @@ function LoadButtonStream() {
     }
     let button_div = document.getElementsByClassName("dropdown2")[0];
     let button = document.getElementById("dropbtn2");
+    let button_content = document.getElementById("dropdown");
     button.innerHTML = " &larr; Go to Z1";
     button_div.style.display = "inline-flex";
+    let new_delays = [delays[0], delays[delays.length-1]];
+    for (let delay of new_delays) {
+      let a = document.createElement("a");
+      a.href = "stream_dashboard.html?stream=z1~"+stream.slice(first, last)+"~"+delay;
+      a.innerText = delay + " sec";
+      a.style.display = "block";
+      button_content.appendChild(a);
+    }
     button.onclick = function() {
       document.getElementById("dropdown").classList.toggle("show");
-    }
-    let times = [70, 310, 910]
-    let time_words = ["1 min", "5 min", "15 min"]
-    for (let i in times) {
-      document.getElementById("dropdown_"+i).href = "stream_dashboard.html?stream=z1~"+stream.slice(first, last)+"~"+times[i];
-      document.getElementById("dropdown_"+i).innerText = time_words[i];
-      document.getElementById("dropdown_"+i).style.display = "block";
     }
   }
 }

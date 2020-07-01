@@ -16,8 +16,6 @@ async function LoadStreams() {
   var z3_streams = [];
 
   for (let key in dict) {
-    if (key.slice(-11, -5) === "~10810" || key.slice(-7, -5) === "~1" || key.slice(-7, -5) === "~5") 
-      continue;
     if ("z1~" === key.slice(0,3))
       z1_streams.push(key.slice(0,-5))
     else if ("z2~" === key.slice(0,3))

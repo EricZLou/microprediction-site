@@ -29,21 +29,23 @@ function TextDiv(item, pos_neg_color=false, round_digit, exact_color, bold) {
   return div;
 }
 
-function JoinDivs(divs, hover, card) {
+function JoinDivs(divs, hover, card, display="inline") {
   var parent = document.createElement("div");
   if (hover) {
     parent.id = "div-hover";
   }
   last = divs[divs.length-1];
   for (var child of divs) {
-    child.style.display = "inline";
+    child.style.display = display;
     parent.appendChild(child);
     child.setAttribute("name",last.textContent);
   }
+  if (!hover && !card)
+    return parent;
   parent.setAttribute("name",last.textContent);
   parent.onclick = e => {
     name = e.target.getAttribute("name");
-    var loc;
+    var loc = "";
     if (card === "Active Streams" || card === "Performance" || card === "Stream Search") {
       var horizon_idx = name.indexOf("::");
       if (horizon_idx === -1) {
@@ -62,7 +64,8 @@ function JoinDivs(divs, hover, card) {
     } else {
       throw "ERROR";
     }
-    window.location = loc;
+    if (loc)
+      window.location = loc;
   }
   return parent;
 }

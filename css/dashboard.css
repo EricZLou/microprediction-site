@@ -6,6 +6,22 @@
 
 
 /****************************************
+            LANDING PAGE
+ ****************************************/
+
+#just-getting-started {
+  text-align: center; 
+  font-weight: bold;
+  font-size: 1.3em;
+}
+#introduction-verb {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-bottom: 12px;
+}
+
+
+/****************************************
             INSIDE ROUND BOX
  ****************************************/
 
@@ -21,15 +37,15 @@ input#box-input-write-key[type=text] {
   transition-duration: 0.4s;
 }
 input#box-input-write-key[type=text]:focus {
-  border: 2px solid #7e2857;
+  border: 2px solid #00A176;
   outline-width: 0;
 }
 /* Submit button for text block */
 input#box-button-write-key {
-  background-color: #7e2857;
+  background-color: #00A176;
   padding: 12px 20px;
   margin: 8px 0;
-  border: 2px solid #7e2857;
+  border: 2px solid #00A176;
   border-radius: 8px;
   color: white;
   text-align: center;
@@ -38,7 +54,6 @@ input#box-button-write-key {
 }
 input#box-button-write-key:hover {
   cursor: pointer;
-  background-color: #8f3566;
 }
 
 /* "Invalid" text if invalid key entered */
@@ -90,6 +105,9 @@ input#box-button-write-key:hover {
 
 /* Show 1 column */
 @media screen and (max-width: 800px) {
+  .shadow-column-permanent {
+    width: 100%;
+  }
   .shadow-column {
     width: 100%;
   }

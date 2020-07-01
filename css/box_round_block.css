@@ -11,7 +11,7 @@
   padding: 2%;
   left: 0;
   width: 96%;
-  border: 2px solid #f9c809;
+  border: 2px solid #706398;
   background: white;
 }
 #box-img {
@@ -34,11 +34,11 @@
 }
 #box-info-loaded-from {
   display: none;
-  color: #7e2857;
+  color: #00A176;
   font-weight: bold;
 }
 #box-href {
-  color: #f9c809;
+  color: #706398;
   text-decoration: underline;
 }
 

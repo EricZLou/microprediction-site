@@ -16,8 +16,20 @@
 
 .shadow-column {
   float: left;
-  width: 100%;
+  width: 99%;
   padding: 0px 1%;
+}
+.shadow-column-permanent {
+  display: inline-block;
+  width: 99%;
+  padding: 0px 1%;
+}
+.shadow-column-permanent a {
+  text-decoration: none;
+  color: #00A176;
+}
+.weird {
+  width: 25%;
 }
 .third {
   width: 31%;
@@ -32,6 +44,13 @@
  ****************************************/
 
 .shadow-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  margin-bottom: 30px;
+  background-color: #f1f1f1;
+  display: hidden;
+}
+.shadow-card-permanent {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
   margin-bottom: 30px;

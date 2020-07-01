@@ -110,8 +110,9 @@ function FetchAndLoadData(request, refresh) {
     })
     .then(json => {
       if (json["animal"] !== null) {
+        document.getElementById("introduction").style.display = "none";
         resp = json;
-
+    
         AddLocalStorage();
 
         document.getElementsByClassName("dropdown2")[0].style.display = "inline-flex";
@@ -133,8 +134,10 @@ function FetchAndLoadData(request, refresh) {
       }
     })
     .catch(error => {
-      console.log("Error Caught");
-      console.log(error);
+      document.getElementById("box-bad-key").innerHTML = "Invalid";
+      setTimeout(function(){
+        document.getElementById("box-bad-key").innerHTML = '';
+      }, 2000);
     })
 }
 
@@ -172,6 +175,10 @@ async function OnLoadDashboard() {
     await FetchConfirms();
     await FetchAndLoadData(request);
   }
+  else {
+    // load some welcome text!
+    document.getElementById("introduction").style.display = "inline-block";
+  }
 }
 
 // called when the user enters a write key in the text box
@@ -208,19 +215,19 @@ function LoadOverview() {
   card.appendChild(TextDiv(resp["code"], null, null, null, bold=true));
   card.appendChild(
     JoinDivs([
-      TextDiv("Memorable ID: ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
+      TextDiv("Memorable ID: ", pos_neg_color=false, null, exact_color="#706398", bold=true),
       TextDiv(resp["animal"])
     ])
   );
   card.appendChild(
     JoinDivs([
-      TextDiv("Balance: ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
+      TextDiv("Balance: ", pos_neg_color=false, null, exact_color="#706398", bold=true),
       TextDiv(resp["balance::"+write_key+".json"], pos_neg_color=true, round_digit=4)
     ])
   );
   card.appendChild(
     JoinDivs([
-      TextDiv("Distance to Bankruptcy: ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
+      TextDiv("Distance to Bankruptcy: ", pos_neg_color=false, null, exact_color="#706398", bold=true),
       TextDiv(resp["distance_to_bankruptcy"], pos_neg_color=false, round_digit=2)
     ])
   );
@@ -294,7 +301,7 @@ function LoadConfirms() {
       }
       card.appendChild(
         JoinDivs([
-          TextDiv("SET ", pos_neg_color=false, null, exact_color="#f9c809", bold=true),
+          TextDiv("SET ", pos_neg_color=false, null, exact_color="#706398", bold=true),
           TextDiv(item["examples"][0]["name"].slice(0,-5))
         ], true, title)
       );
@@ -306,7 +313,7 @@ function LoadConfirms() {
       }
       card.appendChild(
         JoinDivs([
-          TextDiv("SUBMIT ", pos_neg_color=false, null, exact_color="#7e2857", bold=true),
+          TextDiv("SUBMIT ", pos_neg_color=false, null, exact_color="#00A176", bold=true),
           TextDiv(item["name"].slice(0,-5))
         ], true, title)
       );
@@ -318,7 +325,7 @@ function LoadConfirms() {
       }
       card.appendChild(
         JoinDivs([
-          TextDiv("TOUCH ", pos_neg_color=false, null, exact_color="#339B26", bold=true),
+          TextDiv("TOUCH ", pos_neg_color=false, null, exact_color="#C1573D", bold=true),
           TextDiv(item["name"].slice(0,-5))
         ], true, title)
       );
@@ -340,8 +347,24 @@ function LoadErrors() {
   title = "Errors";
   card = CreateCardWithTitle(title);
   var errors = resp["errors::"+write_key+".json"];
+  let idx = 1;
+  let colors = ["#f9c809", "#7e2857"];
   for (var item of errors) {
-    card.appendChild(TextDiv(item));
+    item = JSON.parse(item);
+    var divs = [];
+    for (let key in item) {
+      divs.push(
+        JoinDivs([
+          TextDiv(key, null, null, colors[idx%2], true),
+          TextDiv(": "),
+          TextDiv(item[key])
+        ])
+      );
+    }
+    card.appendChild(
+      JoinDivs(divs, true, "Errors", "block") 
+    );
+    idx++;
   }
   if (errors.length === 0) {
     card.appendChild(TextDiv("No Errors"));
@@ -353,8 +376,24 @@ function LoadWarnings() {
   title = "Warnings";
   card = CreateCardWithTitle(title);
   var warnings = resp["warnings::"+write_key+".json"];
+  let idx = 1;
+  let colors = ["#f9c809", "#7e2857"];
   for (var item of warnings) {
-    card.appendChild(TextDiv(item));
+    item = JSON.parse(item);
+    var divs = [];
+    for (let key in item) {
+      divs.push(
+        JoinDivs([
+          TextDiv(key, null, null, colors[idx%2], true),
+          TextDiv(": "),
+          TextDiv(item[key])
+        ])
+      );
+    }
+    card.appendChild(
+      JoinDivs(divs, true, "Errors", "block") 
+    );
+    idx++;
   }
   if (warnings.length === 0) {
     card.appendChild(TextDiv("No Warnings"));
