@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stream Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/stream_dashboard.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
+    <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <script src="/static/js/utils.js" type="text/javascript"></script>
+    <script src="/static/js/stream_dashboard.js" type="text/javascript"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+        $("#header-small").load("header_small.html");
+        $("#header-big").load("header_big.html");
+        $("#my-footer").load("footer.html");
+      });
+    </script>
+  </head>
+  <body onload="OnLoadStreamDashboard({{plot}}, {{all_delays}})">
+
+    <div id="header-small"></div>
+    <div id="header-big"></div>
+
+    <div id="body-dashboard-container">
+
+      <div id="space"></div>
+
+      <div id="dashboard">
+
+        <div id="dashboard-left">
+
+          <div id="box-stream-name"></div>
+          <div id="box-current-value">
+            <div id="box-red-text">Live Current Value: </div>
+            <div id="box-current-value-value"></div>
+          </div>
+
+          <div style="display:flex">
+            <button id="box-button-left"></button>
+            <button id="box-button-right"></button>
+            <div class="dropdown2">
+              <button id="dropbtn2"></button>
+              <div id="dropdown" class="dropdown-content2"></div>
+            </div>
+          </div>
+
+          <div id="box-horizon">
+            <div id="half-space"></div>
+            <div id="box-red-text">
+              Horizon:
+            </div>
+            <div id="box-horizon-button-group"></div>
+          </div>
+
+          <div id="half-space"></div>
+
+          <!-- LEADERBOARD -->
+          <div id="dashboard-title">Leaderboard</div>
+          <div id="dashboard-leaderboard"></div>
+
+        </div>
+
+        <!-- LAGGED -->
+        <div id="dashboard-middle">
+          <div id="dashboard-title">Lagged Values</div>
+          <div id="dashboard-lagged"></div>
+        </div>
+
+        <!-- GRAPHS -->
+        <div id="dashboard-right">
+          <!-- BARGRAPH -->
+          <div id="dashboard-bargraph-container">
+            <div id="dashboard-title">Data Values</div>
+            <div id="dashboard-bargraph"></div>
+          </div>
+          <!-- CDF -->
+          <div id="dashboard-cdf-container">
+            <div id="dashboard-title">CDF</div>
+            <div id="dashboard-cdf"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="space"></div>
+
+    <div id="my-footer"></div>
+
+  </body>
+</html>

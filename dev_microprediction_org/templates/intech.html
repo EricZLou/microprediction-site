@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Contests</title>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
+    <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+        $("#header-small").load("header_small.html");
+        $("#header-big").load("header_big.html");
+        $("#my-footer").load("footer.html");
+      });
+    </script>
+  </head>
+  <body>
+
+    <div id="header-small"></div>
+    <div id="header-big"></div>
+
+    <div id="body-container">
+      <div id="body-title">Intech Awards ($4,000 each month)</div>
+      <div id="body-text">For algorithms that predict marginal and joint distributions accurately, and for other contributions to
+      democratizing bespoke microprediction, <a href="https://www.intechinvestments.com/">Intech Investments</a>
+      will be making regular cash awards. We are looking to advance the state of the art in joint distribution estimation.</div>
+
+      <div id="body-subtitle">Open source equity crawler ($1000)</div>
+
+     Each month, Intech will pay cash awards of $500, $250, $150, $50 and $50 for the best crawlers that are entirely open source. Those wishing
+     to be considered for this prize might do the following:
+     <ol>
+         <li>Create a crawler following the <a href="/crawling.html">instructions</a>
+         <li>Set it loose on <a href="/sponsors">streams</a> sponsored by <i>Cellose Bobcat</i>, at minimum.
+     </ol>
+The stock market related time series are also mentioned in the <a href="gallery.html">gallery</a>. As with other Intech awards, the nom de plume <i>Cellose Bobcat</i> is you
+cue that a stream is relevant. However we encourage a cross polination between these prediction tasks and other civic data streams and you may find it easier to crawl to all streams and not
+just those sponsored by <i>Cellose Bobcat</i>.
+<p>
+      Judges discretion will be final but
+ the following criteria will weigh heavily.
+<ul>
+    <li>Ease of replication</li>
+    <li>Orthogonality to existing contributions - such as use of a library not already widely used here.
+    <li>Performance on streams sponsored by <i>Cellose Bobcat</i>. See the list of <a href="/sponsors">sponors</a></li>
+    <li>The degree to which the code and approach can easily be adopted by others.
+    <li>Cleanliness of code including documentation.
+    <li>Clarity of a short article explaining your approach.
+</ul>
+If your approach proves influential you need not score in the top five to qualify for an award.
+
+ <div id="body-subtitle">Open source joint distribution z-crawler $500</div>
+
+Each month, Intech will make awards of
+$250, $150, $50 and $50 will be made for open source contributions, similar to the above, as it relates to <i>joint distribution prediction</i> specifically.
+Joint distribution streams are denoted by z2~ and z3~ prefixes and they are generated using space filling zcurves, as per the video below.
+
+  <p></p>
+  <iframe src="https://player.vimeo.com/video/408183858" width="640" height="491" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  <p>
+
+Authors wishing to qualify for "Z" prizes should proceed as with the open source equity instructions:
+     <ol>
+         <li>Create a crawler following the <a href="/crawling.html">instructions</a> or
+         <li>Create one or more prediction algorithms folloing the <a href="/predicting.html">prediction</a> instructions.</li>
+         <li>Set it loose on <a href="/sponsors">streams</a> created by <i>Cellose Bobcat</i> that start with <b>z2~</b> or <b>z3~</b>.
+     </ol>
+It is suggested that participants study the parent time series of the z-streams.
+
+<div id="body-subtitle">Best open or closed source equity crawler ($1000)</div>
+
+Each month Intech will award prizes of $500, $250, $150, $50 and $50. Judges discretion will be final but the following criteria will weigh heavily.
+<ul>
+    <li>Performance on streams sponsored by <i>Cellose Bobcat</i>. See the list of <a href="/sponsors">sponors</a></li>
+    <li>Originality, as judged statistically.
+ </ul>
+Open source entries also qualify.
+
+ <div id="body-subtitle">Best project contributor ($500)</div>
+
+ Each month Intech will pay a cash award of $500 to a project contributor. See the <a href="/contribute.html">contributing</a> page for some ideas.
+
+ <div id="body-subtitle">Best article ($500)</div>
+
+ Each month Intech will make one award of $500 for the best article or series of articles that explain microprediction and illustrate application of the same, with the following judging criteria.
+ <ul>
+     <li> Clarity of exposition
+     <li> Readership and response
+     <li> Originality
+ </ul>
+ The use of code examples in an article using the microprediction library is recommended.
+
+ <div id="body-subtitle">Best new civic stream ($500)</div>
+
+ Each month, Intech will make an award of $500 for individuals who create and maintain streams of civic or scientific importance, with the following judging criteria:
+ <ul>
+     <li> Clarity of purpose
+     <li> Reliability
+     <li> Popularity amongst algorithms
+     <li> Potential impact
+     <li> Care in design (differencing, timing of updates relative to horizons)
+     <li> Potential accuracy lift from collective prediction
+ </ul>
+Streams should contain frequently updated data so as to quickly discern superior approaches.
+
+<div id="body-subtitle">Intech Contest General rules</div>
+
+Contributors may find the <a href="algorithm_faq.html">algorithm FAQ</a> helpful.
+<ul>
+    <li>Only one prize awarded per person, per category, per month.
+    <li>To qualify for open source awards, authors must write and post an article explaining their approach.
+    <li>To qualify for Intech awards authors must complete a <a href="/profile.html">profile</a>.
+    <li>Prizes are awarded on a calendar month basis, with the first month May 2020. Performance is not the only
+    criterion, but to the extent that it applies, leaderboards will be reset on the first day of the month at midnight GMT.
+    <li>Performance for a particular award is judged by performance of one write_key, and cannot be aggregated
+    across multiple write_keys.
+    <li>To qualify for open source awards, all code must be made open source and remain so. Awards will be paid only after code has
+    been made available for a period of one month. Algorithms made open source near the end of the calendar month may qualify
+    for an award in the next month at judges discretion - especially if they prove influential. It is strongly recommended
+    that code be made available through github and PyPI and this will factor into the assessment of reusability.</li>
+    <li>Winners will be notified using contact information provided on their <a href="/profile.html">profile</a>.
+    <li> To qualify for open source awards, software must be releases under a <i>permissive</i> license such as MIT, BSD or Apache. See (a <href="https://en.wikipedia.org/wiki/Permissive_software_license">wikipedia</href> for
+    more information).
+    <li> To receive prizemoney participants must reside in one of the countries in which Paypal operates. That list is <a href="https://www.paypal.com/ga/webapps/mpp/ua/residence-full">here</a>.
+</ul>
+Behaviour judged to be counter to the spirit of this community may result in write_key blacklisting and other measures.
+
+
+ <div id="body-subtitle">Judging panel</div>
+
+Many thanks to our volunteer judging panel.
+<ul>
+    <li> Professor <a href="http://ludkovski.faculty.pstat.ucsb.edu/">Mike Ludkovski</a></li>
+    <li> Professor<a href="https://www.iit.edu/directory/people/matthew-dixon">Matthew Dixon</a></li>
+</ul>
+Please reach out if you would be interested in serving as a judge.
+
+
+    <!-- SPACE -->
+    <div id="space"></div>
+
+    <!-- FOOTER -->
+    <div id="my-footer"></div>
+
+  </body>
+</html>

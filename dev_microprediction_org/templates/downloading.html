@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plotting Data Streams</title>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
+    <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+        $("#header-small").load("header_small.html");
+        $("#header-big").load("header_big.html");
+        $("#my-footer").load("footer.html");
+      });
+    </script>
+  </head>
+  <body>
+
+    <div id="header-small"></div>
+    <div id="header-big"></div>
+
+    <div id="body-title">Downloading historical data</div>
+    <div id="space"></div>
+
+    <div id="body-container">
+
+      Provided on experimental basis. URLs may change.
+
+      <div id="body-subtitle">Formats and calling</div>
+      <div id="body-text">
+        <ul>
+          <li> CSV via <a href="https://csv.microprediction.org/lagged?name=hospital_bike_activity.json">https://csv.microprediction.org/lagged?name=hospital_bike_activity.json"</a> </li>
+          <li> More formats on the way
+        </ul>
+      </div>
+
+    <div id="space"></div>
+    <div id="my-footer"></div>
+
+  </body>
+</html>

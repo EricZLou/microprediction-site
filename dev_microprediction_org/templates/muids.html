@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MUIDs</title>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
+    <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+        $("#header-small").load("header_small.html");
+        $("#header-big").load("header_big.html");
+        $("#my-footer").load("footer.html");
+      });
+    </script>
+  </head>
+  <body>
+
+    <div id="header-small"></div>
+    <div id="header-big"></div>
+
+    <div id="body-title">Memorable Unique Identifiers</div>
+
+    <div id="space"></div>
+    <div id="body-container">
+
+        <div id="body-subtitle">
+        Looking for login or registration?
+      </div>
+
+      <div id="body-text">
+          You don't have to register here. It is completely anonymous.
+        <p>
+
+      <div id="body-subtitle">
+        write keys
+      </div>
+        In lieu of registration and handing over emails, everyone here has a write key they make themselves. You can insert one or more write keys into the dashboard.
+        <p>
+        Write keys are <em>Hash Memorable Unique Identifiers</em> Click <a href="https://www.muid.org/create">here</a> to generate an
+        example write_key (though not a very powerful one). We created the concept of a memorable unique identifier in order to:
+      </div>
+      <ul>
+        <li> Keep things private and democratic ... nobody is asking you to pay or reveal yourself</li>
+        <li> Have one less join (the sha256 hash of your write key is your public identifier) </li>
+      </ul>
+      <p>
+        By construction Memorable Unique Identifiers are rare and that's your way of signalling that you are serious. If you are predicting, it signals that
+        you are prepared to persist. If you are soliciting predictions, it signals that you have found or engineered a live time series that is important to someone, and you intend to keep publishing it indefinitely.
+        Streams that aren't maintained get garbage collected pretty quickly, but we'd prefer not to have spurious streams to begin with.
+        <p>
+        While MUIDs discourage spurious streams, noisy predictions and nuissance crawlers, it is still up to you to the prediction commons like a public garden.
+      </p>
+      <div id="body-subtitle">
+        Video introduction
+      </div>
+
+      <iframe src="https://player.vimeo.com/video/397352413" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+      <div id="body-subtitle">
+        Minimum key difficulty settings
+      </div>
+      <div id="body-text">
+        The length of the memorable part of the hash of the key (such as Losable Flea) is known as the difficulty.
+        <ul>
+          <li> To create a stream, you will require a write_key of difficulty {{min_len}}.
+          <li> To create a copula stream (joint distributions) you will require a write_key of difficulty {{min_len}}+1.
+          <li> To supply predictions the bar is lower and currently set at a minimum difficulty of {{min_len}}-4.
+        </ul>
+        If you mine a better nom de plume than <i>Foldable Cat</i> then by all means <a href="https://www.quora.com/What-are-the-most-amusing-hash-memorable-identifiers-you-have-generated">let everyone know</a>.
+      </div>
+      <div id="body-subtitle">
+        Bankruptcy
+      </div>
+      <div id="body-text">
+        All write_keys have an associated balance. See the microprediction package <a href="https://pypi.org/project/microprediction">README</a> for a table of minimum allowed balances. A write_key whose balance falls below these thresholds can no longer be used.
+      </div>
+      <div id="body-subtitle">
+        How to get a MUID to use as a write_key
+      </div>
+      <div id="body-text">
+        Your choices are:
+        <ol>
+          <li> pip install microprediction and call microprediction.new_key()
+          <li> Run this <a href="https://raw.githubusercontent.com/microprediction/muid/master/examples/one_liner.sh">bash command</a> in terminal.</li>
+          <li> Pip install the muid package and run muid.mine()</li>
+        </ol>
+        You can also beg. Email info@microprediction.com and explain your intended use.
+      </div>
+
+      <div id="body-subtitle">
+        Start mining MUIDs with a cut and paste (mac/linux only)
+      </div>
+      <div id="body-text">
+        For convenience we copy the first choice here:
+        <pre>
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/microprediction/muid/master/examples/mine_from_venv.sh)"
+        </pre>
+        It may take a day or so to produce a MUID with difficulty {{min_len}}. If it doesn't work then perhaps you need Python 3 and/or a package manager:
+        <pre>
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew install python
+        </pre>
+        then return to the mining script.
+      </div>
+      <div id="body-subtitle">
+        Miner not working?
+      </div>
+      Log an <a href="https://github.com/microprediction/muid/issues">issue</a> on Github please.
+      <div id="body-subtitle">
+        How to validate a key
+      </div>
+      <div id="body-text">
+        Use the validate API call at <a href="https://www.muid.org">MUID.org</a>. For example <a href="https://www.muid.org/validate/fb74baf628d43892020d803614f91f29">www.muid.org/validate/fb74baf628d43892020d803614f91f29</a>.
+      </div>
+    </div>
+
+    <div id="space"></div>
+    <div id="my-footer"></div>
+
+  </body>
+</html>
