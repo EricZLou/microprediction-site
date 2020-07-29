@@ -7,6 +7,7 @@ import plotly.graph_objs as go
 import pandas as pd
 
 from constants import API_URL, BASE_URL
+from redis_config import REDIS_CONFIG
 
 app = Flask(__name__,static_folder="static")
 CORS(app)
@@ -43,11 +44,6 @@ MICRO_CONVENTIONS = {"base_url":BASE_URL,
                    "delays":[70,310,910,3555],
                    "min_balance":-1,
                    "min_len":12}
-
-# Hosted on redis labs
-REDIS_CONFIG = {"password":"REthunD3r1",
-                "host":"redis-19020.c9156.us-east-1-mz.ec2.cloud.rlrcp.com",
-                "port":"19020"}
 
 OTHER_REDIZ_CONFIG = { "delay_grace":30,# promises expiry after delivery
                  "lagged_len":10000,
