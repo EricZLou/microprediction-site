@@ -1,0 +1,49 @@
+body {
+  background: rgb(126 40 87);
+}
+.video-container {
+  position: relative;
+}
+video {
+  height: auto;
+  vertical-align: middle;
+  width: 100%;
+}
+.center-container{
+  background: rgba(0,0,0,0);
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.challenge {
+}
+.surtitle {
+   z-index: 9;
+}
+
+h1 {
+  color: rgb(249,200,9);
+  font-family: 'Nobile', sans-serif;
+  font-size: 9vw;
+  text-align: center;
+}
+h3 {
+  color: black;
+  font-family: 'Nobile', sans-serif;
+  font-size: 2vw;
+  text-align: right;
+}
+
+main {
+  margin: 0 auto;
+  width: 80%;
+}
+
+p {
+  color: rgb(249,200,9);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.7rem;
+}

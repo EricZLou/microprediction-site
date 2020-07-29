@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Making a Prediction</title>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
+    <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+        $("#header-small").load("header_small.html");
+        $("#header-big").load("header_big.html");
+        $("#my-footer").load("footer.html");
+      });
+    </script>
+  </head>
+  <body>
+
+    <div id="header-small"></div>
+    <div id="header-big"></div>
+
+    <div id="body-title">Submitting predictions</div>
+    <div id="space"></div>
+
+    <div id="body-container">
+      <div id="body-text">To <i>predict</i> is to supply a vector of {{num_predictions}} scenarios intended to represent possible future values
+      taken by a source of live data (to <a href="crawling.html"><i>crawl</i></a> is to do this frequently for a number of different streams).</div>
+      <div id="body-subtitle">0. Install microprediction</div>
+      <pre>
+    pip install microprediction
+      </pre>
+      <div id="body-text">
+        See the <a href="https://pypi.org/project/microprediction/">microprediction package</a> on PyPI.
+      </div>
+
+      <div id="body-subtitle">1. Get a key</div>
+      <div id="body-text">
+        Two options:
+        <ol>
+          <li> Click <a href="https://www.muid.org/create">here</a> for an instant key.</li>
+          <li> Or see <a href="muids.html">muid instructions</a> for ways to mine a more rare key.</li>
+        </ol>
+        Rare keys prolong your algorithm's life. See the table of bankruptcy levels in the <a href="https://pypi.org/project/microprediction/">README</a>.
+      </div>
+      <div id="body-subtitle">2. Choose a live data stream</div>
+      <div id="body-text">
+        If you are new, see the <a href="gallery.html">gallery</a> for some ideas. To programmatically select a suitable stream you
+        might find the following types of JSON page useful:
+        <ul>
+          <li> Stream listings such as <a href="https://www.microprediction.com/budgets/">budget</a>, <a href="https://www.microprediction.com/volumes/">volumes</a> or
+          <a href="https://www.microprediction.com/sponsors/">sponsors</a>.</li>
+          <li> Stream value histories <a href="/live/lagged::cop.json">live/lagged::cop.json</a> or <a href="/live/lagged_values::cop.json">live/lagged_values::cop.json</a>.</li>
+        </ul>
+      </div>
+      <div id="body-subtitle">3. Choose a horizon</div>
+      <div id="body-text">
+          You can supply a delay parameter chosen from the vector of delays in <a href="/config.json">config.json</a>.
+      </div>
+      <div id="body-subtitle">4. Use the MicroWriter to submit scenarios</div>
+      You can directly POST scenarios using the API, but Python folks will probably prefer:
+      <pre>
+    from microprediction import MicroWriter
+    mw = MicroWriter(write_key="744fd0bec96112c9c5ce92ee904e1a4e")  # Substitute in your own key
+    scenarios = [ i*0.001 for i in range(mw.num_predictions) ]
+    mw.submit(name='cop.json',values=scenarios)
+      </pre>
+      <div id="body-subtitle">5. Examine performance</div>
+      Use your write_key to log into the <a href="dashboard.html">dashboard</a>. To manage
+      things programmatically the following types of calls may help.
+      <pre>su
+    mw.get_performance()['cop.json']
+    mw.get_leaderboard(name='cop.json')
+    mw.get_overall()
+    mw.get_home()
+    mw.get_errors()
+    mw.get_transactions()
+      </pre>
+      <div id="body-subtitle">6, 7, 8... Improve it</div>
+      <div id="body-text">This we leave in your capable hands. Here is a start:</div>
+      <pre>
+    mw.get_lagged_values(name='cop.json')
+    mw.get_summary(name='cop.json')
+      </pre>
+     You are advised to read the MicroWriter <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/writer.py">code</a> and package readme.
+     Also likely to be of interest is the MicroCrawler <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/crawler.py">code</a>. There is
+        a series of <a href="https://www.linkedin.com/in/petercotton/detail/recent-activity/posts/">articles</a> on LinkedIn covering topics such as crawler
+        <a href="https://www.linkedin.com/pulse/economical-statistics-how-modify-prediction-crawlers-cotton-phd/">navigation</a>, predicting <a href="https://www.linkedin.com/pulse/helicopulas-peter-cotton-phd/">bivariate</a> streams
+        and <a hef="https://www.linkedin.com/pulse/short-introduction-z-streams-peter-cotton-phd/">overview</a> of the mechanics of prediction and reward.
+
+
+      <div id="body-subtitle">Submission API</div>
+      <div id="body-text">You can also make a PUT request to submit/STREAM_NAME, with values in the payload as a comma separated list. See the <a href="https://devapi.microprediction.org">API</a>.</div>
+      <div id="body-subtitle">Questions?</div>
+      <div id="body-text">Try the <a href="predicting_faq.html">Predicting FAQ</a>.</div>
+      <div id="body-subtitle">Crawling</div>
+      <div id="body-text">See <a href="crawling.html">crawling</a>.</div>
+
+    </div>
+
+    <div id="space"></div>
+    <div id="my-footer"></div>
+
+  </body>
+</html>

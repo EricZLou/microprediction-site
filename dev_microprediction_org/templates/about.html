@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About</title>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
+    <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+        $("#header-small").load("header_small.html");
+        $("#header-big").load("header_big.html");
+        $("#my-footer").load("footer.html");
+      });
+    </script>
+  </head>
+  <body>
+
+    <div id="header-small"></div>
+    <div id="header-big"></div>
+
+    <div id="body-title">About</div>
+    <div id="space"></div>
+
+    <div id="body-container">
+      <div id="body-bold-remark">The world needs cost-effective, democratic, accessible <em>microprediction</em>.</div>
+        <div id="body-text">
+            And if everyone copies this prototypical site, it might happen (did you know it is open source?)
+        </div>
+
+      <div id="body-subtitle">What's microprediction you say?</div>
+      <div id="body-text">
+        The act of making thousands of predictions of the same type over and over again. Microprediction can
+        <ul>
+            <li> Clean and enrich live data </li>
+            <li> Alert you to outliers and anomalies </li>
+            <li> Provide you short term forecasts </li>
+            <li> Identify patterns in model residuals </li>
+        </ul>
+        Moreover it can be combined with patterns from Control Theory and Reinforcement Learning to
+        <ul>
+            <li> Engineer low cost but tailored intelligent applications </li>
+        </ul>
+        Often enough <i>AI is microprediction</i>, albeit bundled with other mathematical or application logic.
+      </div>
+      <div id="body-subtitle">The API</div>
+      <div id="body-text">
+        The provided microprediction <a href="/">API</a> (or Python <a href="https://pypi.org/project/microprediction/">client</a>) seeks to addresses
+        the high cost of bespoke data science - at least as it applies to microprediction.
+        <ol>
+          <li> You <a href="/publishing.html">publish</a> a live data value. </li>
+          <li> The sequence of these values gets <a href="/cumulative?name=cop.json&delay=910">predicted</a> by a swarm of algorithms. </li>
+          <li> Anyone can write a <a href="/crawling.html">crawler</a> that tries to predict many different streams. </li>
+        </ol>
+        Microprediction APIs make it easy to:
+        <ul>
+          <li> Separate the act of microprediction from other application logic. </li>
+          <li> Invite contribution from other people and machines </li>
+          <li> Benefit from other data you may never have considered. </li>
+          <li> Benchmark your work for research purposes. </li>
+          <li> Automate ongoing performance analysis. </li>
+        </ul>
+        Perhaps, this is how our future AI overlords will solve realtime decision making and control problems.
+      </div>
+      <div id="body-subtitle">A community effort</div>
+      <div id="body-text">
+        Seamless data and algorithm reuse is accomplished here.
+      </div>
+      <ol>
+        <li> Algorithms <a href="crawling.html">crawl</a> from one stream to another. </li>
+        <li> Algorithms discover causal links between streams. </li>
+      </ol>
+      Let's say your store is predicting sales and I'm optimizing an HVAC system across the street. Your feature space and mine probably have a lot in common.
+      <div id="body-subtitle">Help us create a microprediction network</div>
+      <p>
+        Microprediction is inherently hard because it is a search in the space of the world's data and models. It is the kind of thing that is likely to be solved by a complex network, not individual work. We think microprediction must be solved <em>collectively</em> by <em>everyone</em> or not very well at all.
+      </p>
+      <p>
+        Allow us one analogy. Document search was pretty lame before the web. Cold start artisan data scientists trying to organize the world's feature spaces might as well be librarians trying
+        to replace the internet with the Dewey decimal system.
+      </p>
+      <p>
+        Driving down the cost of microprediction, and thus AI, requires more powerful, ruthless orchestrating mechanisms.
+        Help us evolve low cost supply chains for microprediction. Help
+        us build a lattice of nowcasts of numbers of civic, commercial and scientific significance that, like the web itself, can grow to become an indispensible resource.
+        Perhaps over time that feature lattice can become as essential
+        to realtime operations as the web is to commerce today.
+      </p>
+      <p>
+        Right now we are making microprediction easy for individuals, organizations and small to medium size enterprises who cannot afford teams of data scientists.
+        In the long term, perhaps this can be the beginning of a more profound realtime, collective intelligence.
+      </p>
+      <p>
+        It's worth a shot.
+      </p>
+      <div id="body-bold-remark">
+        Please consider <a href="contribute.html">contributing</a> in some way (and check the footer for cash incentives).
+      </div>
+    </div>
+
+    <div id="space"></div>
+
+    <div id="my-footer"></div>
+
+  </body>
+</html>

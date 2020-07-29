@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Publishing</title>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
+    <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+        $("#header-small").load("header_small.html");
+        $("#header-big").load("header_big.html");
+        $("#my-footer").load("footer.html");
+      });
+    </script>
+  </head>
+  <body>
+
+    <div id="header-small"></div>
+    <div id="header-big"></div>
+
+    <div id="body-title">Crowd prediction</div>
+    <div id="space"></div>
+
+    <div id="body-container">
+      <div id="body-bold-remark">How to publish a stream of live data</div>
+      <div id="body-text">
+        Do you want a swarm of fiercely competiting algorithms to predict your data? State of the art algorithms will find your stream of data and start predicting it. They even find relevant data. The quintessential use is live, public, frequently updated data. However there are many ways to use the API for private prediction if you are sneaky.
+      </div>
+      <div id="body-subtitle">1. Install Microprediction</div>
+    <pre>
+    pip install microprediction
+    </pre>
+      <div id="body-text">
+        See <a href="https://pypi.org/project/microprediction/">microprediction</a> on PyPI.
+      </div>
+      <div id="body-subtitle">2. Locate or create a live source of data</div>
+      <div id="body-text">
+        Take a look at this <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/live/nyc_traffic.py">example</a>. There is a function that returns a single number - the current speed of traffic on the Verrazano Narrows bridge.
+        We will assume you have at your disposal a function like the following:
+      </div>
+    <pre>
+    def verrazano_speed():
+      return fetch_live_data(key=VERRAZANO, field="speed")
+    </pre>
+    <div id="body-subtitle">3. Publish the live data periodically</div>
+    <div id="body-text">
+      Take a look at this <a href="https://github.com/microprediction/microprediction/blob/master/feed_examples_live/traffic_live.py">example</a> of a script that uses the <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/writer.py">MicroWriter</a> to publish the speed every 20 minutes. You could do something even simpler such as:
+    </div>
+    <pre>
+    from microprediction import MicroWriter
+    import time
+    mw = MicroWriter(write_key="1586411f3ca74133384e2e33a474bdc3")   # <-- More on this in a moment
+    while True:
+      mw.set(name='mytrafficstream.json',value=verrazano_speed())
+      time.sleep(60*20)
+    </pre>
+
+    You may also wish to take advantage of some convenience classes provided in <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/polling.py">polling.py</a> and
+    <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/looping.py">looping.py</a> which make it very easy to poll data or run data in a loop. See the
+ <a href="https://github.com/microprediction/microprediction/tree/master/polling_examples">polling_examples</a> directory. For instance the following code uses the ChangePoll class
+ to send changes in traffic speed to a stream similar to <a href="http://dev.microprediction.org/stream_dashboard.html?stream=traffic_speed_deltas">this stream</a>.
+
+    <pre>
+        from microprediction.polling import ChangePoll
+        from microprediction import new_key
+        from microprediction.live import verrazano_speed
+
+        try:
+            from microprediction.config_private import TRAFFIC_WRITE_KEY
+        except:
+            TRAFFIC_WRITE_KEY = new_key(difficulty=12)  # Could take a while!
+
+        if __name__=="__main__":
+            changes = ChangePoll(write_key=TRAFFIC_WRITE_KEY,
+                                name='verrazano_speed_change.json',
+                            interval=1,
+                            func=verrazano_speed)
+            changes.run()
+    </pre>
+   This code will poll every minute.
+
+
+<!--    <div id="body-subtitle"><strike>4. Wait months while primadonnas you hired promise to deliver models</strike></div>
+    Watch your in-house data scientists writhe as they try to justify why they aren't already sending model residuals here.
+
+    -->
+    <div id="body-subtitle">4. Let it run! </div>
+
+    One suggestion for maintaining a long running process at little cost is provided in this <a href="https://www.linkedin.com/pulse/fundamental-theorem-epidemiology-peter-cotton-phd/">article</a>, though of course there are
+    many ways to accomplish it.
+
+    <div id="body-subtitle">5. See the results </div>
+
+     Insert your write key into the <a href="https://www.microprediction.org/dashboard.html">dashboard</a>
+
+
+    <div id="body-subtitle">How do I get a write_key?</div>
+    <div id="body-text">As you see in the examples above, you must possess a <em>hash-memorable write_key</em> of difficulty at least {{min_len}} in order to publish.
+    Your options:</div>
+    <ul>
+      <li> new_key(difficulty=12)
+      <li> Can't wait? Email info@microprediction.org and explain the stream you have in mind.</li>
+      <li> More detail? See <a href="/muids.html">MUID instructions</a>
+    </ul>
+    <div id="body-subtitle">Questions?</div>
+    <div id="body-text">Try the <a href="publishing_faq.html">Publishing FAQ</a>.</div>
+    </div>
+
+    <div id="space"></div>
+    <div id="my-footer"></div>
+
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Confirmations</title>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/confirmations_and_transactions.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/box_round_block.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
+    <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <script src="/static/js/utils.js" type="text/javascript"></script>
+    <script src="/static/js/confirmations.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+        $("#header-small").load("header_small.html");
+        $("#header-big").load("header_big.html");
+        $("#my-footer").load("footer.html");
+      });
+    </script>
+  </head>
+  <body onload="OnLoadConfirmations()">
+
+    <div id="header-small"></div>
+    <div id="header-big"></div>
+
+    <div id="body-container">
+
+      <div id="space"></div>
+
+      <div id="box-round-block">
+        <div id="box-left">
+          <div id="box-title">Confirmations</div>
+          <div id="box-description">
+            All of your most recent confirmations.
+            <div id="box-info-loaded-from">
+              Information loaded from <a href="" id="box-href">/confirms/{write_key}/</a>
+            </div>
+          </div>
+        </div>
+        <div id="box-right">
+          <!-- <img src="sources/forecast.jpg"> -->
+        </div>
+      </div>
+
+      <div id="space"></div>
+      <div id="confirmations"></div>
+      <div id="see-more">
+        <button id="see-more-button" onclick="LoadConfirmations()">Load More</button>
+        <div id="see-more-text" style="display:none;">End of confirmation history.</div>
+      </div>
+
+      <div>
+        <a href="#body-container" id="back-to-top-button">Go to top</a>
+      </div>
+
+    </div>
+
+    <div id="space"></div>
+    <div id="my-footer"></div>
+
+  </body>
+</html>

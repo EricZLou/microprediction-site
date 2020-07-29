@@ -1,0 +1,510 @@
+/********************************************************
+ ********************************************************
+                    GERERAL FORMATS
+ ********************************************************
+ ********************************************************/
+
+
+body {
+  margin: 0 auto;
+  font-family: 'Montserrat', sans-serif;
+  overflow-wrap: break-word;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+a:link {
+  color: #00A176;
+  text-decoration: none;
+}
+a:visited {
+  color: #00A176;
+  text-decoration: none;
+}
+a:hover {
+  color: #00A176;
+  text-decoration: underline;
+}
+a:active {
+  color: #00A176;
+  text-decoration: none;
+}
+table, th, td {
+  border-collapse: collapse;
+  color: black;
+  width: 100%;
+  text-align: left;
+}
+table {
+  table-layout: fixed;
+}
+th, td {
+  padding: 20px;
+  vertical-align: top;
+  border: 1px solid black;
+}
+ol.body-list {
+  color: black;
+  font-size: 1.0em;
+  list-style-type: upper-roman;
+}
+ul.body-list {
+  color: black;
+  font-size: 1.0em;
+  list-style: circle;
+}
+li {
+  padding-left: 10px;
+  font-weight: normal;
+}
+button:focus {
+  outline:0;
+}
+
+
+
+/********************************************************
+ ********************************************************
+                      BODY CONTENT
+ ********************************************************
+ ********************************************************/
+
+
+#body-container {
+  position: relative;
+  left: 10%;
+  width: 80%;
+  height: 100%;
+}
+#body-title {
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 2em;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #b7c3c9;
+  padding-left: 10%;
+}
+#body-subtitle {
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.3em;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+#body-bold-remark {
+  color: black;
+  font-size: 1.0em;
+  font-weight: bold;
+  padding: 20px 0px;
+}
+
+#body-text {
+  color: black;
+  font-size: 1.0em;
+  font-weight: normal;
+}
+
+
+
+/********************************************************
+ ********************************************************
+                    DEFAULT TABLE
+ ********************************************************
+ ********************************************************/
+
+
+/****************************************
+            REGULAR SIZE
+            (leaderboard.html)
+ ****************************************/
+
+.default-table {
+  color: white;
+  text-align: center;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.default-table tr:first-child {
+  background-color: #00A176;
+}
+.default-table tr:first-child th {
+  color: #FFF;
+}
+.default-table tr {
+  background-color: white;
+}
+.default-table tr:nth-child(2) > td {
+  border-top-width: 0;
+}
+.default-table th, .default-table td {
+  margin: 0;
+  padding: 0.5em 1.5em;
+  text-align: center;
+  border-width: 1px 0;
+  border-color: #00A176;
+  border-style: solid;
+}
+.default-table th {
+  border-bottom-width: 4px;
+  border: none;
+}
+.default-table td:nth-child(n+2) {
+  border-left-width: 4px;
+  border-color: #00A176;
+  border-style: solid;
+}
+
+
+/****************************************
+          CONDENSED SIZE
+          (stream_dashboard.html)
+ ****************************************/
+
+.default-table-small th, .default-table-small td {
+  padding: 3px 10px;
+}
+
+
+
+/********************************************************
+ ********************************************************
+                    DYNAMIC HEADER
+ ********************************************************
+ ********************************************************/
+
+
+/* NORMAL HEADER */
+@media screen {
+  #header-small { display: none; }
+  #header-big { display: block; }
+}
+/* DROPDOWN HEADER */
+@media screen and (max-width: 1200px) {
+  #header-big { display: none; }
+  #header-small { display: block; }
+}
+
+
+/****************************************
+            NORMAL HEADER
+ ****************************************/
+
+#header-container-big {
+  background-color: #00A176;
+  padding-left: 5%;
+  padding-right: 0%;
+}
+.header {
+  height: 80px;
+}
+
+/* Microprediction Name */
+#header-name {
+  float: left;
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFF;
+  height: 80px;
+  line-height: 80px;
+  padding-right: 5%;
+  display: inline;
+}
+
+.header a {
+  float: left;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  height: 80px;
+  line-height: 80px;
+  padding: 0px 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.dropdown {
+  float: left;
+  overflow: hidden;
+  padding: 0px 5px;
+}
+.dropdown .dropbtn {
+  font-size: 14px;
+  border: none;
+  outline: none;
+  color: white;
+  height: 80px;
+  line-height: 80px;
+  padding: 0px 15px;
+  background-color: inherit;
+  font-family: inherit;
+  font-weight: bold;
+  margin: 0;
+}
+.header a:hover, .dropdown:hover .dropbtn:hover {
+  color: #A9B0B7;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  float: none;
+  color: black;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  height: 80px;
+}
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: inherit;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Go to API button */
+#header-api {
+  float: right;
+  background-color: #706398;
+  padding: 0px 10px;
+  transition-duration: 0.4s;
+}
+#header-api a {
+  color: #FFF;
+  font-weight: bold;
+  background-color: inherit;
+}
+
+
+/****************************************
+            DROPDOWN HEADER
+ ****************************************/
+
+/* Styling for Dropdown Header comes from Bootstrap */
+#navbar-section {
+  color: white;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+
+
+/********************************************************
+ ********************************************************
+                        FOOTER
+ ********************************************************
+ ********************************************************/
+
+#footer-container {
+  height: 35vh;
+  position: relative;
+  background-color: #A9B0B7;
+}
+#footer {
+  height: 100%;
+  position: relative;
+  left: 15%;
+  width: 70%;
+}
+#footer-left, #footer-right {
+  width: 45%;
+  float: left;
+}
+#footer-links a {
+  color: white;
+  padding-right: 20px;
+}
+@media screen and (max-width: 800px) {
+  #footer-left, #footer-right {
+    width: 100%;
+  }
+}
+
+
+
+
+/********************************************************
+ ********************************************************
+                  PERSISTENT BUTTONS
+ ********************************************************
+ ********************************************************/
+
+
+button#persistent-dashboard-button {
+  position: fixed;
+  top: 220px;
+  height: 140px;
+  left: 0px;
+  min-width: 40px;
+  width: 3%;
+  max-width: 60px;
+  background-color: #00A176;
+  border-radius: 0px 15px 0px 0px;
+  border: none;
+  border-bottom: 1px solid #FFF;
+  text-align: center;
+  outline:none;
+  margin: 0;
+  padding: 0;
+  transition-duration: 0.4s;
+  z-index: 1;
+}
+button#persistent-leaderboard-button {
+  position: fixed;
+  top: 360px;
+  height: 150px;
+  left: 0px;
+  min-width: 40px;
+  width: 3%;
+  max-width: 60px;
+  background-color: #00A176;
+  border-radius: 0px 0px 15px 0px;
+  border: none;
+  border-top: 1px solid #FFF;
+  text-align: center;
+  outline:none;
+  margin: 0;
+  padding: 0;
+  transition-duration: 0.4s;
+  z-index: 1;
+}
+button#persistent-dashboard-button:hover, 
+button#persistent-leaderboard-button:hover {
+  background-color: #706398;
+  cursor: pointer;
+}
+#persistent-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  display: inline-block;
+  color: #FFF;
+  font-size: 1.2em;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+}
+
+#mobile-persistent-buttons {
+  display: none;
+}
+#mobile-link {
+  color: #FFF;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 10px;  
+  display: block;
+}
+
+
+@media screen and (max-width: 475px) {
+  button#persistent-dashboard-button {
+    display: none;
+  }
+  button#persistent-leaderboard-button {
+    display: none;
+  }
+  #mobile-persistent-buttons {
+    display: inline-block;
+  }
+}
+
+
+
+/********************************************************
+ ********************************************************
+                      WHITE SPACES
+ ********************************************************
+ ********************************************************/
+
+#space {
+  height: 10vh;
+  position: relative;
+}
+#half-space {
+  height: 5vh;
+  position: relative;
+}
+
+
+
+/********************************************************
+ ********************************************************
+                          MISC
+ ********************************************************
+ ********************************************************/
+
+
+#dashboard-title {
+  color: black;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5em;
+  width: 100%;
+  padding-bottom: 2%;
+}
+
+/* "See More" div under Active Streams 
+   and stream_search divs */
+#div-hover:hover {
+  background: white;
+  cursor: pointer;
+}
+
+/****************************************
+            DROPDOWN BUTTON
+ ****************************************/
+
+.dropdown2 {
+  flex: 1;
+  display: none;
+}
+#dropbtn2 {
+  background-color: #00A176;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 0.9em;
+  transition-duration: 0.4s;
+  width: 100%;
+}
+#dropbtn2:hover, #dropbtn2:focus {
+  outline: 0;
+}
+.dropdown-content2 {
+  margin-top: 40px;
+  border-radius: 8px;
+  display: none;
+  position: absolute;
+  background-color: #00A176;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  text-align: center;
+  z-index: 1;
+}
+.dropdown-content2 a {
+  color: white;
+  font-size: 0.9em;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content2 .log-out {
+  color: #FFF;
+  background-color: #706398;
+  font-size: 0.9em;
+  font-weight: bold;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.show {display: block;}
