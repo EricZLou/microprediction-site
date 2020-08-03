@@ -565,7 +565,7 @@ button#persistent-leaderboard-button:hover {
 }
 .dropdown-content .log-out {
   color: #FFF;
-  background-color: var(--theme-purple);
+  background-color: var(--theme-red);
   font-size: 0.9em;
   font-weight: bold;
   padding: 12px 16px;
