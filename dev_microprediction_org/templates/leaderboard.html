@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Leaderboard</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/leaderboard.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/shadow_card.css" type="text/css">
     <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
     <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
@@ -22,18 +24,20 @@
       });
     </script>
   </head>
-  <body onload="LoadLeaderboard()">
+  <body onload="LoadLeaderboardNav()">
 
     <div id="header-small"></div>
     <div id="header-big"></div>
 
-    <div id="body-title">Overall Leaderboard</div>
+    <div id="body-title">Leaderboards</div>
 
     <div id="body-container">
       <div id="space"></div>
-      <div id="leaderboard"></div>
+      <div class="shadow-card" id="leaderboards-container">
+        <div class="sidenav" id="leaderboards-sidenav"></div>
+        <div id="leaderboard"></div>
+      </div>
     </div>
-
 
     <div id="space"></div>
     <div id="my-footer"></div>

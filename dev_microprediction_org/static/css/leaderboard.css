@@ -1,0 +1,15 @@
+#leaderboards-container {
+  display: flex;
+}
+
+@media screen and (max-width: 800px) {
+  #leaderboards-container { display: inline-block; }
+}
+
+#leaderboards-sidenav {
+  flex: 2;
+}
+
+#leaderboard {
+  flex: 8;
+}
