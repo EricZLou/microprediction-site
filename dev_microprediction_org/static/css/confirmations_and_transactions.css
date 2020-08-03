@@ -11,7 +11,8 @@
   position:fixed; 
   right: 3%; 
   bottom: 5%;
-  background-color: #706398;
+  background-color: var(--theme-purple);
+  text-decoration: none;
   padding: 0.5% 0.5%;
   border-radius: 8px;
   color: #FFF;
@@ -27,7 +28,7 @@ a#back-to-top-button:hover {
   text-align: center;
 }
 button#see-more-button {
-  background-color: #00A176;
+  background-color: var(--theme-green);
   border: none;
   border-radius: 8px;
   color: white;
@@ -44,6 +45,7 @@ button#see-more-button:hover {
   color: black;
   font-size: 1.0em;
   font-weight: normal;
+  display: none;
 }
 
 /* SMALL ROUND BOX WITH SHADOW */

@@ -1,7 +1,18 @@
 const home_url = "/";
 
+
 function Round(item, round_digit) {
   return Math.round((Math.pow(10,round_digit) * item)) / Math.pow(10,round_digit);
+}
+
+function CssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name);
+}
+
+async function get(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
 }
 
 function TextDiv(item, pos_neg_color=false, round_digit, exact_color, bold) {
@@ -78,34 +89,6 @@ function GetUrlVars() {
   return vars;
 }
 
-function Fetch(request) {
-  var value;
-
-  return new Promise(function(resolve, reject) {
-    fetch(request)
-      .then(response => {
-        if (response.status !== 200) {
-          throw "Response status is not 200: " + response.status;
-        } else {
-          return response.json();
-        }
-      })
-      .then(json => {
-        value = json;
-      })
-      .catch(error => {
-        console.log("Erorr Caught");
-        console.log(error);
-      })
-    .then(() => {
-      if (!value) {
-        value = "null";
-      }
-      resolve(value)
-    })
-  });
-}
-
 function UnixToHMS(unix) {
   var date = new Date(unix * 1000);
   var month = date.getMonth() + 1;
@@ -117,8 +100,8 @@ function UnixToHMS(unix) {
 }
 
 window.onclick = function(event) {
-  if (!event.target.matches('#dropbtn2')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content2");
+  if (!event.target.matches('#dropdown-button')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];

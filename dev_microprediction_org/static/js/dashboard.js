@@ -1,15 +1,17 @@
 const base_url = home_url;
 
 
-var write_key;
-var resp;
-var all_active_streams;
-var all_confirms;
+let write_key;
+let resp;
+let all_active_streams;
+let all_confirms;
+let announcements = [];
+let announcement_idx = 0;
 
 
 function LoadAll() {
-  let button = document.getElementById("dropbtn2");
-  let dropdown = document.getElementById("dropdown");
+  let button = document.getElementById("dropdown-button");
+  let dropdown = document.getElementsByClassName("dropdown-content")[0];
   button.onclick = function() {
     dropdown.classList.toggle("show");
   }
@@ -115,7 +117,7 @@ function FetchAndLoadData(request, refresh) {
     
         AddLocalStorage();
 
-        document.getElementsByClassName("dropdown2")[0].style.display = "inline-flex";
+        document.getElementsByClassName("dropdown-container")[0].style.display = "inline-flex";
         let name = "home/" + write_key;
         document.getElementById("box-href").href = name;
         document.getElementById("box-info-loaded-from").style.display = "inline-block";
@@ -179,6 +181,7 @@ async function OnLoadDashboard() {
     // load some welcome text!
     document.getElementById("introduction").style.display = "inline-block";
   }
+  await LoadAnnouncements();
 }
 
 // called when the user enters a write key in the text box
@@ -197,13 +200,51 @@ async function LoadDashboard() {
   }
 }
 
+// Store all of them the first time the page is loaded
+async function LoadAnnouncements() {
+  const url = base_url + "announcements/";
+  const announcements_dict = await get(url);
+  for (let ann in announcements_dict) {
+    announcements.push([ann, announcements_dict[ann]]);
+  }
+  if (announcements.length === 0)
+    return;
+  ShowAnnouncement(announcement_idx);   // default set to 0
+  if (announcements.length > 1)
+    document.getElementById("right-arrow").style.visibility = "visible";
+}
+
+function ShowAnnouncement() {
+  let ann_div = document.getElementById("announcements-text");
+  const message = announcements[announcement_idx][0];
+  const link = announcements[announcement_idx][1];
+  ann_div.innerHTML = "ANNOUNCEMENT: <a href="+link+" target='_blank'>(Read More)</a> " + message;
+}
+
+function AnnouncementPrev() {
+  if (announcement_idx === 1) {
+    document.getElementById("left-arrow").style.visibility = "hidden";
+  }
+  document.getElementById("right-arrow").style.visibility = "visible";
+  announcement_idx--;
+  ShowAnnouncement();
+}
+
+function AnnouncementNext() {
+  if (announcement_idx === announcements.length - 2) {
+    document.getElementById("right-arrow").style.visibility = "hidden";
+  }
+  document.getElementById("left-arrow").style.visibility = "visible";
+  announcement_idx++;
+  ShowAnnouncement();
+}
 
 // HELPER FUNCTION
 function CreateCardWithTitle(title) {
   let card = document.createElement("div");
   card.className = "shadow-card";
   var title_div = document.createElement("div");
-  title_div.id = "dashboard-title";
+  title_div.classList.add("dashboard-title");
   title_div.innerHTML = title;
   card.appendChild(title_div);
   return card;
@@ -215,19 +256,19 @@ function LoadOverview() {
   card.appendChild(TextDiv(resp["code"], null, null, null, bold=true));
   card.appendChild(
     JoinDivs([
-      TextDiv("Memorable ID: ", pos_neg_color=false, null, exact_color="#706398", bold=true),
+      TextDiv("Memorable ID: ", pos_neg_color=false, null, exact_color=CssVar('--theme-purple'), bold=true),
       TextDiv(resp["animal"])
     ])
   );
   card.appendChild(
     JoinDivs([
-      TextDiv("Balance: ", pos_neg_color=false, null, exact_color="#706398", bold=true),
+      TextDiv("Balance: ", pos_neg_color=false, null, exact_color=CssVar('--theme-purple'), bold=true),
       TextDiv(resp["balance::"+write_key+".json"], pos_neg_color=true, round_digit=4)
     ])
   );
   card.appendChild(
     JoinDivs([
-      TextDiv("Distance to Bankruptcy: ", pos_neg_color=false, null, exact_color="#706398", bold=true),
+      TextDiv("Distance to Bankruptcy: ", pos_neg_color=false, null, exact_color=CssVar('--theme-purple'), bold=true),
       TextDiv(resp["distance_to_bankruptcy"], pos_neg_color=false, round_digit=2)
     ])
   );
@@ -309,7 +350,7 @@ function LoadConfirms() {
       }
       card.appendChild(
         JoinDivs([
-          TextDiv("SET ", pos_neg_color=false, null, exact_color="#706398", bold=true),
+          TextDiv("SET ", pos_neg_color=false, null, exact_color=CssVar('--theme-purple'), bold=true),
           TextDiv(item["examples"][0]["name"].slice(0,-5))
         ], true, title)
       );
@@ -321,7 +362,7 @@ function LoadConfirms() {
       }
       card.appendChild(
         JoinDivs([
-          TextDiv("SUBMIT ", pos_neg_color=false, null, exact_color="#00A176", bold=true),
+          TextDiv("SUBMIT ", pos_neg_color=false, null, exact_color=CssVar('--theme-green'), bold=true),
           TextDiv(item["name"].slice(0,-5))
         ], true, title)
       );
@@ -333,7 +374,7 @@ function LoadConfirms() {
       }
       card.appendChild(
         JoinDivs([
-          TextDiv("TOUCH ", pos_neg_color=false, null, exact_color="#C1573D", bold=true),
+          TextDiv("TOUCH ", pos_neg_color=false, null, exact_color=CssVar('--theme-red'), bold=true),
           TextDiv(item["name"].slice(0,-5))
         ], true, title)
       );

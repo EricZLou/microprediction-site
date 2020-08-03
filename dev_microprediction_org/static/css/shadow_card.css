@@ -26,7 +26,7 @@
 }
 .shadow-column-permanent a {
   text-decoration: none;
-  color: #00A176;
+  color: var(--theme-green);
 }
 .weird {
   width: 25%;

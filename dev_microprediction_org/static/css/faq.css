@@ -8,7 +8,7 @@
   margin-bottom: 1%;
 }
 #faq-q {
-  color: #00A176;
+  color: var(--theme-green);
   font-size: 1.0em;
   font-weight: bold;
   display: inline;
@@ -18,7 +18,7 @@
   margin-bottom: 3%;
 }
 #faq-a {
-  color: #C1573D;
+  color: var(--theme-red);
   font-size: 1.0em;
   font-weight: bold;
   display: inline;

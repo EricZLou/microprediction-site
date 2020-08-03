@@ -3,17 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Leaderboard</title>
+    <title>General FAQ</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/faq.css" type="text/css">
     <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
     <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="/static/js/utils.js" type="text/javascript"></script>
-    <script src="/static/js/leaderboard.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="/static/js/utils.js" type="text/javascript"></script>
+    <script src="/static/js/faq.js" type="text/javascript"></script>
+    <script src="/static/js/general_faq_questions.js" type="text/javascript"></script>
     <script>
       $(function() {
         $("#header-small").load("header_small.html");
@@ -22,18 +24,20 @@
       });
     </script>
   </head>
-  <body onload="LoadLeaderboard()">
+  <body onload = "RenderFAQ()">
 
     <div id="header-small"></div>
     <div id="header-big"></div>
 
-    <div id="body-title">Overall Leaderboard</div>
-
+    <div id="body-title">
+      General FAQ: The Basics
+    </div>
     <div id="body-container">
       <div id="space"></div>
-      <div id="leaderboard"></div>
+      <div id="body-bold-remark">Check out the <a href="predicting_faq.html">FAQ for predicting data</a> and the <a href="publishing_faq.html">FAQ for publishing live data</a>.</div>
+      <div id="body-bold-remark">For more information, see the <a href='https://www.linkedin.com/in/petercotton/detail/recent-activity/posts/'>LinkedIn articles</a> and <a href='https://github.com/microprediction/microprediction'>Github documentation</a>.</div>
+      <div id="faq-container"></div>
     </div>
-
 
     <div id="space"></div>
     <div id="my-footer"></div>

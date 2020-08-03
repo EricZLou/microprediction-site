@@ -1,19 +1,17 @@
 const base_url = home_url;
 
-var full_div;
+let full_div;
 
 async function LoadStreams(delays) {
-  var url = base_url + "budgets/";
-  const request = new Request(url, {method: 'GET'});
-
-  var dict = await Fetch(request);
+  const url = base_url + "budgets/";
+  const dict = await get(url);
   full_div = document.getElementById("stream-search");
 
-  var all_streams = [];
-  var reg_streams = [];
-  var z1_streams = [];
-  var z2_streams = [];
-  var z3_streams = [];
+  let all_streams = [];
+  let reg_streams = [];
+  let z1_streams = [];
+  let z2_streams = [];
+  let z3_streams = [];
 
   for (let key in dict) {
     key = key.slice(0,-5)   // remove ".json"
@@ -31,15 +29,17 @@ async function LoadStreams(delays) {
     else if ("z3~" === key.slice(0,3))
       z3_streams.push(key);
   }
-  for (stream of reg_streams)
+
+  for (let stream of reg_streams)
     all_streams.push(stream);
-  for (stream of z1_streams)
+  for (let stream of z1_streams)
     all_streams.push(stream);
-  for (stream of z2_streams)
+  for (let stream of z2_streams)
     all_streams.push(stream);
-  for (stream of z3_streams)
+  for (let stream of z3_streams)
     all_streams.push(stream);
-  for (stream of all_streams) {
+
+  for (let stream of all_streams) {
     full_div.appendChild(
       JoinDivs([TextDiv(stream)], true, "Stream Search")
     );

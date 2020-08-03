@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Contests</title>
+    <title>Publishing FAQ</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/faq.css" type="text/css">
     <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
     <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
@@ -12,6 +13,9 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="/static/js/utils.js" type="text/javascript"></script>
+    <script src="/static/js/faq.js" type="text/javascript"></script>
+    <script src="/static/js/publishing_faq_questions.js" type="text/javascript"></script>
     <script>
       $(function() {
         $("#header-small").load("header_small.html");
@@ -20,26 +24,23 @@
       });
     </script>
   </head>
-  <body>
+  <body onload = "RenderFAQ({{min_len}})">
 
     <div id="header-small"></div>
     <div id="header-big"></div>
 
-    <div id="body-title">Contests and Sponsors</div>
+    <div id="body-title">
+      Publishing FAQ: Using the Crowd for Microprediction
+    </div>
     <div id="space"></div>
-
     <div id="body-container">
-      <div id="body-bold-remark">Reach out if you would like to sponsor collective microprediction.</div>
 
-      <div id="body-subtitle">Micropredictions, LLC</div>
-      Micropredictions, LLC makes monthly awards to high performing crawlers, but also to individuals who advance the vision of democratic, open microprediction.
-      <!--See <a href="/intech.html">Intech Awards</a>.-->
+      <div id="body-bold-remark">Check out the <a href="general_faq.html">general FAQ</a> first.</div>
+      <div id="faq-container"></div>
+
     </div>
 
-    <!-- SPACE -->
     <div id="space"></div>
-
-    <!-- FOOTER -->
     <div id="my-footer"></div>
 
   </body>

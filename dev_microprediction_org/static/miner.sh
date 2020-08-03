@@ -1,1 +1,0 @@
-/bin/bash -c "$(curl -fsSL https://www.microprediction.com/mine.sh)"

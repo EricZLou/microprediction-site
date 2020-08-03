@@ -9,4 +9,4 @@ Instructions for setup:
 
 NOTE: flask app will not run without `redis_config.py`
 
-CONTACT: info@microprediction.com; ericzlou@gmail.com
+CONTACT: info@microprediction.org; ericzlou@gmail.com

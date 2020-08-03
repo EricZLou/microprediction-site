@@ -1,5 +1,28 @@
 /********************************************************
  ********************************************************
+                    CONSTANTS
+                    Used in HTML and JS pages
+ ********************************************************
+ ********************************************************/
+
+
+:root {
+  /*****************
+   THEME COLORS
+   *****************/
+  --theme-green: #00A176;
+  --theme-purple: #706398;
+  --theme-red: #C1573D;
+  --light-green: #22d4a4;
+  --light-purple: #9c89d6;
+  --light-red: #db8069;
+  --bg-gray: #b7c3c9;
+}
+
+
+
+/********************************************************
+ ********************************************************
                     GERERAL FORMATS
  ********************************************************
  ********************************************************/
@@ -14,35 +37,25 @@ img {
   max-width: 100%;
   max-height: 100%;
 }
-a:link {
-  color: #00A176;
-  text-decoration: none;
-}
-a:visited {
-  color: #00A176;
-  text-decoration: none;
+a:link, a:visited, a:hover {
+  color: var(--theme-green);
 }
 a:hover {
-  color: #00A176;
   text-decoration: underline;
 }
-a:active {
-  color: #00A176;
-  text-decoration: none;
-}
 table, th, td {
-  border-collapse: collapse;
-  color: black;
+  /*border-collapse: collapse;*/
+  /*color: black;*/
   width: 100%;
-  text-align: left;
+  /*text-align: left;*/
 }
 table {
   table-layout: fixed;
 }
 th, td {
-  padding: 20px;
-  vertical-align: top;
-  border: 1px solid black;
+  /*padding: 20px;*/
+  /*vertical-align: top;*/
+  /*border: 1px solid black;*/
 }
 ol.body-list {
   color: black;
@@ -84,7 +97,7 @@ button:focus {
   font-size: 2em;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #b7c3c9;
+  background-color: var(--bg-gray);
   padding-left: 10%;
 }
 #body-subtitle {
@@ -129,7 +142,7 @@ button:focus {
   border-collapse: collapse;
 }
 .default-table tr:first-child {
-  background-color: #00A176;
+  background-color: var(--theme-green);
 }
 .default-table tr:first-child th {
   color: #FFF;
@@ -145,7 +158,7 @@ button:focus {
   padding: 0.5em 1.5em;
   text-align: center;
   border-width: 1px 0;
-  border-color: #00A176;
+  border-color: var(--theme-green);
   border-style: solid;
 }
 .default-table th {
@@ -154,8 +167,18 @@ button:focus {
 }
 .default-table td:nth-child(n+2) {
   border-left-width: 4px;
-  border-color: #00A176;
+  border-color: var(--theme-green);
   border-style: solid;
+}
+
+.leaderboard-table tr th:nth-child(1) {
+  width: 20%;
+}
+.leaderboard-table tr th:nth-child(2) {
+  width: 50%;
+}
+.leaderboard-table tr th:nth-child(3) {
+  width: 30%;
 }
 
 
@@ -194,7 +217,7 @@ button:focus {
  ****************************************/
 
 #header-container-big {
-  background-color: #00A176;
+  background-color: var(--theme-green);
   padding-left: 5%;
   padding-right: 0%;
 }
@@ -225,12 +248,12 @@ button:focus {
   text-decoration: none;
   font-weight: bold;
 }
-.dropdown {
+.header-dropdown {
   float: left;
   overflow: hidden;
   padding: 0px 5px;
 }
-.dropdown .dropbtn {
+.header-dropdown .header-dropbtn {
   font-size: 14px;
   border: none;
   outline: none;
@@ -243,10 +266,10 @@ button:focus {
   font-weight: bold;
   margin: 0;
 }
-.header a:hover, .dropdown:hover .dropbtn:hover {
+.header a:hover, .header-dropdown:hover .header-dropbtn:hover {
   color: #A9B0B7;
 }
-.dropdown-content {
+.header-dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -254,7 +277,7 @@ button:focus {
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
-.dropdown-content a {
+.header-dropdown-content a {
   float: none;
   color: black;
   text-decoration: none;
@@ -262,18 +285,18 @@ button:focus {
   text-align: left;
   height: 80px;
 }
-.dropdown-content a:hover {
+.header-dropdown-content a:hover {
   background-color: #ddd;
   color: inherit;
 }
-.dropdown:hover .dropdown-content {
+.header-dropdown:hover .header-dropdown-content {
   display: block;
 }
 
 /* Go to API button */
 #header-api {
   float: right;
-  background-color: #706398;
+  background-color: var(--theme-purple);
   padding: 0px 10px;
   transition-duration: 0.4s;
 }
@@ -306,8 +329,9 @@ button:focus {
 
 #footer-container {
   height: 35vh;
+  padding-top: 10vh;
   position: relative;
-  background-color: #A9B0B7;
+  background-color: var(--bg-gray);
 }
 #footer {
   height: 100%;
@@ -319,9 +343,12 @@ button:focus {
   width: 45%;
   float: left;
 }
+#footer-links p {
+  color: var(--theme-green); 
+  font-weight:bold;
+}
 #footer-links a {
   color: white;
-  padding-right: 20px;
 }
 @media screen and (max-width: 800px) {
   #footer-left, #footer-right {
@@ -347,7 +374,7 @@ button#persistent-dashboard-button {
   min-width: 40px;
   width: 3%;
   max-width: 60px;
-  background-color: #00A176;
+  background-color: var(--theme-green);
   border-radius: 0px 15px 0px 0px;
   border: none;
   border-bottom: 1px solid #FFF;
@@ -366,7 +393,7 @@ button#persistent-leaderboard-button {
   min-width: 40px;
   width: 3%;
   max-width: 60px;
-  background-color: #00A176;
+  background-color: var(--theme-green);
   border-radius: 0px 0px 15px 0px;
   border: none;
   border-top: 1px solid #FFF;
@@ -379,7 +406,7 @@ button#persistent-leaderboard-button {
 }
 button#persistent-dashboard-button:hover, 
 button#persistent-leaderboard-button:hover {
-  background-color: #706398;
+  background-color: var(--theme-purple);
   cursor: pointer;
 }
 #persistent-text {
@@ -442,7 +469,7 @@ button#persistent-leaderboard-button:hover {
  ********************************************************/
 
 
-#dashboard-title {
+.dashboard-title {
   color: black;
   text-align: center;
   font-weight: bold;
@@ -452,7 +479,7 @@ button#persistent-leaderboard-button:hover {
 }
 
 /* "See More" div under Active Streams 
-   and stream_search divs */
+   and browse_streams divs */
 #div-hover:hover {
   background: white;
   cursor: pointer;
@@ -462,45 +489,52 @@ button#persistent-leaderboard-button:hover {
             DROPDOWN BUTTON
  ****************************************/
 
-.dropdown2 {
+.dropdown-container {
   flex: 1;
   display: none;
-}
-#dropbtn2 {
-  background-color: #00A176;
-  border-radius: 8px;
+  background-color: var(--theme-green);
   border: none;
+  border-radius: 8px;
   color: white;
   padding: 12px 16px;
   font-size: 0.9em;
   transition-duration: 0.4s;
-  width: 100%;
 }
-#dropbtn2:hover, #dropbtn2:focus {
+.dropdown-container #dropdown-button {
+  border: 2px solid var(--theme-green);
+}
+#dropdown-button {
+  background-color: var(--theme-green);
+  border: none;
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+#dropdown-button:hover, #dropdown-button:focus {
   outline: 0;
 }
-.dropdown-content2 {
+.dropdown-content {
   margin-top: 40px;
   border-radius: 8px;
   display: none;
   position: absolute;
-  background-color: #00A176;
-  min-width: 160px;
+  background-color: var(--theme-purple);
+  min-width: 140px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   text-align: center;
   z-index: 1;
 }
-.dropdown-content2 a {
+.dropdown-content a {
   color: white;
   font-size: 0.9em;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
-.dropdown-content2 .log-out {
+.dropdown-content .log-out {
   color: #FFF;
-  background-color: #706398;
+  background-color: var(--theme-purple);
   font-size: 0.9em;
   font-weight: bold;
   padding: 12px 16px;

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crawling</title>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
+    <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+        $("#header-small").load("header_small.html");
+        $("#header-big").load("header_big.html");
+        $("#my-footer").load("footer.html");
+      });
+    </script>
+  </head>
+  <body>
+
+    <div id="header-small"></div>
+    <div id="header-big"></div>
+
+    <div id="body-title">Crawling</div>
+    <div id="space"></div>
+
+    <div id="body-container">
+
+      <div id="body-bold-remark">It is easy to write programs that look for streams to predict and submit scenarios.</div>
+
+      <!-- STEP 0 -->
+      <div id="body-subtitle">0. Install microprediction</div>
+      <pre>
+        pip install microprediction
+      </pre>
+      <div id="body-text">
+        Or see <a href="https://pypi.org/project/microprediction/" target="_blank">microprediction</a> from PyPI.
+      </div>
+
+      <!-- STEP 1 -->
+      <div id="body-subtitle">1. Get a key</div>
+      <div id="body-text">
+        See <a href="muids.html">muid instructions</a>. Note especially the table of bankruptcy levels in the microprediction package's <a href="https://pypi.org/project/microprediction/" target="_blank">README</a>. At minimum, visit <a href="https://www.muid.org/create" target="_blank">muid.org</a> to create a minimal strength MUID for prediction submission.
+      </div>
+
+      <!-- STEP 2 -->
+      <div id="body-subtitle">2. Run the default crawler</div>
+      <pre>
+        from microprediction import SimpleCrawler
+        crawler = MicroCrawler(write_key="YOUR_WRITE_KEY_HERE")
+        crawler.run()
+      </pre>
+    
+      <!-- STEP 3 -->
+      <div id="body-subtitle">3. Watch it run</div>
+      You can use the <a href="/dashboard.html">dashboard</a> to monitor performance. Performance is also available via the API, or Python client:
+      <pre>
+       mw.get_performance()
+       mw.get_overall()
+       mw.get_home()
+       mw.get_errors()
+       mw.get_transactions()
+      </pre>
+      You are advised to read the MicroWriter <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/writer.py" target="_blank">code</a>, the MicroCrawler <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/crawler.py" target="_blank">code</a> and package readme. There is also a series of <a href="https://www.linkedin.com/in/petercotton/detail/recent-activity/posts/" target="_blank">articles</a> on LinkedIn covering topics such as crawler <a href="https://www.linkedin.com/pulse/economical-statistics-how-modify-prediction-crawlers-cotton-phd/" target="_blank">navigation</a>, predicting <a href="https://www.linkedin.com/pulse/helicopulas-peter-cotton-phd/" target="_blank">bivariate</a> streams and <a hef="https://www.linkedin.com/pulse/short-introduction-z-streams-peter-cotton-phd/" target="_blank">overview</a> of the mechanics of prediction and reward.
+
+      <!-- STEP 4 -->
+      <div id="body-subtitle"> 4. Improve it </div>
+      <div id="body-text">
+        Take a look at how this <a href="https://github.com/microprediction/microprediction/blob/master/crawler_examples/simple.py" target="_blank">example</a> modifies the all important <b>sample</b> method of the crawler. Crawlers provide samples, which can be interpreted as percentile estimates. Any time series model can be shoe-horned into a crawler. It is worth reviewing this <a href="https://www.linkedin.com/pulse/short-introduction-z-streams-peter-cotton-phd/" target="_blank">article</a> also that explains the mechanics of this site and scoring.
+      </div>
+      <p></p>
+      <div id="body-text">
+        You can also read this <a href="https://www.linkedin.com/pulse/economical-statistics-how-modify-prediction-crawlers-cotton-phd/" target="_blank">article</a> showing
+        how to change the nagivation of the crawler, thus determining which streams it visits and how far ahead it decides to try to predict.
+      </div>
+
+      <!-- STEP 5 -->
+      <div id="body-subtitle"> 5. Let it go further afield </div>
+      <div id="body-text">
+        If you derive from MicroCrawler rather than SimpleCrawler you can visit zscore, bivariate and trivariate streams. The z1~ streams are described in the <a href="https://www.linkedin.com/pulse/short-introduction-z-streams-peter-cotton-phd/" target="_blank">article</a> mentioned above. You can also read this <a href="https://www.linkedin.com/pulse/helicopulas-peter-cotton-phd/" target="_blank">article</a> about bivariate prediction of badminton, or this <a href="https://www.linkedin.com/pulse/call-contributions-copula-contest-where-carefully-can-cotton-phd/" target="_blank">article</a> about trivariate prediction of crytocurrencies to understand the z2~ and z3~ streams you see.
+      </div>
+
+      <div id="body-subtitle"> 6. Let it run indefinitely </div>
+      <div id="body-text">
+        There are many ways to do this. One is suggested towards the end of this <a href="https://www.linkedin.com/pulse/you-love-your-algorithm-set-free-peter-cotton-phd/" target="_blank">article</a>.
+      </div>
+
+    </div>
+
+    <div id="space"></div>
+    <div id="my-footer"></div>
+
+  </body>
+</html>

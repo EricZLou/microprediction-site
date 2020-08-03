@@ -6,9 +6,50 @@
 
 
 /****************************************
+            ANNOUNCEMENT
+ ****************************************/
+#announcements {
+  background-color: var(--theme-red);
+  margin: 8px 0;
+  color: white;
+  font-weight: bold;
+  display: flex;
+}
+.announcements-arrow {
+  background-color: var(--theme-red);
+  padding: 10px 0;
+  flex: 1;
+  transition-duration: 0.2s;
+  border: none;
+  color: white;
+  visibility: hidden
+}
+.announcements-arrow:hover {
+  background-color: var(--light-red);
+}
+#announcements-text {
+  margin: 10px 3%;
+  flex: 14;
+  font-size: 0.9em;
+}
+#announcements a {
+  color: white;
+}
+
+
+/****************************************
             LANDING PAGE
  ****************************************/
 
+#introduction {
+  display:none; 
+  width:100%; 
+  margin:auto;
+}
+#introduction-row {
+  text-align:center; 
+  font-size:1em;
+}
 #just-getting-started {
   text-align: center; 
   font-weight: bold;
@@ -28,7 +69,7 @@
 /* Text block to enter write_key */
 input#box-input-write-key[type=text] {
   width: 40%;
-  padding: 12px 20px;
+  padding: 12px 16px;
   margin: 8px 0;
   display: inline-block;
   border: 2px solid #ccc;
@@ -37,15 +78,15 @@ input#box-input-write-key[type=text] {
   transition-duration: 0.4s;
 }
 input#box-input-write-key[type=text]:focus {
-  border: 2px solid #00A176;
+  border: 2px solid var(--theme-green);
   outline-width: 0;
 }
 /* Submit button for text block */
 input#box-button-write-key {
-  background-color: #00A176;
-  padding: 12px 20px;
+  background-color: var(--theme-green);
+  padding: 12px 16px;
   margin: 8px 0;
-  border: 2px solid #00A176;
+  border: 2px solid var(--theme-green);
   border-radius: 8px;
   color: white;
   text-align: center;

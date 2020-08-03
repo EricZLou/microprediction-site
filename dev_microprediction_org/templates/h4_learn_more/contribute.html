@@ -3,18 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Search for Streams</title>
+    <title>How to Contribute</title>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/stream_search.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/shadow_card.css" type="text/css">
     <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
     <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="/static/js/utils.js" type="text/javascript"></script>
-    <script src="/static/js/stream_search.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script>
       $(function() {
@@ -24,19 +20,28 @@
       });
     </script>
   </head>
-  <body onload="LoadStreams({{delays}})">
+  <body>
 
     <div id="header-small"></div>
     <div id="header-big"></div>
 
-    <div id="body-title">Search for Streams</div>
-    <div id="body-container">
-      <div id="space"></div>
-      <div class="shadow-card">
-        <div id="stream-search"></div>
-      </div>
-    </div>
+    <div id="body-title">how to contribute</div>
+    <div id="space"></div>
 
+    <div id="body-container">
+      <div id="body-bold-remark">
+        Here are some suggestions if you would like to help.
+      </div>
+
+        <ol>
+            <li> Start <a href="crawling.html">crawling</a> with thoughtful, well designed statistical algorithms.</li>
+            <li> Produce a live, clean JSON source of data of civic significance that changes at least five times an hour.</li>
+            <li> Write an R client. </li>
+            <li> Write a Julia client.</li>
+            <li> Make other suggestions by creating a <a href="https://github.com/microprediction/microprediction/issues" target="_blank">github issue</a>.</li>
+            <li> Share or provide thoughtful feedback on <a href="https://www.linkedin.com/in/petercotton/detail/recent-activity/posts/" target="_blank">articles</a> on the topic to help get the word out.</li>
+        </ol>
+    </div>
 
     <div id="space"></div>
     <div id="my-footer"></div>

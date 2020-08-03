@@ -39,7 +39,7 @@
   display: inline-flex;
   flex-direction: column;
   border-radius: 6px;
-  border: 2px solid #706398;
+  border: 2px solid var(--theme-purple);
   padding: 20px 20px;
   margin-right: 2%;
 }
@@ -57,7 +57,7 @@
   display: none;
 }
 #box-current-value-value {
-  color: #00A176;
+  color: var(--theme-green);
   font-size: 1.2em;
   font-weight: bold;
   height: 40px;
@@ -70,19 +70,10 @@
   overflow-x: hidden;
   flex: 1;
 }
-.leaderboard-table tr th:nth-child(1) {
-  width: 20%;
-}
-.leaderboard-table tr th:nth-child(2) {
-  width: 50%;
-}
-.leaderboard-table tr th:nth-child(3) {
-  width: 30%;
-}
 
 /* Red text: "Horizon" and "Live Current Value" */
 #box-red-text {
-  color: #706398;
+  color: var(--theme-purple);
   font-size: 1.1em;
   font-weight: bold;
   padding-right: 10px;
@@ -98,8 +89,12 @@
                   "go to stream"
  ****************************************/
 
+#box-button-container {
+  display: flex;
+}
+
 button#box-button-left, button#box-button-right {
-  background-color: #00A176;
+  background-color: var(--theme-green);
   border: none;
   border-radius: 8px;
   color: white;
@@ -122,12 +117,12 @@ button#box-button-left:hover, button#box-button-right:hover {
 #box-horizon {
   display: none;
 }
-#box-horizon-button-group {
+.box-horizon-button-group {
   display: flex;
 }
-#box-horizon-button-group button {
-  background-color: #00A176;
-  border: 2px solid #00A176;
+.box-horizon-button-group button {
+  background-color: var(--theme-green);
+  border: 2px solid var(--theme-green);
   color: white;
   border-radius: 15px;
   margin: 0px 4px;
@@ -137,6 +132,11 @@ button#box-button-left:hover, button#box-button-right:hover {
   transition-duration: 0.4s;
   flex: 1;
 }
+.box-horizon-button-group .current {
+  background-color: var(--theme-purple);
+  font-weight: bold;
+}
+
 
 
 

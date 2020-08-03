@@ -44,12 +44,12 @@
             <div id="box-current-value-value"></div>
           </div>
 
-          <div style="display:flex">
+          <div id="box-button-container">
             <button id="box-button-left"></button>
             <button id="box-button-right"></button>
-            <div class="dropdown2">
-              <button id="dropbtn2"></button>
-              <div id="dropdown" class="dropdown-content2"></div>
+            <div class="dropdown-container">
+              <button id="dropdown-button"></button>
+              <div id="dropdown" class="dropdown-content"></div>
             </div>
           </div>
 
@@ -58,34 +58,28 @@
             <div id="box-red-text">
               Horizon:
             </div>
-            <div id="box-horizon-button-group"></div>
+            <div class="box-horizon-button-group"></div>
           </div>
 
           <div id="half-space"></div>
 
           <!-- LEADERBOARD -->
-          <div id="dashboard-title">Leaderboard</div>
+          <div class="dashboard-title">Leaderboard</div>
           <div id="dashboard-leaderboard"></div>
 
         </div>
 
         <!-- LAGGED -->
         <div id="dashboard-middle">
-          <div id="dashboard-title">Lagged Values</div>
+          <div class="dashboard-title">Lagged Values</div>
           <div id="dashboard-lagged"></div>
         </div>
 
-        <!-- GRAPHS -->
+        <!-- GRAPH -->
         <div id="dashboard-right">
-          <!-- BARGRAPH -->
-          <div id="dashboard-bargraph-container">
-            <div id="dashboard-title">Data Values</div>
-            <div id="dashboard-bargraph"></div>
-          </div>
-          <!-- CDF -->
-          <div id="dashboard-cdf-container">
-            <div id="dashboard-title">CDF</div>
-            <div id="dashboard-cdf"></div>
+          <div id="dashboard-graph-container">
+            <div class="dashboard-title graph-name"></div>
+            <div id="dashboard-graph"></div>
           </div>
         </div>
 
