@@ -16,15 +16,11 @@
   display: flex;
 }
 .announcements-arrow {
-  background-color: var(--theme-red);
   padding: 10px 0;
   flex: 1;
-  transition-duration: 0.2s;
   border: none;
   color: white;
-  visibility: hidden
-}
-.announcements-arrow:hover {
+  visibility: hidden;
   background-color: var(--light-red);
 }
 #announcements-text {
