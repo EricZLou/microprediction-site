@@ -516,6 +516,16 @@ button#persistent-leaderboard-button:hover {
   cursor: pointer;
 }
 
+.mini-button {
+  color: white;
+  background-color: var(--theme-red);
+  border: none;
+  border-radius: 20px;
+}
+.mini-button:hover {
+  cursor: pointer;
+}
+
 /****************************************
             DROPDOWN BUTTON
  ****************************************/

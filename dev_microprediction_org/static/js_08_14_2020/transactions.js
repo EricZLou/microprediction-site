@@ -123,8 +123,9 @@ async function CreateTransactDiv(item) {
   }
   // TRANSFER KEYS TRANSACTION
   else {
-    let amount_given_div = TextDiv("-"+item["given"], true, null, null, true);
-    let amount_received_div = TextDiv(item["received"], true, null, null, true);
+    // TODO: Figure out these values.
+    let amount_given_div = TextDiv(item["given"], true, null, null, true);
+    // let amount_received_div = TextDiv(item["received"], true, null, null, true);
     let max_given_div = TextDiv(item["max_to_give"], false, 2, null, true);
     let max_received_div = TextDiv(item["max_to_receive"], false, 2, null, true);
     let source_div = TextDiv(item["source"]);
@@ -134,9 +135,9 @@ async function CreateTransactDiv(item) {
     transact_div.appendChild(
       JoinDivs([
         TextDiv("Gave ", null, null, "#7e2857", true),
-        amount_given_div,
-        TextDiv(" and received ", null, null, "#7e2857", true),
-        amount_received_div
+        amount_given_div
+        // TextDiv(" and received ", null, null, "#7e2857", true),
+        // amount_received_div
       ])
     );
     transact_div.appendChild(

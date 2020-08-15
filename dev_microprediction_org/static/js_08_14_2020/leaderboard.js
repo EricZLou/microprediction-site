@@ -1,4 +1,5 @@
 const base_url = home_url;
+const repos_kwarg = "?with_repos=True";
 let leaderboard_dict = {};
 let nav_divs = [];
 
@@ -40,8 +41,34 @@ async function LoadLeaderboardNav() {
   LoadLeaderboard(base_url + "overall/");
 }
 
+function PopulateRow(row, place, name, points, repo) {
+  let new_cell = row.insertCell(-1);
+  new_cell.appendChild(TextDiv(place));
+  new_cell = row.insertCell(-1);
+  let divs = [];
+  // Use "Carryover" instead of "null"
+  if (name === "null")
+    divs.push(TextDiv("Carryover"));
+  else
+    divs.push(TextDiv(name));
+  if (repo) {
+    let repo_div = document.createElement("button");
+    repo_div.classList.add("mini-button");
+    // repo_div.href = repo;
+    repo_div.onclick = function() {
+      window.open(repo);
+    };
+    repo_div.innerText = "Code";
+    divs.push(TextDiv(" "));
+    divs.push(repo_div);
+  }
+  new_cell.appendChild(JoinDivs(divs));
+  new_cell = row.insertCell(-1);
+  new_cell.appendChild(TextDiv(points, true, 3));
+}
+
 async function LoadLeaderboard(url) {
-  let dict = await get(url);
+  let dict = await get(url + repos_kwarg);
   let leaderboard_div = document.getElementById("leaderboard");
   leaderboard_div.innerHTML = "";
 
@@ -65,21 +92,15 @@ async function LoadLeaderboard(url) {
     header_cell.innerHTML = head;
     new_row.appendChild(header_cell);
   }
+
   let place = 1;
 
   // All subsequent rows
   for (let name in dict) {
+    let points = dict[name][0];
+    let repo = dict[name][1];
     let new_row = table.insertRow(-1);
-    let new_cell = new_row.insertCell(-1);
-    new_cell.appendChild(TextDiv(place));
-    new_cell = new_row.insertCell(-1);
-    // Use "Carryover" instead of "null"
-    if (name === "null")
-      new_cell.appendChild(TextDiv("Carryover"));
-    else
-      new_cell.appendChild(TextDiv(name));
-    new_cell = new_row.insertCell(-1);
-    new_cell.appendChild(TextDiv(dict[name], true, 3));
+    PopulateRow(new_row, place, name, points, repo);
     place = place + 1;
   }
 

@@ -28,6 +28,11 @@ def home_reroute():
 
 @app.route('/<path:url>', strict_slashes=False)
 def reroute(url):
+    # Hack because the API for `overall` ends in a `/`. So, flask does not
+    # capture any of the `?with_repos=True` part.
+    with_repos = request.args.get('with_repos')
+    if with_repos:
+        return redirect(API_URL + url + "?with_repos=True", code=302)
     return redirect(API_URL + url, code=302)
 
 # --------------------------------------------------------------------------

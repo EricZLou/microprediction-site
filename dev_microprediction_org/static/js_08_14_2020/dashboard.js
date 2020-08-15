@@ -5,6 +5,7 @@ let write_key;
 let resp;
 let all_active_streams;
 let all_confirms;
+let repo;
 let announcements = [];
 let announcement_idx = 0;
 
@@ -159,6 +160,11 @@ function FetchConfirms() {
     .then(json => {all_confirms = json;})
 }
 
+async function FetchRepository() {
+  var url = base_url+"repository/"+write_key;
+  repo = await get(url);
+}
+
 // called immediately when the page loads
 async function OnLoadDashboard() {
   var text_box = document.getElementById("box-input-write-key");
@@ -175,6 +181,7 @@ async function OnLoadDashboard() {
     const request = new Request(url, {method: 'GET'});
     await FetchActiveStreams();
     await FetchConfirms();
+    await FetchRepository();
     await FetchAndLoadData(request);
   }
   else {
@@ -253,7 +260,18 @@ function CreateCardWithTitle(title) {
 
 function LoadOverview() {
   let card = CreateCardWithTitle("Overview");
-  card.appendChild(TextDiv(resp["code"], null, null, null, bold=true));
+  let divs = [TextDiv(resp["code"], null, null, null, bold=true)];
+  if (repo) {
+    let repo_div = document.createElement("button");
+    repo_div.classList.add("mini-button");
+    repo_div.onclick = function() {
+      window.open(repo);
+    };
+    repo_div.innerText = "Code";
+    divs.push(TextDiv(" "));
+    divs.push(repo_div);
+  }
+  card.appendChild(JoinDivs(divs));
   card.appendChild(
     JoinDivs([
       TextDiv("Memorable ID: ", pos_neg_color=false, null, exact_color=CssVar('--theme-purple'), bold=true),
