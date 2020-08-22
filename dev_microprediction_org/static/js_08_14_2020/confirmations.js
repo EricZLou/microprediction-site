@@ -50,10 +50,10 @@ function CreateConfirmDiv(item) {
   if (item["operation"] === "set") {
     confirm_div.appendChild(
       JoinDivs([
-        TextDiv("SET ", pos_neg_color=false, null, exact_color=CssVar('--theme-purple'), bold=true),
-        TextDiv(item["examples"][0]["name"].slice(0,-5), null, null, null, bold=true),
+        BoldDiv("SET ", "color:var(--theme-purple);"),
+        BoldDiv(item["examples"][0]["name"].slice(0,-5)),
         TextDiv(" to "),
-        TextDiv(Math.round((Math.pow(10,8) * item["examples"][0]["value"])) / Math.pow(10,8), null, null, null, bold=true)
+        BoldDiv(item["examples"][0]["value"], null, {"round":8})
       ])
     );
     confirm_div.appendChild(TextDiv("Percentiles:"));
@@ -64,7 +64,7 @@ function CreateConfirmDiv(item) {
         JoinDivs([
           TextDiv(key),
           TextDiv(": "),
-          TextDiv(Math.round((Math.pow(10,5) * item["examples"][0]["percentiles"][key])) / Math.pow(10,5))
+          TextDiv(item["examples"][0]["percentiles"][key], null, {"round":5})
         ])
       );
     }
@@ -77,10 +77,10 @@ function CreateConfirmDiv(item) {
   } else if (item["operation"] === "submit") {
     confirm_div.appendChild(
       JoinDivs([
-        TextDiv("SUBMIT ", pos_neg_color=false, null, exact_color=CssVar('--theme-green'), bold=true),
-        TextDiv(item["name"].slice(0,-5), null, null, null, bold=true),
+        BoldDiv("SUBMIT ", "color:var(--theme-green);"),
+        BoldDiv(item["name"].slice(0,-5)),
         TextDiv(" with "),
-        TextDiv(item["delays"], null, null, null, bold=true),
+        BoldDiv(item["delays"]),
         TextDiv(" delay")
       ])
     );
@@ -89,7 +89,7 @@ function CreateConfirmDiv(item) {
     values_div.id = "confirm-values";
     for (let value of item["some_values"]) {
       values_div.appendChild(
-        TextDiv(Math.round((Math.pow(10,5) * value)) / Math.pow(10,5))
+        TextDiv(value, null, {"round":5})
       );
     }
     confirm_div.appendChild(values_div);
@@ -100,8 +100,8 @@ function CreateConfirmDiv(item) {
   } else if (item["operation"] === "touch") {
     confirm_div.appendChild(
       JoinDivs([
-        TextDiv("TOUCH ", pos_neg_color=false, null, exact_color=CssVar('--theme-red'), bold=true),
-        TextDiv(item["name"].slice(0,-5), null, null, null, bold=true)
+        BoldDiv("TOUCH ", "color:var('--theme-red');"),
+        BoldDiv(item["name"].slice(0,-5))
       ])
     );
     let random_div = document.createElement("div");
@@ -116,23 +116,23 @@ function CreateConfirmDiv(item) {
   } else if (item["operation"] === "cancel") {
     confirm_div.appendChild(
       JoinDivs([
-        TextDiv("CANCEL ", pos_neg_color=false, null, exact_color="#000", bold=true),
-        TextDiv(item["name"], null, null, null, bold=true),
+        BoldDiv("CANCEL ", "color:black;"),
+        BoldDiv(item["name"]),
         TextDiv(" with "),
-        TextDiv(item["delays"], null, null, null, bold=true),
+        BoldDiv(item["delays"]),
         TextDiv(" delays")
       ])
     );
     confirm_div.appendChild(
       JoinDivs([
         TextDiv("Success: "),
-        TextDiv(item["success"], null, null, null, bold=true)
+        BoldDiv(item["success"])
       ])
     );
     confirm_div.appendChild(
       JoinDivs([
         TextDiv("Participant: "),
-        TextDiv(item["participant"], null, null, null, bold=true)
+        BoldDiv(item["participant"])
       ])
     );
     confirm_div.appendChild(
@@ -150,23 +150,23 @@ function CreateConfirmDiv(item) {
   } else if (item["operation"] === "withdraw") {
     confirm_div.appendChild(
       JoinDivs([
-        TextDiv("WITHDRAW ", pos_neg_color=false, null, exact_color="#000", bold=true),
-        TextDiv(item["name"], null, null, null, bold=true),
+        BoldDiv("WITHDRAW ", "color:black;"),
+        BoldDiv(item["name"]),
         TextDiv(" with "),
-        TextDiv(item["delays"], null, null, null, bold=true),
+        BoldDiv(item["delays"]),
         TextDiv(" delays")
       ])
     );
     confirm_div.appendChild(
       JoinDivs([
         TextDiv("Success: "),
-        TextDiv(item["success"], null, null, null, bold=true)
+        BoldDiv(item["success"])
       ])
     );
     confirm_div.appendChild(
       JoinDivs([
         TextDiv("Code: "),
-        TextDiv(item["code"], null, null, null, bold=true)
+        BoldDiv(item["code"])
       ])
     );
     let random_div = document.createElement("div");
@@ -181,14 +181,14 @@ function CreateConfirmDiv(item) {
   } else if (item["operation"] === "bankruptcy") {
     confirm_div.appendChild(
       JoinDivs([
-        TextDiv("BANKRUPT ON ", pos_neg_color=false, null, exact_color="#000", bold=true),
-        TextDiv(item["name"], null, null, null, bold=true)
+        BoldDiv("BANKRUPT ON ", "color:black;"),
+        BoldDiv(item["name"])
       ])
     );
     confirm_div.appendChild(
       JoinDivs([
         TextDiv("Code: "),
-        TextDiv(item["code"], null, null, null, bold=true)
+        BoldDiv(item["code"])
       ])
     );
     let random_div = document.createElement("div");

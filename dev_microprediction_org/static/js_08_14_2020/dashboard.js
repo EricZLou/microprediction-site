@@ -176,7 +176,7 @@ async function OnLoadDashboard() {
   });
   pair = JSON.parse(localStorage.getItem('microprediction_key_current'));
   if (pair) {
-    write_key = pair[0]
+    write_key = pair[0];
     var url = base_url+"home/"+write_key+"/";
     const request = new Request(url, {method: 'GET'});
     await FetchActiveStreams();
@@ -210,10 +210,7 @@ async function LoadDashboard() {
 // Store all of them the first time the page is loaded
 async function LoadAnnouncements() {
   const url = base_url + "announcements/";
-  const announcements_dict = await get(url);
-  for (let ann in announcements_dict) {
-    announcements.push([ann, announcements_dict[ann]]);
-  }
+  announcements = await get(url);
   if (announcements.length === 0)
     return;
   ShowAnnouncement(announcement_idx);   // default set to 0
@@ -260,10 +257,11 @@ function CreateCardWithTitle(title) {
 
 function LoadOverview() {
   let card = CreateCardWithTitle("Overview");
-  let divs = [TextDiv(resp["code"], null, null, null, bold=true)];
+  let divs = [BoldDiv(resp["code"])];
   if (repo) {
     let repo_div = document.createElement("button");
     repo_div.classList.add("mini-button");
+    repo_div.classList.add("bg-red-hover");
     repo_div.onclick = function() {
       window.open(repo);
     };
@@ -274,20 +272,20 @@ function LoadOverview() {
   card.appendChild(JoinDivs(divs));
   card.appendChild(
     JoinDivs([
-      TextDiv("Memorable ID: ", pos_neg_color=false, null, exact_color=CssVar('--theme-purple'), bold=true),
+      BoldDiv("Memorable ID: ", "color:var(--theme-purple);"),
       TextDiv(resp["animal"])
     ])
   );
   card.appendChild(
     JoinDivs([
-      TextDiv("Balance: ", pos_neg_color=false, null, exact_color=CssVar('--theme-purple'), bold=true),
-      TextDiv(resp["balance::"+write_key+".json"], pos_neg_color=true, round_digit=4)
+      BoldDiv("Balance: ", "color:var(--theme-purple);"),
+      TextDiv(resp["balance::"+write_key+".json"], null, {"pos_neg_color":true, "round":4})
     ])
   );
   card.appendChild(
     JoinDivs([
-      TextDiv("Distance to Bankruptcy: ", pos_neg_color=false, null, exact_color=CssVar('--theme-purple'), bold=true),
-      TextDiv(resp["distance_to_bankruptcy"], pos_neg_color=false, round_digit=2)
+      BoldDiv("Distance to Bankruptcy: ", "color:var(--theme-purple);"),
+      TextDiv(resp["distance_to_bankruptcy"], null, {"round":2})
     ])
   );
   $("#dashboard-overview").replaceWith(card);
@@ -368,7 +366,7 @@ function LoadConfirms() {
       }
       card.appendChild(
         JoinDivs([
-          TextDiv("SET ", pos_neg_color=false, null, exact_color=CssVar('--theme-purple'), bold=true),
+          BoldDiv("SET ", "color:var(--theme-purple);"),
           TextDiv(item["examples"][0]["name"].slice(0,-5))
         ], true, title)
       );
@@ -380,7 +378,7 @@ function LoadConfirms() {
       }
       card.appendChild(
         JoinDivs([
-          TextDiv("SUBMIT ", pos_neg_color=false, null, exact_color=CssVar('--theme-green'), bold=true),
+          BoldDiv("SUBMIT ", "color: var(--theme-green);"),
           TextDiv(item["name"].slice(0,-5))
         ], true, title)
       );
@@ -392,7 +390,7 @@ function LoadConfirms() {
       }
       card.appendChild(
         JoinDivs([
-          TextDiv("TOUCH ", pos_neg_color=false, null, exact_color=CssVar('--theme-red'), bold=true),
+          BoldDiv("TOUCH ", "color:var(--theme-red);"),
           TextDiv(item["name"].slice(0,-5))
         ], true, title)
       );
@@ -404,7 +402,7 @@ function LoadConfirms() {
       }
       card.appendChild(
         JoinDivs([
-          TextDiv("CANCEL ", pos_neg_color=false, null, exact_color="#000", bold=true),
+          BoldDiv("CANCEL ", "color:black;"),
           TextDiv(item["name"])
         ], true, title)
       );
@@ -416,7 +414,7 @@ function LoadConfirms() {
       }
       card.appendChild(
         JoinDivs([
-          TextDiv("WITHDRAW ", pos_neg_color=false, null, exact_color="#000", bold=true),
+          BoldDiv("WITHDRAW ", "color:black;"),
           TextDiv(item["name"])
         ], true, title)
       );
@@ -428,7 +426,7 @@ function LoadConfirms() {
       }
       card.appendChild(
         JoinDivs([
-          TextDiv("BANKRUPT ", pos_neg_color=false, null, exact_color="#000", bold=true),
+          BoldDiv("BANKRUPT ", "color:black;"),
           TextDiv(item["name"])
         ], true, title)
       );
@@ -458,7 +456,7 @@ function LoadErrors() {
     for (let key in item) {
       divs.push(
         JoinDivs([
-          TextDiv(key, null, null, colors[idx%2], true),
+          Boldiv(key, "color:"+colors[idx%2]),
           TextDiv(": "),
           TextDiv(item[key])
         ])
@@ -487,7 +485,7 @@ function LoadWarnings() {
     for (let key in item) {
       divs.push(
         JoinDivs([
-          TextDiv(key, null, null, colors[idx%2], true),
+          BoldDiv(key, "color:"+colors[idx%2]),
           TextDiv(": "),
           TextDiv(item[key])
         ])
@@ -511,8 +509,8 @@ function LoadPerformance() {
   for (var key in performance) {
     card.appendChild(
       JoinDivs([
-        TextDiv(performance[key], pos_neg_color=true, round_digit=4, null, bold=true),
-        TextDiv(": ", null, null, null, bold=true),
+        BoldDiv(performance[key], null, {"pos_neg_color":true, "round":4}),
+        BoldDiv(": "),
         TextDiv(key.slice(0,-5))
       ], true, title)
     );
@@ -550,8 +548,8 @@ function LoadTransactions() {
 
     card.appendChild(
       JoinDivs([
-        TextDiv(amt, pos_neg_color=true, round_digit=4, null, bold=true),
-        TextDiv(": ", null, null, null, bold=true),
+        BoldDiv(amt, null, {"pos_neg_color":true, "round":4}),
+        BoldDiv(": "),
         TextDiv(text)
       ], true, title)
     );

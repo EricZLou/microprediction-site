@@ -52,14 +52,14 @@ async function CreateTransactDiv(item) {
 
   // NORMAL TRANSACTION
   if (!("type" in item)) {
-    let amount_div = TextDiv(item["amount"], true, 5, null, true);
-    let stream_div = TextDiv(item["stream"].slice(0, -5), null, null, null, true);
-    let delay_div = TextDiv(item["delay"], null, null, null, true);
-    let time_div = TextDiv(item["settlement_time"].slice(0, 16), null, null, null, true);
-    let submissions_close_div = TextDiv(item["submissions_close"], null, null, CssVar('--theme-purple'), true);
-    let submissions_total_div = TextDiv(item["submissions_count"], null, null, CssVar('--theme-purple'), true);
+    let amount_div = BoldDiv(item["amount"], null, {"pos_neg_color":true, "round":5});
+    let stream_div = BoldDiv(item["stream"].slice(0, -5));
+    let delay_div = BoldDiv(item["delay"]);
+    let time_div = BoldDiv(item["settlement_time"].slice(0, 16));
+    let submissions_close_div = BoldDiv(item["submissions_close"], "color:var(--theme-purple)");
+    let submissions_total_div = BoldDiv(item["submissions_count"], "color:var(--theme-purple)");
     let readable_muid = await GetReadableMUID(item["stream_owner_code"]);
-    let stream_owner_div = TextDiv(readable_muid, null, null, null, true);
+    let stream_owner_div = BoldDiv(readable_muid);
 
     transact_div.appendChild(
       JoinDivs([
@@ -72,7 +72,7 @@ async function CreateTransactDiv(item) {
       JoinDivs([
         TextDiv("Awarded for "),
         submissions_close_div,
-        TextDiv(" / ", null, null, CssVar('--theme-purple'), true),
+        BoldDiv(" / ", "color:var(--theme-purple)"),
         submissions_total_div,
         TextDiv(" submissions")
       ])
@@ -98,14 +98,14 @@ async function CreateTransactDiv(item) {
   }
   // CREATE A STREAM TRANSACTION
   else if (item["type"] === "create") {
-    let amount_div = TextDiv("-"+item["amount"], true, null, null, true);
-    let stream_div = TextDiv(item["name"].slice(0, -5), null, null, null, true);
-    let time_div = TextDiv(item["settlement_time"].slice(0, 16), null, null, null, true);
+    let amount_div = BoldDiv("-"+item["amount"], null, {"pos_neg_color":true});
+    let stream_div = BoldDiv(item["name"].slice(0, -5));
+    let time_div = BoldDiv(item["settlement_time"].slice(0, 16));
     let message_div = TextDiv(item["message"]);
 
     transact_div.appendChild(
       JoinDivs([
-        TextDiv("Charged ", null, null, null, true),
+        BoldDiv("Charged "),
         amount_div,
         TextDiv(" from "),
         stream_div
@@ -123,21 +123,17 @@ async function CreateTransactDiv(item) {
   }
   // TRANSFER KEYS TRANSACTION
   else {
-    // TODO: Figure out these values.
-    let amount_given_div = TextDiv(item["given"], true, null, null, true);
-    // let amount_received_div = TextDiv(item["received"], true, null, null, true);
-    let max_given_div = TextDiv(item["max_to_give"], false, 2, null, true);
-    let max_received_div = TextDiv(item["max_to_receive"], false, 2, null, true);
+    let amount_given_div = BoldDiv(item["given"], null, {"pos_neg_color":true});
+    let max_given_div = BoldDiv(item["max_to_give"], null, {"round":2});
+    let max_received_div = BoldDiv(item["max_to_receive"], null, {"round":2});
     let source_div = TextDiv(item["source"]);
     let recipient_div = TextDiv(item["recipient"]);
-    let time_div = TextDiv(item["settlement_time"].slice(0, 16), null, null, null, true);
+    let time_div = BoldDiv(item["settlement_time"].slice(0, 16));
 
     transact_div.appendChild(
       JoinDivs([
-        TextDiv("Gave ", null, null, "#7e2857", true),
+        BoldDiv("Gave ", "color:var(--theme-red);"),
         amount_given_div
-        // TextDiv(" and received ", null, null, "#7e2857", true),
-        // amount_received_div
       ])
     );
     transact_div.appendChild(

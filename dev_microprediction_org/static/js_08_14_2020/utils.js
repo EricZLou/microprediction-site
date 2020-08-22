@@ -1,8 +1,12 @@
 const home_url = "/";
+const my_styles = [
+  "pos_neg_color",
+  "round"
+]
 
 
 function Round(item, round_digit) {
-  return Math.round((Math.pow(10,round_digit) * item)) / Math.pow(10,round_digit);
+  return Number((Number(item)).toFixed(round_digit));
 }
 
 function CssVar(name) {
@@ -15,45 +19,70 @@ async function get(url) {
   return data;
 }
 
-function TextDiv(item, pos_neg_color=false, round_digit, exact_color, bold) {
-  var div = document.createElement("div");
+// `added_styles` is a dict that has elements in `my_styles` as keys
+function GenDiv(div, text, css_text, added_styles) {
   div.id = "body-text";
-  if (!round_digit) {
-    div.innerHTML = item;
-  } else {
-    var value = parseFloat(item);
-    div.innerHTML = Round(value, round_digit);
+  div.innerText = text;
+  if (css_text)
+    if (!(typeof(css_text) === "string")) {
+      console.log("Forgot to put `null` in GenDiv");
+      throw "Forgot to put `null` in GenDiv.";
+    }
+    div.style.cssText += ';' + css_text;
+  if (!added_styles)
+    return div;
+
+  // check that all added styles are valid
+  for (style in added_styles) {
+    if (!(my_styles.includes(style)))
+      throw style + " is not a valid additional style."
   }
-  if (pos_neg_color) {
-    if (parseFloat(item) < 0) {
+
+  if ("round" in added_styles) {
+    div.innerText = Round(text, added_styles["round"]);
+  }
+  if ("pos_neg_color" in added_styles) {
+    if (Number(text) < 0) {
       div.style.color = "red";
     } else {
       div.style.color = "green";
-      div.innerHTML = "+" + div.innerHTML;
+      div.innerText = "+" + div.innerText;
     }
-  } else if (exact_color) {
-    div.style.color = exact_color;
-  }
-  if (bold) {
-    div.style.fontWeight = "bold";
   }
   return div;
 }
 
-function JoinDivs(divs, hover, card, display="inline") {
+function TextDiv(text, css_text, added_styles) {
+  var div = document.createElement("div");
+  return GenDiv(div, text, css_text, added_styles);
+}
+
+function BoldDiv(text, css_text, added_styles) {
+  var div = document.createElement("div");
+  div.style.fontWeight = "bold";
+  return GenDiv(div, text, css_text, added_styles);
+}
+
+function JoinDivs(divs, hover, card, display="inline", idx) {
   var parent = document.createElement("div");
   if (hover) {
     parent.id = "div-hover";
   }
-  last = divs[divs.length-1];
+  let desired;
+  if (!(idx === null)) {
+    desired = divs[idx];
+  }
+  else {
+    desired = divs[divs.length-1];
+  }
   for (var child of divs) {
     child.style.display = display;
     parent.appendChild(child);
-    child.setAttribute("name",last.textContent);
+    child.setAttribute("name",desired.textContent);
   }
   if (!hover && !card)
     return parent;
-  parent.setAttribute("name",last.textContent);
+  parent.setAttribute("name",desired.textContent);
   parent.onclick = e => {
     name = e.target.getAttribute("name");
     var loc = "";

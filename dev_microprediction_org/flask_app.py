@@ -13,7 +13,6 @@ app = Flask(__name__,static_folder="static")
 CORS(app)
 
 
-
 # --------------------------------------------------------------------------
 #            Redirect / --> /dashboard.html
 # --------------------------------------------------------------------------
@@ -280,6 +279,10 @@ def transactions():
 # --------------------------------------------
 #            CONTESTS
 # --------------------------------------------
+
+@app.route('/prizes.html')
+def prizes():
+    return render_template('contests/prizes.html')
 
 @app.route('/contests.html')
 def contests():

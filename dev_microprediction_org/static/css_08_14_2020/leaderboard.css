@@ -1,15 +1,27 @@
 #leaderboards-container {
-  display: flex;
-}
-
-@media screen and (max-width: 800px) {
-  #leaderboards-container { display: inline-block; }
+  display: inline-block;
 }
 
 #leaderboards-sidenav {
-  flex: 2;
+  width: 20%;
+  float: left;
 }
 
 #leaderboard {
-  flex: 8;
+  width: 80%;
+  float: right;
+}
+
+@media screen and (max-width: 800px) {
+  #leaderboards-container { 
+  	display: block;
+  }
+  #leaderboards-sidenav { 
+  	width: 100%;
+  	float: none;
+  }
+  #leaderboard {
+  	width: 100%;
+  	float: none;
+  }
 }

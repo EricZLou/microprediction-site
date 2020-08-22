@@ -163,7 +163,7 @@ async function LoadLeaderboard() {
 
   if (Object.keys(dict).length === 0) {
     leaderboard_div.appendChild(
-      TextDiv("No leaderboard available.", null, null, null, true)
+      BoldDiv("No leaderboard available.")
     );
     leaderboard_div.appendChild(space_div);
     return;
@@ -190,7 +190,7 @@ async function LoadLeaderboard() {
     else
       new_cell.appendChild(TextDiv(name));
     new_cell = new_row.insertCell(-1);
-    new_cell.appendChild(TextDiv(dict[name], true, 3));
+    new_cell.appendChild(TextDiv(dict[name], null, {"pos_neg_color":true, "round":3}));
     place = place + 1;
   }
   leaderboard_div.appendChild(table);
@@ -205,7 +205,7 @@ async function LoadLagged() {
 
   if (lagged_values === "null" || lagged_values.length === 0) {
     lagged_div.appendChild(
-      TextDiv("No lagged values available.", null, null, null, true)
+      BoldDiv("No lagged values available.")
     );
     lagged_div.appendChild(space_div);
     return;
@@ -236,7 +236,7 @@ async function LoadLagged() {
     let new_cell = new_row.insertCell(-1);
     new_cell.appendChild(TextDiv(UnixToHMS(group[0])));
     new_cell = new_row.insertCell(-1);
-    new_cell.appendChild(TextDiv(Round(parseFloat(group[1]), 5)));
+    new_cell.appendChild(TextDiv(group[1], null, {"round":5}));
     i = i + 1;
   }
   lagged_div.appendChild(table);

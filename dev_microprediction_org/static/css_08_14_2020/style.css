@@ -66,6 +66,36 @@ li {
 button:focus {
   outline:0;
 }
+.green {
+  color: var(--theme-green);
+}
+.purple {
+  color: var(--theme-purple);
+}
+.red {
+  color: var(--theme-red);
+}
+.bg-green, .bg-green-hover {
+  background-color: var(--theme-green);
+  transition-duration: 0.4s;
+}
+.bg-purple, .bg-purple-hover {
+  background-color: var(--theme-purple);
+  transition-duration: 0.4s;
+}
+.bg-red, .bg-red-hover {
+  background-color: var(--theme-red);
+  transition-duration: 0.4s;
+}
+.bg-green-hover:hover {
+  background-color: var(--light-green);
+}
+.bg-purple-hover:hover {
+  background-color: var(--light-purple);
+}
+.bg-red-hover:hover {
+  background-color: var(--light-red);
+}
 
 
 
@@ -78,9 +108,10 @@ button:focus {
 
 #body-container {
   position: relative;
-  left: 10%;
-  width: 80%;
-  height: 100%;
+  max-width: 1440px;
+  margin: 0px auto !important;
+  padding-left: 60px;
+  padding-right: 20px;
 }
 #body-title {
   color: black;
@@ -192,25 +223,16 @@ button:focus {
  ********************************************************/
 
 
-.sidenav {
-  height: 100%;
-  padding-right: 10px;
-  position: relative;
-  top: 0;
-  left: 0;
-  overflow-x: hidden;
-}
+.sidenav {}
 
-.sidenav div {
-  padding: 10px 10px;
+.sidenav .sidenav-row {
+  padding: 20px 0px;
   text-decoration: none;
   font-size: 1.0em;
   color: black;
-  display: block;
 }
 
-.sidenav div:hover {
-  color: var(--theme-red);
+.sidenav-row:hover {
   background-color: white;
   cursor: pointer;
 }
@@ -219,9 +241,6 @@ button:focus {
   background-color: white;
 }
 
-@media screen and (max-width: 800px) {
-  .sidenav { width: 100%; }
-}
 
 
 /********************************************************
@@ -397,46 +416,42 @@ button:focus {
  ********************************************************/
 
 
-button#persistent-dashboard-button {
+.persistent-button {
   position: fixed;
+  left: 0px;
+  min-width: 40px;
+  width: 3%;
+  max-width: 60px;
+  background-color: var(--theme-green);
+  border: none;
+  text-align: center;
+  outline:none;
+  margin: 0;
+  padding: 0;
+  transition-duration: 0.4s;
+  z-index: 1;
+}
+
+button#persistent-dashboard-button {
   top: 220px;
   height: 140px;
-  left: 0px;
-  min-width: 40px;
-  width: 3%;
-  max-width: 60px;
-  background-color: var(--theme-green);
   border-radius: 0px 15px 0px 0px;
-  border: none;
   border-bottom: 1px solid #FFF;
-  text-align: center;
-  outline:none;
-  margin: 0;
-  padding: 0;
-  transition-duration: 0.4s;
-  z-index: 1;
 }
 button#persistent-leaderboard-button {
-  position: fixed;
   top: 360px;
   height: 150px;
-  left: 0px;
-  min-width: 40px;
-  width: 3%;
-  max-width: 60px;
-  background-color: var(--theme-green);
-  border-radius: 0px 0px 15px 0px;
-  border: none;
+  border-radius: 0px 0px 0px 0px;
+  border-bottom: 1px solid #FFF;
   border-top: 1px solid #FFF;
-  text-align: center;
-  outline:none;
-  margin: 0;
-  padding: 0;
-  transition-duration: 0.4s;
-  z-index: 1;
 }
-button#persistent-dashboard-button:hover, 
-button#persistent-leaderboard-button:hover {
+button#persistent-cash-prizes-button {
+  top: 510px;
+  height: 140px;
+  border-radius: 0px 0px 15px 0px;
+  border-top: 1px solid #FFF;
+}
+.persistent-button:hover {
   background-color: var(--theme-purple);
   cursor: pointer;
 }
@@ -463,10 +478,7 @@ button#persistent-leaderboard-button:hover {
 
 
 @media screen and (max-width: 475px) {
-  button#persistent-dashboard-button {
-    display: none;
-  }
-  button#persistent-leaderboard-button {
+  .persistent-button {
     display: none;
   }
   #mobile-persistent-buttons {
@@ -516,14 +528,18 @@ button#persistent-leaderboard-button:hover {
   cursor: pointer;
 }
 
+
 .mini-button {
   color: white;
-  background-color: var(--theme-red);
   border: none;
   border-radius: 20px;
+  display: inline;
 }
 .mini-button:hover {
   cursor: pointer;
+}
+.bg-red:hover {
+  background-color: var(--light-red);
 }
 
 /****************************************
