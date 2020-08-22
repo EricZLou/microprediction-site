@@ -63,7 +63,7 @@ function BoldDiv(text, css_text, added_styles) {
   return GenDiv(div, text, css_text, added_styles);
 }
 
-function JoinDivs(divs, hover, card, display="inline", idx) {
+function JoinDivs(divs, hover, card, display="inline", idx=null) {
   var parent = document.createElement("div");
   if (hover) {
     parent.id = "div-hover";
