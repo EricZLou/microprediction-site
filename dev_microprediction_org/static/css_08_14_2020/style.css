@@ -19,7 +19,15 @@
   --bg-gray: #b7c3c9;
 }
 
-
+@mixin smallphone   { @media (max-width:   400px)  {@content;} }
+@mixin phone        { @media (max-width:   580px)  {@content;} }
+@mixin tabletvert   { @media (max-width:   768px)  {@content;} }
+@mixin tablet       { @media (max-width:  1025px)  {@content;} }
+@mixin navbreak     { @media (max-width:  1100px)  {@content;} }
+@mixin between     { @media (max-width:  1250px)  {@content;} }
+@mixin laptop       { @media (max-width:  1440px)  {@content;} }
+@mixin largebetween { @media (max-width:  1680px) {@content;} }
+@mixin desktop      { @media (max-width:  1920px)  {@content;} }
 
 /********************************************************
  ********************************************************
@@ -268,24 +276,37 @@ button:focus {
 
 #header-container-big {
   background-color: #FFF;
-  padding-left: 5%;
-  padding-right: 0%;
   box-shadow: 0 2px 30px -10px rgba(0,0,0,0.5);
+  height: 110px;
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+}
+.header-inner {
+  display: flex;
+  max-width: 1920px;
+  float: none !important;
+  padding-right: 5%;
+  padding-left: 5%;
+  align-items: center;
+  justify-content: flex-end;
 }
 .header {
-  height: 80px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 /* Microprediction Name */
 #header-name {
-  float: left;
-  font-size: 20px;
-  font-weight: bold;
-  color: #555f60;
-  height: 80px;
-  line-height: 80px;
-  padding-right: 5%;
-  display: inline;
+  padding: 20px 5% 20px 0px;
+  position: relative;
+  flex-grow: 1;
+}
+#header-name img {
+  max-width: 200px;
 }
 
 .header a {
@@ -293,8 +314,6 @@ button:focus {
   font-size: 14px;
   color: #555f60;
   text-align: center;
-  height: 80px;
-  line-height: 80px;
   padding: 0px 15px;
   text-decoration: none;
   font-weight: bold;
@@ -334,7 +353,7 @@ button:focus {
   text-decoration: none;
   display: block;
   text-align: left;
-  padding: 20px 15px;
+  padding: 15px 15px;
   font-weight: normal;
 }
 .header-dropdown-content a:hover {
@@ -348,8 +367,10 @@ button:focus {
 #header-api {
   float: right;
   background-color: var(--theme-purple);
-  padding: 0px 10px;
+  padding: 10px 20px;
   transition-duration: 0.4s;
+  border-radius: 4px;
+  margin-left: 40px;
 }
 #header-api a {
   color: #FFF;
@@ -363,11 +384,30 @@ button:focus {
  ****************************************/
 
 /* Styling for Dropdown Header comes from Bootstrap */
+#header-container-small {
+  background-color: white;
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+}
+.header-space {
+  height: 110px;
+  position: relative;
+}
 #navbar-section {
-  color: white;
+  color: var(--theme-purple);
   font-weight: bold;
-  padding-top: 20px;
-  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+@media screen and (max-width: 850px) {
+  #header-container-small {
+    position: relative;
+  }
+  .header-space {
+    height: 0px;
+  }
 }
 
 
@@ -470,10 +510,10 @@ button#persistent-cash-prizes-button {
   display: none;
 }
 #mobile-link {
-  color: #FFF;
+  color: var(--theme-purple);
   font-weight: bold;
-  padding-top: 20px;
-  padding-bottom: 10px;  
+  padding-top: 10px;
+  padding-bottom: 5px;
   display: block;
 }
 
