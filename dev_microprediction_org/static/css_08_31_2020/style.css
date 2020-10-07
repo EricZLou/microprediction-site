@@ -355,6 +355,7 @@ button:focus {
   text-align: left;
   padding: 15px 15px;
   font-weight: normal;
+  font-size: 13px;
 }
 .header-dropdown-content a:hover {
   color: var(--theme-green);
@@ -475,20 +476,20 @@ button:focus {
 
 button#persistent-dashboard-button {
   top: 220px;
-  height: 140px;
+  height: 150px;
   border-radius: 0px 15px 0px 0px;
   border-bottom: 1px solid #FFF;
 }
 button#persistent-leaderboard-button {
-  top: 360px;
+  top: 370px;
   height: 150px;
   border-radius: 0px 0px 0px 0px;
   border-bottom: 1px solid #FFF;
   border-top: 1px solid #FFF;
 }
-button#persistent-cash-prizes-button {
-  top: 510px;
-  height: 140px;
+button#persistent-competitions-button {
+  top: 520px;
+  height: 150px;
   border-radius: 0px 0px 15px 0px;
   border-top: 1px solid #FFF;
 }
@@ -501,7 +502,7 @@ button#persistent-cash-prizes-button {
   text-orientation: mixed;
   display: inline-block;
   color: #FFF;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: bold;
   letter-spacing: 0.2em;
 }

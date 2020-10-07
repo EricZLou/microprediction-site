@@ -102,67 +102,29 @@ function RemoveAllLocalStorage() {
   location.reload();
 }
 
-function FetchAndLoadData(request, refresh) {
-  return fetch(request)
-    .then(response => {
-      if (response.status !== 200) {
-        throw "Response status is not 200: " + response.status;
-      } else {
-        return response.json();
-      }
-    })
-    .then(json => {
-      if (json["animal"] !== null) {
-        document.getElementById("introduction").style.display = "none";
-        resp = json;
-    
-        AddLocalStorage();
+async function FetchAndLoadData(refresh) {
+  resp = await get(base_url+"home/"+write_key);
+  if (resp["animal"] !== null) {
+    document.getElementById("introduction").style.display = "none";
+    AddLocalStorage();
 
-        document.getElementsByClassName("dropdown-container")[0].style.display = "inline-flex";
-        let name = "home/" + write_key;
-        document.getElementById("box-href").href = name;
-        document.getElementById("box-info-loaded-from").style.display = "inline-block";
-        for (var card of document.getElementsByClassName("shadow-card")) {
-          card.style.display = "block";
-        }
-        LoadAll();
+    document.getElementsByClassName("dropdown-container")[0].style.display = "inline-flex";
+    let name = "home/" + write_key;
+    document.getElementById("box-href").href = name;
+    document.getElementById("box-info-loaded-from").style.display = "inline-block";
+    for (var card of document.getElementsByClassName("shadow-card")) {
+      card.style.display = "block";
+    }
 
-        if (refresh) location.reload();
+    LoadAll();
 
-      } else {
-        document.getElementById("box-bad-key").innerHTML = "Invalid";
-        setTimeout(function(){
-          document.getElementById("box-bad-key").innerHTML = '';
-        }, 2000);
-      }
-    })
-    .catch(error => {
-      document.getElementById("box-bad-key").innerHTML = "Invalid";
-      setTimeout(function(){
-        document.getElementById("box-bad-key").innerHTML = '';
-      }, 2000);
-    })
-}
-
-function FetchActiveStreams() {
-  var url = base_url+"active/"+write_key;
-  request = new Request(url, {method: 'GET'});
-  return fetch(request)
-    .then(response => {return response.json();})
-    .then(json => {all_active_streams = json;})
-}
-
-function FetchConfirms() {
-  var url = base_url+"confirms/"+write_key+"/";
-  request = new Request(url, {method: 'GET'});
-  return fetch(request)
-    .then(response => {return response.json();})
-    .then(json => {all_confirms = json;})
-}
-
-async function FetchRepository() {
-  var url = base_url+"repository/"+write_key;
-  repo = await get(url);
+    if (refresh) location.reload();
+  } else {
+    document.getElementById("box-bad-key").innerHTML = "Invalid";
+    setTimeout(function(){
+      document.getElementById("box-bad-key").innerHTML = '';
+    }, 2000);
+  }
 }
 
 // called immediately when the page loads
@@ -174,36 +136,33 @@ async function OnLoadDashboard() {
       document.getElementById("box-button-write-key").click();
     }
   });
+  await LoadAnnouncements();
   pair = JSON.parse(localStorage.getItem('microprediction_key_current'));
   if (pair) {
     write_key = pair[0];
-    var url = base_url+"home/"+write_key+"/";
-    const request = new Request(url, {method: 'GET'});
-    await FetchActiveStreams();
-    await FetchConfirms();
-    await FetchRepository();
-    await FetchAndLoadData(request);
+    all_active_streams = await get(base_url+"active/"+write_key);
+    all_confirms = await get(base_url+"confirms/"+write_key+"/");
+    repo = await get(base_url+"repository/"+write_key);
+    await FetchAndLoadData();
   }
   else {
     // load some welcome text!
     document.getElementById("introduction").style.display = "inline-block";
   }
-  await LoadAnnouncements();
 }
 
 // called when the user enters a write key in the text box
 async function LoadDashboard() {
   write_key = document.getElementById("box-input-write-key").value;
   if (write_key !== "") {
-    var url = base_url+"home/"+write_key+"/";
-    const request = new Request(url, {method: 'GET'});
-    await FetchActiveStreams();
-    await FetchConfirms();
+    all_active_streams = await get(base_url+"active/"+write_key);
+    all_confirms = await get(base_url+"confirms/"+write_key+"/");
+    repo = await get(base_url+"repository/"+write_key);
     // refresh the page if the page is already displaying a valid write key
     if (localStorage.getItem('microprediction_key_current'))
-      await FetchAndLoadData(request, refresh=true);
+      await FetchAndLoadData(refresh=true);
     else
-      await FetchAndLoadData(request);
+      await FetchAndLoadData();
   }
 }
 
@@ -257,7 +216,7 @@ function CreateCardWithTitle(title) {
 
 function LoadOverview() {
   let card = CreateCardWithTitle("Overview");
-  let divs = [BoldDiv(resp["code"])];
+  let divs = [BoldDiv(resp["animal"])];
   if (repo) {
     let repo_div = document.createElement("button");
     repo_div.classList.add("mini-button");
@@ -272,8 +231,8 @@ function LoadOverview() {
   card.appendChild(JoinDivs(divs));
   card.appendChild(
     JoinDivs([
-      BoldDiv("Memorable ID: ", "color:var(--theme-purple);"),
-      TextDiv(resp["animal"])
+      BoldDiv("Public ID: ", "color:var(--theme-purple);"),
+      TextDiv(resp["code"])
     ])
   );
   card.appendChild(

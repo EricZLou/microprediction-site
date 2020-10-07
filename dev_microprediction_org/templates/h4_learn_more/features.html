@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Downloading Data</title>
+    <title>Features</title>
     <link rel="stylesheet" href="/static/css_08_31_2020/style.css" type="text/css">
     <link rel="stylesheet" href="/static/css_08_31_2020/bootstrap.css" type="text/css">
     <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
@@ -25,22 +25,29 @@
     <div id="header-small"></div>
     <div id="header-big"></div>
 
-    <div id="body-title">Downloading historical data</div>
+    <div id="body-title">Features</div>
     <div id="space"></div>
 
     <div id="body-container">
 
-      This is an experimental feature. URLs may change.
-
-      <div id="body-subtitle">Formats and calling</div>
+      <div id="body-subtitle">Downloading data to CSV</div>
       <div id="body-text">
         <ul>
           <li> CSV via <a href="https://csv.microprediction.org/lagged?name=hospital_bike_activity.json">https://csv.microprediction.org/lagged?name=hospital_bike_activity.json</a> </li>
           <li> More formats on the way </li>
         </ul>
       </div>
-    </div>
   
+      <div id="body-subtitle">Plotting Data Streams</div>
+      <div id="body-text">
+        <ul>
+          <li> Bar plots via <a href="/bar?name=cop.json">/bar?name=cop.json</a> </li>
+          <li> Histograms via <a href="/histogram?name=cop.json">/histogram?name=cop.json</a> </li>
+          <li> CDF via <a href="/cumulative?name=cop.json&delay=70">/cumulative?name=cop.json&delay=70 </a> </li>
+        </ul>
+      </div>
+    </div>
+
     <div id="space"></div>
     <div id="my-footer"></div>
   </body>

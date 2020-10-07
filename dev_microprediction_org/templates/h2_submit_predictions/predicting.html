@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Making a Prediction</title>
+    <title>Make Predictions</title>
     <link rel="stylesheet" href="/static/css_08_31_2020/style.css" type="text/css">
     <link rel="stylesheet" href="/static/css_08_31_2020/bootstrap.css" type="text/css">
     <link rel="shortcut icon" href="/static/icon_jupiter.ico" type="image/x-icon">
@@ -25,10 +25,12 @@
     <div id="header-small"></div>
     <div id="header-big"></div>
 
-    <div id="body-title">Submitting predictions</div>
+    <div id="body-title">Make predictions</div>
     <div id="space"></div>
 
     <div id="body-container">
+      <a href="make-predictions" target="_blank">Read more: Overview</a> 
+      <div id="half-space"></div>
       <div id="body-text">To <i>predict</i> is to supply a vector of {{num_predictions}} scenarios intended to represent possible future values taken by a source of live data (to <a href="crawling.html"><i>crawl</i></a> is to do this frequently for a number of different streams).</div>
       
       <!-- STEP 0 -->
@@ -46,7 +48,7 @@
         Two options:
         <ol>
           <li> Click <a href="https://www.muid.org/create">here</a> for an instant key.</li>
-          <li> Or see <a href="muids.html">muid instructions</a> for ways to mine a more rare key.</li>
+          <li> Or see <a href="muids">muid instructions</a> for ways to mine a more rare key.</li>
         </ol>
         Rare keys prolong your algorithm's life. See the table of bankruptcy levels in the <a href="https://pypi.org/project/microprediction/" target="_blank">README</a>.
       </div>
@@ -101,13 +103,11 @@
       You are advised to read the MicroWriter <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/writer.py" target="_blank">code</a> and package readme. Also likely to be of interest is the MicroCrawler <a href="https://github.com/microprediction/microprediction/blob/master/microprediction/crawler.py" target="_blank">code</a>. There is a series of <a href="https://www.linkedin.com/in/petercotton/detail/recent-activity/posts/" target="_blank">articles</a> on LinkedIn covering topics such as crawler <a href="https://www.linkedin.com/pulse/economical-statistics-how-modify-prediction-crawlers-cotton-phd/" target="_blank">navigation</a>, predicting <a href="https://www.linkedin.com/pulse/helicopulas-peter-cotton-phd/" target="_blank">bivariate</a> streams and <a hef="https://www.linkedin.com/pulse/short-introduction-z-streams-peter-cotton-phd/" target="_blank">overview</a> of the mechanics of prediction and reward.
 
       <div id="body-subtitle">Submission API</div>
-      <div id="body-text">You can also make a PUT request to submit/STREAM_NAME, with values in the payload as a comma separated list. See the <a href="api">API</a>.</div>
+      <div id="body-text">You can also make a PUT request to submit/STREAM_NAME, with values in the payload as a comma separated list. See the <a href="api" target="_blank">API</a>.</div>
 
       <div id="body-subtitle">Questions?</div>
-      <div id="body-text">Try the <a href="predicting_faq.html">Predicting FAQ</a>.</div>
+      <div id="body-text">Try the <a href="faq" target="_blank">FAQ</a>.</div>
 
-      <div id="body-subtitle">Crawling</div>
-      <div id="body-text">See <a href="crawling.html">crawling</a>.</div>
     </div>
 
     <div id="space"></div>

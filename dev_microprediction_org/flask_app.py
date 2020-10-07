@@ -35,14 +35,32 @@ def reroute(url):
     return redirect(API_URL + url, code=302)
 
 # --------------------------------------------------------------------------
-#            HTML: <a href="api.html">See the API</a>
+#            Fast HTML routes
 # --------------------------------------------------------------------------
+
+COM = "https://www.microprediction.com/"
 
 @app.route('/api')
 def api():
     return redirect(API_URL, code=302)
-
-
+@app.route('/github')
+def github():
+    return redirect("https://github.com/microprediction/microprediction", code=302)
+@app.route('/faq')
+def faq():
+    return redirect(COM + "knowledge-center", code=302)
+@app.route('/muids')
+def muids():
+    return redirect(COM + "private-keys", code=302)
+@app.route('/competitions')
+def competitions():
+    return redirect(COM + "competitions", code=302)
+@app.route('/get-predictions')
+def get_predictions():
+    return redirect(COM + "get-predictions", code=302)
+@app.route('/make-predictions')
+def make_predictions():
+    return redirect(COM + "make-predictions", code=302)
 
 
 # --------------------------------------------------------------------------
@@ -174,11 +192,6 @@ def publishing():
     return render_template('h1_publish_data/publishing.html', 
         min_len=str(MIN_LEN))
 
-@app.route('/publishing_faq.html')
-def publishing_faq():
-    return render_template('h1_publish_data/publishing_faq.html', 
-        min_len=str(MIN_LEN))
-
 
 # --------------------------------------------
 #            H2 SUBMIT PREDICTIONS
@@ -189,20 +202,10 @@ def predicting():
     return render_template('h2_submit_predictions/predicting.html', 
         num_predictions=str(NUM_PREDICTIONS))
 
-@app.route('/muids.html')
-def muids():
-    return render_template('h2_submit_predictions/muids.html', 
-        min_len=str(MIN_LEN))
-
 @app.route('/crawling.html')
 def crawling():
     return render_template('h2_submit_predictions/crawling.html', 
         num_predictions=str(NUM_PREDICTIONS))
-
-@app.route('/predicting_faq.html')
-def predicting_faq():
-    return render_template('h2_submit_predictions/predicting_faq.html', 
-        min_len=str(MIN_LEN), num_predictions=str(NUM_PREDICTIONS))
 
 
 # --------------------------------------------
@@ -218,10 +221,6 @@ def browse_streams():
     return render_template('h3_data_streams/browse_streams.html', 
         delays=DELAYS)
 
-@app.route('/plotting.html')
-def plotting():
-    return render_template('h3_data_streams/plotting.html')
-
 
 # --------------------------------------------
 #            H4 LEARN MORE
@@ -235,9 +234,9 @@ def about():
 def contribute():
     return render_template('h4_learn_more/contribute.html')
 
-@app.route('/downloading.html')
-def downloading():
-    return render_template('h4_learn_more/downloading.html')
+@app.route('/features.html')
+def features():
+    return render_template('h4_learn_more/features.html')
 
 @app.route('/contact.html')
 def contact():
@@ -280,14 +279,6 @@ def transactions():
 #            CONTESTS
 # --------------------------------------------
 
-@app.route('/prizes.html')
-def prizes():
-    return render_template('contests/prizes.html')
-
-@app.route('/contests.html')
-def contests():
-    return render_template('contests/contests.html')
-
 @app.route('/july.html')
 def july():
     return render_template('contests/july.html')
@@ -313,10 +304,6 @@ def footer():
 # --------------------------------------------
 #            OTHERS
 # --------------------------------------------
-
-@app.route('/general_faq.html')
-def general_faq():
-    return render_template('general_faq.html')
 
 @app.route('/terms.html')
 def terms():
