@@ -46,6 +46,9 @@ def api():
 @app.route('/github')
 def github():
     return redirect("https://github.com/microprediction/microprediction", code=302)
+@app.route('/contact')
+def contact():
+    return redirect(COM + "contact-us", code=302)
 @app.route('/faq')
 def faq():
     return redirect(COM + "knowledge-center", code=302)
@@ -61,7 +64,15 @@ def get_predictions():
 @app.route('/make-predictions')
 def make_predictions():
     return redirect(COM + "make-predictions", code=302)
-
+@app.route('/python-1')
+def lesson_python_1():
+    return redirect(COM + "python-1", code=302)
+@app.route('/python-4')
+def lesson_python_4():
+    return redirect(COM + "python-4", code=302)
+@app.route('/welcome-3')
+def welcome_3():
+    return redirect(COM + "welcome-3", code=302)
 
 # --------------------------------------------------------------------------
 #            Config
@@ -237,10 +248,6 @@ def contribute():
 @app.route('/features.html')
 def features():
     return render_template('h4_learn_more/features.html')
-
-@app.route('/contact.html')
-def contact():
-    return render_template('h4_learn_more/contact.html')
 
 
 # --------------------------------------------
